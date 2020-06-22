@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include includes/metaMain %>
+</head>
+<body>
+
+
+
+
+
+<!-- header starts here -->
+<% include includes/header %>
+<!-- header ends here -->
+
+
+
+
+
+<style type="text/css">
+    table tr {
+        cursor: pointer;
+    }
+</style>
+
+        <div align="center" style="margin-top: 5vh"><h2>Order menu</h2></div>
+        <div class="row nav-cards" align="center" style="width: 90%; margin:auto;">
+            <!-- <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+            <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+            <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div> -->
+
+
+
+
+
+            <a href="<%= site.adminURL%>/orders/new">
+                <div class="col-xs-6 col-sm-6 hvr-bob navCardWrapper">
+                    <div class="card card-body">
+                          <div align="center" style="margin:auto;">
+                              <h1><i class="fa fa-clock icon"></i></h1>
+                          </div>
+                          <!-- <p class="card-text"> </p> -->
+                          <div class="flex-row">
+                            <a class="card-link">New Orders</a>
+                          </div>
+                    </div>
+                </div>                
+            </a>
+
+            <a href="<%= site.adminURL%>/orders/delivered">
+                <div class="col-xs-6 col-sm-6 hvr-bob navCardWrapper">
+                    <div class="card card-body">
+                          <div align="center" style="margin:auto;">
+                              <h1><i class="fa fa-check icon"></i></h1>
+                          </div>
+                          <!-- <p class="card-text"> </p> -->
+                          <div class="flex-row">
+                            <a class="card-link">Delivered orders</a>
+                          </div>
+                    </div>
+                </div>                
+            </a>
+                       
+        </div>
+
+                                
+<!-- 
+                                <div class="dropdown">
+
+                                   <button class="no-border" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons down">more_vert</i></button>
+
+
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                    <a class="dropdown-item" href="order.html">View order</a>
+                                  </div>
+                                </div> -->
+
+                            
+
+
+<!-- footer starts here -->
+<% include includes/footer %>
+<!-- footer ends here -->
+
+</body>
+</html>
