@@ -1,4 +1,10 @@
-	<header><!-- should be fixed top -->
+	<style type="text/css">
+		#top-super-nav-btn:hover {
+			text-decoration: underline;
+		}
+	</style>
+
+	<header class="sticky-top"><!-- should be fixed top -->
 		<div class="head-container">
 			<div class="row">
 			</div>
@@ -12,17 +18,17 @@
 					</div>
 					<div class="logo">
 						<a href="">
-							<img src="img/Logo_white.png" alt="Biirii" style="width:50px;">
-							<span>Biirii</span>
+							<img src="/img/logo-white.png" alt="Biirii" style="width:60px;">
+							<!-- <span>Biirii</span> -->
 						</a>
 					</div>
 	
 					<div class="gender-tags hideonmobile">
-						<div>
-							<a>Women</a>
+						<div<% if (superCategory == 'women') { -%> class="active" <% } -%> style="cursor: pointer;" id="top-super-nav-btn">
+							<a onclick="window.location.href='/women'">Women</a>
 						</div>
-						<div class="active">
-							<a>Men</a>
+						<div <% if (superCategory == 'men') { -%> class="active" <% } -%>  style="cursor: pointer;" id="top-super-nav-btn">
+							<a onclick="window.location.href='/men'">Men</a>
 						</div>
 					</div>
 	
@@ -51,41 +57,20 @@
 				<nav>
 					<ul class="main-menu">
 						<li>
-							<a href="#">sales</a>
+							<a href="#">Store</a>
 						</li>
 						<li>
-							<a href="#">New in</a>
+							<a href="#">Impact</a>
 						</li>
 						<li>
-							<a href="">Clothing</a>
+							<a href="">About us</a>
 						</li>
+
 						<li>
-							<a href="#">Shoes</a>
+							<a href="">Return Policy</a>
 						</li>
-						<li>
-							<a href="#">Accessories</a>
-						</li>
-						<li>
-							<a href="#">Activewear</a>
-						</li>
-						<li>
-							<a href="#">Face + Body</a>
-						</li>
-						<li>
-							<a href="#">Brands</a>
-						</li>
-						<li>
-							<a href="#">Outlet</a>
-						</li>
-						<li>
-							<a href="#">Marketplace</a>
-						</li>
-						<li>
-							<a href="#">Inspiration</a>
-						</li>
-						<li><a href="#">Jewelry
-							<span class="new">New</span>
-						</a></li>
+
+
 					</ul>
 				</nav>
 
@@ -169,8 +154,8 @@
 							</div> -->
 							<div class="container-logo">
 								<div class="logo-container">
-									<img src="img/Logo_black.png" alt="" width="50px">
-									<span>Biirii</span>
+									<img src="/img/logo-black.png" alt="" width="50px">
+									<!-- <span>Biirii</span> -->
 								</div>
 							</div>
 							<nav class="panel-container">
@@ -181,7 +166,7 @@
 												<a>
 													<p>Home</p>
 													<div>
-														<img src="img/nav/home.jpg" alt="">
+														<img src="/img/nav/home.jpg" alt="">
 													</div>
 												</a>
 											</li>
@@ -196,7 +181,7 @@
 														<span class="_info">up to 50% off</span>
 													</p>
 													<div>
-														<img src="img/nav/sales.jpg" alt="">
+														<img src="/img/nav/sales.jpg" alt="">
 													</div>
 												</a>
 											</li>
@@ -206,7 +191,7 @@
 														<span>Women</span>
 													</p>
 													<div>
-														<img src="img/nav/women.jpg" alt="">
+														<img src="/img/nav/women.jpg" alt="">
 													</div>
 												</a>
 											</li>
@@ -216,7 +201,7 @@
 														<span>Men</span>
 													</p>
 													<div>
-														<img src="img/nav/men.jpg" alt="">
+														<img src="/img/nav/men.jpg" alt="">
 													</div>
 												</a>
 											</li>
@@ -226,7 +211,7 @@
 														<span>Accessories</span>
 													</p>
 													<div>
-														<img src="img/nav/accessories.jpg" alt="">
+														<img src="/img/nav/accessories.jpg" alt="">
 													</div>
 												</a>
 											</li>
@@ -236,7 +221,7 @@
 														<span>Brands</span>
 													</p>
 													<div>
-														<img src="img/nav/brands.jpg" alt="">
+														<img src="/img/nav/brands.jpg" alt="">
 													</div>
 												</a>
 											</li>
@@ -246,7 +231,7 @@
 														<span>Outlet</span>
 													</p>
 													<div>
-														<img src="img/nav/outlets.jpg" alt="">
+														<img src="/img/nav/outlets.jpg" alt="">
 													</div>
 												</a>
 											</li>
@@ -271,7 +256,7 @@
 												<span>Pants</span>
 											</p>
 											<div>
-												<img src="img/nav/female-pants.jpg" alt="">
+												<img src="/img/nav/female-pants.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -281,7 +266,7 @@
 												<span>Skirts</span>
 											</p>
 											<div>
-												<img src="img/nav/skirts.jpg" alt="">
+												<img src="/img/nav/skirts.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -291,7 +276,7 @@
 												<span>Top</span>
 											</p>
 											<div>
-												<img src="img/nav/female-top.jpg" alt="">
+												<img src="/img/nav/female-top.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -301,7 +286,7 @@
 												<span>Dress</span>
 											</p>
 											<div>
-												<img src="img/nav/dress.jpg" alt="">
+												<img src="/img/nav/dress.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -311,7 +296,7 @@
 												<span>Jumpsuits</span>
 											</p>
 											<div>
-												<img src="img/nav/jumpsuits.jpg" alt="">
+												<img src="/img/nav/jumpsuits.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -321,7 +306,7 @@
 												<span>Shirts</span>
 											</p>
 											<div>
-												<img src="img/nav/female-shirt.jpg" alt="">
+												<img src="/img/nav/female-shirt.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -331,7 +316,7 @@
 												<span>Gowns</span>
 											</p>
 											<div>
-												<img src="img/nav/gowns.jpg" alt="">
+												<img src="/img/nav/gowns.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -341,7 +326,7 @@
 												<span>Tee Shirts</span>
 											</p>
 											<div>
-												<img src="img/nav/female-tee-shirts.jpg" alt="">
+												<img src="/img/nav/female-tee-shirts.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -351,7 +336,7 @@
 												<span>Blouses</span>
 											</p>
 											<div>
-												<img src="img/nav/blouse.jpg" alt="">
+												<img src="/img/nav/blouse.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -374,7 +359,7 @@
 												<span>Pants</span>
 											</p>
 											<div>
-												<img src="img/nav/male-pants.jpg" alt="">
+												<img src="/img/nav/male-pants.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -384,7 +369,7 @@
 												<span>Shorts</span>
 											</p>
 											<div>
-												<img src="img/nav/male-shorts.jpg" alt="">
+												<img src="/img/nav/male-shorts.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -394,7 +379,7 @@
 												<span>Top</span>
 											</p>
 											<div>
-												<img src="img/nav/male-top.jpg" alt="">
+												<img src="/img/nav/male-top.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -404,7 +389,7 @@
 												<span>Jackets</span>
 											</p>
 											<div>
-												<img src="img/nav/jackets.jpg" alt="">
+												<img src="/img/nav/jackets.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -414,7 +399,7 @@
 												<span>Kaftans</span>
 											</p>
 											<div>
-												<img src="img/nav/kaftans.jpg" alt="">
+												<img src="/img/nav/kaftans.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -424,7 +409,7 @@
 												<span>Shirts</span>
 											</p>
 											<div>
-												<img src="img/nav/male-shirt.jpg" alt="">
+												<img src="/img/nav/male-shirt.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -434,7 +419,7 @@
 												<span>Jacket &amp; Blazers</span>
 											</p>
 											<div>
-												<img src="img/nav/blazers.jpg" alt="">
+												<img src="/img/nav/blazers.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -444,7 +429,7 @@
 												<span>Tee Shirts</span>
 											</p>
 											<div>
-												<img src="img/nav/male-tee-shirts.jpg" alt="">
+												<img src="/img/nav/male-tee-shirts.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -467,7 +452,7 @@
 												<span>Belts</span>
 											</p>
 											<div>
-												<img src="img/nav/belts.jpg" alt="">
+												<img src="/img/nav/belts.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -477,7 +462,7 @@
 												<span>Ties</span>
 											</p>
 											<div>
-												<img src="img/nav/ties.jpg" alt="">
+												<img src="/img/nav/ties.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -497,7 +482,7 @@
 												<span>Bags</span>
 											</p>
 											<div>
-												<img src="img/nav/bags.jpg" alt="">
+												<img src="/img/nav/bags.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -507,7 +492,7 @@
 												<span>Caps &amp; Hats</span>
 											</p>
 											<div>
-												<img src="img/nav/caps.jpg" alt="">
+												<img src="/img/nav/caps.jpg" alt="">
 											</div>
 										</a>
 									</li>
@@ -517,7 +502,7 @@
 												<span>Socks</span>
 											</p>
 											<div>
-												<img src="img/nav/socks.jpg" alt="">
+												<img src="/img/nav/socks.jpg" alt="">
 											</div>
 										</a>
 									</li>

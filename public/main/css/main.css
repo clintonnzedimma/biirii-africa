@@ -7,6 +7,10 @@
     overflow: hidden;
 } */
 
+body, html{
+    overflow-y: auto;
+}
+
 .header-container{
     background: rgb(45, 45, 45);
     color: rgb(255,255,255);
@@ -182,7 +186,7 @@ nav {
 }
 
 ._wrapper {
-    height: 70vh;
+    height: 90vh;
     position: relative;
 }
 
@@ -190,6 +194,7 @@ nav {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: center 20%;
 }
 
 ._image-wrapper::before {
@@ -199,15 +204,16 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #0000008a;
+    background: #000000 /*#0000008a*/;
+    opacity: 0.5;
     color: black;
-}
+ }
 
 ._content {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,0%);
     max-width: 80%;
 }
 
@@ -219,9 +225,13 @@ nav {
     color: #dee2e6;
 }
 
+._generic-btns{
+    text-align: center;
+}
+
 ._generic-btns a {
     display: inline-block;
-    margin: auto 10px;
+    margin: 5px 10px;
     padding: 5px 20px;
     text-align: center;
     width: 150px;
@@ -270,6 +280,13 @@ nav {
     }
     .search-form:focus-within input{
         display: block;
+    }
+    ._content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        max-width: 80%;
     }
 }
 @media only screen and (max-width: 367px){

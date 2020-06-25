@@ -26,12 +26,11 @@ route.get("/test", (req, res)=> {
 
 
 
-//static routes
-route.get("/", mainHandler.SuperCategoryHomePage);
+route.get("/", mainHandler.IndexPage);
 
 route.get("/:super_category/", mainHandler.SuperCategoryHomePage);
 
-
+route.get("/store/products/:slug", mainHandler.ProductPage);
 
 
 

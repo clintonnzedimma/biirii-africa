@@ -237,7 +237,7 @@ function create() {
                     setTimeout(()=>{ 
 
                      console.log("successful");
-                     window.location.href = "<%= site.adminURL%>/products";
+                     window.location.href = `<%= site.adminURL%>/add-sub-product/${res.pKey}`;
 
                     }, 2000);
 

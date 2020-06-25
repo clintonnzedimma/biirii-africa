@@ -57,10 +57,15 @@ module.exports.OrderMenu = (req, res) => {
 // Products page  
 module.exports.ProductList = (req, res) => {
 
-
 	db.query('SELECT * FROM products ORDER BY id DESC', (err, row)=> {
 		db.query('SELECT * FROM categories ORDER BY id ASC', (err, categories)=> {
-			res.render("dashboard/products", {pageTitle:`Products`, products: row, categories : categories}); 
+			res.render("dashboard/products", 
+				{
+					pageTitle:`Products`, 
+					products: row, 
+					categories : categories
+				}
+			); 
 		});
 	  	
 	});	
@@ -79,14 +84,14 @@ module.exports.AddProduct = (req, res) => {
 
 // Edit product page  
 module.exports.EditProduct = (req, res) => {
-	id = req.params.key;
+	pKey = req.params.key;
 	
 
-	db.query('SELECT * FROM products WHERE id = ? ORDER BY id DESC', [id],(err, product)=> {
+	db.query('SELECT * FROM products WHERE pKey = ? ORDER BY id DESC', [pKey],(err, product)=> {
 		if (product.length > 0) {
 			
 			db.query('SELECT * FROM categories ORDER BY id ASC', (err, categories)=> {
-					db.query('SELECT * FROM sub_products WHERE product_id = ?', [id], (err, subProducts)=> {
+					db.query('SELECT * FROM sub_products WHERE product_key = ?', [pKey], (err, subProducts)=> {
 
 
 						if (categories.length > 0) {
@@ -114,7 +119,7 @@ module.exports.EditProduct = (req, res) => {
 
 //Add sub product or variety
 module.exports.AddSubProduct = (req, res) => {
-	db.query('SELECT * FROM products WHERE id = ?', [req.params.id], (err, row)=> {
+	db.query('SELECT * FROM products WHERE pKey = ?', [req.params.pKey], (err, row)=> {
 		if (err) throw new Error(err);
 		if (!row) res.status(400).send("Not found");
 
@@ -130,14 +135,16 @@ module.exports.AddSubProduct = (req, res) => {
 
 //Add sub product or variety
 module.exports.EditSubProduct = (req, res) => {
-	db.query('SELECT * FROM sub_products WHERE id = ?', [req.params.id], (err, row)=> {
+	let id = req.params.key; // sub product id in the db
+
+	db.query('SELECT * FROM sub_products WHERE id = ?', [id], (err, row)=> {
 		if (err) throw new Error(err);
 		if (!row) res.status(400).send("Not found");
 
 		let sp = row[0];
 
 
-		db.query("SELECT * FROM products WHERE id = ?", [sp.product_id], (err, row)=>{
+		db.query("SELECT * FROM products WHERE pKey = ?", [sp.product_key], (err, row)=>{
 			if (err) throw new Error(err);
 
 			let p = row[0];

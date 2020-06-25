@@ -73,7 +73,7 @@ module.exports.createProduct = async (req, res) => {
 	let productName = req.body.name;
 	let categoryId = parseInt(req.body.category);
 	let description = req.body.description;
-	let pKey = uuid().toUpperCase().slice(0, 5);
+	let pKey = uuid().toUpperCase().slice(0, 3);
 
 
 	let product = {

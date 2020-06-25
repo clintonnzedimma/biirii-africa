@@ -49,10 +49,14 @@
             <div class="col-xs-6 col-sm-7 card" style="margin: auto;">
               <div class="card-body">
                 <h5 class="card-title">Add sub product for <i><%=product.name.toUpperCase() %></i></h5>
-                <h6>The name should be  <i> e.g 50 ml, 1 cup, 30g</i></h6>
+                <h6>
+                    The name should be  <i> e.g XL, Size 40, M</i><br>
+                   <span style="font-size: 14px"> Leave name as (<b style="color:blue">*</b>) if product has only one price</span>
+                </h6>
+
             
                     <div>
-                         <button type="button" class="btn btn-outline-warning waves-effect" onclick="window.location.href='/dashboard/edit-product/<%=product.id%>'">Go to Product</button>
+                         <button type="button" class="btn btn-outline-warning waves-effect" onclick="window.location.href='/dashboard/edit-product/<%=product.pKey%>'">Go to Product</button>
                     </div>
 
 <!-- Material form contact -->
@@ -91,7 +95,9 @@ autofocus<% }  -%> >
  -->
                         <!-- Material form contact -->                            
 
-                        <input type="text" name="id" value="<%=product.id%>" style="display: none;">
+                          <virtual> <input type="text" name="id" value="<%=product.id%>" style="display: none;"> </virtual>
+
+                         <virtual> <input type="text" name="pKey" value="<%=product.pKey%>" style="display: none;"> </virtual>
 
                         <!-- Send button -->
                         <button id="edit-btn" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="button" onclick="modify()">Save changes</button>

@@ -48,10 +48,10 @@ route.get('/add-product', adminMiddleware.isLoggedIn, dashboardHandler.AddProduc
 route.get('/edit-product/:key', adminMiddleware.isLoggedIn, dashboardHandler.EditProduct);
 
 
-route.get('/add-sub-product/:id', adminMiddleware.isLoggedIn, dashboardHandler.AddSubProduct);
+route.get('/add-sub-product/:pKey', adminMiddleware.isLoggedIn, dashboardHandler.AddSubProduct);
 
 
-route.get('/edit-sub-product/:id', adminMiddleware.isLoggedIn, dashboardHandler.EditSubProduct);
+route.get('/edit-sub-product/:key', adminMiddleware.isLoggedIn, dashboardHandler.EditSubProduct);
 
 
 route.get('/categories', adminMiddleware.isLoggedIn, dashboardHandler.Categories);
