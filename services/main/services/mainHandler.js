@@ -41,15 +41,28 @@ module.exports.SuperCategoryHomePage =  async (req, res)=> {
 	res.render("main/home_page", 
 		{
 			pageTitle: `${helpers.ucwords(superCategory)} - BiiriiAfrica`,
-			superCategory: superCategory ,
+			superCategory: superCategory,
 			products: fetchedProducts,
-			categories :fetchedCategories
+			categories :fetchedCategories,
+
 
 		});	
 
 
 }
 
+
+module.exports.GeneralStorePage = async (req, res)=> {
+
+	let products = await Product.fetchAll();
+
+	res.render("main/general_store", {
+		 pageTitle: `Online store - BiiriiAfrica`,
+		 products: products,
+		 superCategory: null,
+		 categories: [],
+	 });
+}
 
 
 

@@ -19,18 +19,20 @@ const Product = require('../../models/db/Product');
 app.use("/online-store/products/",express.static(path.join(__dirname, "public/main")));
 
 route.get("/test", (req, res)=> {
-	Product.findAll().then(products => {
-	  console.log(products);
-	});
+	delete req.session.cart;
+	req.session.save();
 });
-
 
 
 route.get("/", mainHandler.IndexPage);
 
-route.get("/:super_category/", mainHandler.SuperCategoryHomePage);
+route.get("/store", mainHandler.GeneralStorePage);
 
 route.get("/store/products/:slug", mainHandler.ProductPage);
+
+route.get("/:super_category/", mainHandler.SuperCategoryHomePage);
+
+
 
 
 

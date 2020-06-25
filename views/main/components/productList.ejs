@@ -19,9 +19,11 @@
 				<li><a href="#">JUMPERS</a></li>
 				<li><a href="#">LEGGINGS</a></li> -->
 
-<%categories.forEach(category=> {-%>
-				<li><a href="#"><%=category.name %></a></li>
-<%}) -%>
+<% if (categories || categories.length > 0) { -%>
+	<%categories.forEach(category=> {-%>
+					<li><a href="#"><%=category.name %></a></li>
+	<%}) -%>
+<% } %>
 
 			</ul>
 
@@ -33,9 +35,12 @@
 				<div class="col-lg-3 col-sm-6" >
 					<div class="product-item">
 						<div class="pi-pic">
-							<img src="/img/products/<%=product.main_img %>" alt="<%=product.name %>">
+							<img src="/img/products/<%=product.main_img %>" alt="<%=product.name %>" id="productImg-<%=product.id %>">
 							<div class="pi-links">
-								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+
+								<% if (product.sub.length > 0) { -%>
+								<a href="#" class="add-card" onclick="addToCart(<%=product.sub[0].id%>, <%=product.id%>)"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<% } -%>
 								<!-- <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a> -->
 							</div>
 						</div>

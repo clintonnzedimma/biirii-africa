@@ -2,10 +2,10 @@
 * @author Clinton Nzedimma
 * Cart system
 */
- function Cart(el) {				
+ function Cart(el) {									
 
  	
-	this.add = (spId, extras = []) => {
+	this.add = (spId, pId) => {
 	 	let notyf = new Notyf({
 	 		duration:3000,
 	 		  position: {
@@ -16,13 +16,13 @@
 
 		$.post(
 			'/json/cart/add', 
-			{id: spId, extras: extras}, 
+			{id: spId}, 
 			(res)=> {
 			console.log(res);
 			if (res.status == true) {
 				notyf.success(res.message);
 				$(el).html(res.cart.totalItems);
-				this.flyToBasket(spId);
+				this.flyToBasket(pId);
 				window.navigator.vibrate(200);
 			}
 		});
@@ -141,8 +141,11 @@
 
 	this.flyToBasket = (id) => {
 
-        let cart = $('#cartBasket');
+        let cart = $("#cartBasket");
         let imgtodrag = $(`#productImg-${id}`);
+        console.log(`#productImg-${id}`);
+
+
         if (imgtodrag) {
             let imgclone = imgtodrag.clone()
                 .offset({
@@ -154,7 +157,7 @@
                     'position': 'absolute',
                     'height': '150px',
                     'width': '150px',
-                    'z-index': '100'
+                    'z-index': '100000'
             })
                 .appendTo($('body'))
                 .animate({
@@ -201,6 +204,6 @@
 
 }
 
-var Cart = new Cart("#cartQty");
+var Cart = new Cart("#cart-value");
 
 
