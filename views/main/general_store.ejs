@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+<%include includes/metaMain%>	
+</head>
+<body>
+
+	<style type="text/css">
+	.feature:nth-child(2) {
+	    /*//background: #114ff5;*/
+	}		
+	</style>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header section -->
+	<%include includes/header%>
+	<!-- Header section end -->
+
+
+
+	<!-- Features section -->
+	<section class="features-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4 p-0 feature">
+					<div class="feature-inner">
+						<div class="feature-icon">
+							<img src="img/icons/1.png" alt="#">
+						</div>
+						<h2>Fast Secure Payments</h2>
+					</div>
+				</div>
+				<div class="col-md-4 p-0 feature">
+					<div class="feature-inner">
+						<div class="feature-icon">
+							<img src="img/icons/2.png" alt="#">
+						</div>
+						<h2>Premium Products</h2>
+					</div>
+				</div>
+				<div class="col-md-4 p-0 feature">
+					<div class="feature-inner">
+						<div class="feature-icon">
+							<img src="img/icons/3.png" alt="#">
+						</div>
+						<h2>Free & fast Delivery</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Features section end -->
+
+
+
+
+			<div class="section-title">
+				<p><h2>STORE</h2></p>
+			</div>
+
+	<!-- Product filter section -->
+	<%include components/ProductList%>
+	<!-- Product filter section end -->
+
+
+	<!-- Banner section -->
+	<section class="banner-section">
+		<div class="container">
+			<div class="banner set-bg" data-setbg="img/banner-bg.jpg">
+				<div class="tag-new">NEW</div>
+				<span>New Arrivals</span>
+				<h2>STRIPED SHIRTS</h2>
+				<a href="#" class="site-btn">SHOP NOW</a>
+			</div>
+		</div>
+	</section>
+	<!-- Banner section end  -->
+
+
+
+	<!-- latest product section -->
+	<% let componentTitle = "Latest Products" %>
+	<%include components/slidingProductList%>
+	<!-- latest product section end -->
+
+
+
+	<!-- Footer component start -->
+	<%include includes/footer%>
+	<!-- Footer component end -->
+
+
+
+<script type="text/javascript">
+    	// This javascript section activates the AOS library (aos.js) 
+      AOS.init({
+        easing: 'ease-in-out-sine'
+      });
+</script>
+
+	</body>
+</html>
