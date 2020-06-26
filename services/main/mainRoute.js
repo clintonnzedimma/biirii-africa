@@ -23,10 +23,21 @@ route.get("/test", (req, res)=> {
 	req.session.save();
 });
 
+route.get("/see-cart", async (req, res)=> {
+	let cart = new Cart(req.session.cart ? req.session.cart : {});
+	let products = (req.session.cart) ? cart.getItems() :  [];
+	let subs = await Product.fetchSubProducts();
+
+	res.json(products[0]);	
+});
+
+
 
 route.get("/", mainHandler.IndexPage);
 
 route.get("/store", mainHandler.GeneralStorePage);
+
+route.get("/cart", mainHandler.CartPage);
 
 route.get("/store/products/:slug", mainHandler.ProductPage);
 

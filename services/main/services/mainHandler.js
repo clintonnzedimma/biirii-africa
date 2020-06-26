@@ -79,3 +79,22 @@ module.exports.ProductPage = async (req, res)=> {
 		 superCategory: null
 	 });
 }
+
+
+
+module.exports.	CartPage = async(req, res)=> {
+	let cart = new Cart(req.session.cart ? req.session.cart : {});
+	let products = (cart) ? cart.getItems() :  [];
+	let subs = await Product.fetchSubProducts();
+
+	console.log(cart.getItems());	
+
+	res.render("main/cart", {
+		 pageTitle: `Cart - BiiriiAfrica`,
+		 products: products,
+		 subs : subs,
+		 superCategory: null,
+		 totalPrice : cart.totalPrice,
+		 categories: []
+	 });
+}

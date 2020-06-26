@@ -120,9 +120,24 @@ module.exports.fetchOne = (arg) => {
 }
 
 
+// Fetch all sub products
+module.exports.fetchSubProducts =  () => {
+  return new Promise((resolve, reject)=> {
+  		let result = {};
 
+  		db.query("SELECT * FROM sub_products", (err, subs)=> {
+  			if (err) {
+  				reject(err);
+  				throw new Error(err);
+  			}
 
-
+  			if (subs.length > 0) {
+  				resolve(subs);			
+  			}	
+  		});	
+   		
+	});
+}
 
 
 
