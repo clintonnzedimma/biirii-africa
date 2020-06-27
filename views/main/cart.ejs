@@ -39,7 +39,7 @@
 
 		div.cart_product .row {
 			display: flex;
-			flex-wrap: wrap;
+			flex-wrap: nowrap;
 			margin: auto;
 			margin-bottom: 10px;
 		}
@@ -48,6 +48,10 @@
 			width: 150px;
 			overflow: hidden;
 			border-radius: 10px;
+		}
+
+		.item_price{
+			color: #35a535;
 		}
 
 		.quantity{
@@ -76,6 +80,7 @@
 
 		.total_item_price {
 			font-size: 24px;
+			color: #f67770;
 		}
 
 		.bottom-panel{
@@ -103,7 +108,7 @@
 	<section class="_index">
 
 
-<p><h2 align="center" style="font-weight: 200">Your cart</h2></p>
+<p><h2 align="center" style="font-weight: 500">Your cart</h2></p>
 
 <% if (products.length > 0) { -%>
 		<div class="container">
