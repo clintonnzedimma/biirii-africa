@@ -127,7 +127,11 @@ span#cart-value {
     top: 0;
     right: -10px;
     border-radius: 50%;
-    color: rgb(249, 119, 112);
+    background-color: rgb(249, 119, 112);
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 1.7;
 }
 
 .cart-value {

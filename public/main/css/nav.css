@@ -127,6 +127,7 @@ ul.sub-menu h2{
     right: 5%;
     color: white;
     font-size: 30px;
+    cursor: pointer;
 }
 .side-bar aside{
     position: relative;
