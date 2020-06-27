@@ -39,6 +39,10 @@ route.get("/store", mainHandler.GeneralStorePage);
 
 route.get("/cart", mainHandler.CartPage);
 
+route.get("/checkout", mainHandler.CheckoutPage);
+
+route.get("/checkout/success", mainHandler.PurchaseDetails);
+
 route.get("/store/products/:slug", mainHandler.ProductPage);
 
 route.get("/:super_category/", mainHandler.SuperCategoryHomePage);
@@ -78,12 +82,9 @@ route.post("/json/cart/delete", mainService.removeCartItem);
 
 
 //order
-route.post("/json/order/init", mainService.initOrder);
 route.post("/json/order/submit", mainService.submitOrder);
-route.post("/json/order/meal-plan/submit", mainService.submitMealPlanOrder);
 
 //checkout
 route.post("/json/checkout/pay", mainService.pay);
-route.post("/json/checkout/meal-plan/pay", mainService.payMealPlan);
 
 module.exports =  route;

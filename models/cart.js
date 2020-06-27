@@ -10,49 +10,30 @@ module.exports = function Cart(cart) {
     this.sumOfExtrasPrice = 0;
     this.productOrderKey = null;
 
-    this.add = function(item, superItem, extras = []) {
-
+    this.add = function(item, superItem, qty = 1) {
         // `id` is a random generated string used to identify an item added to the cart
         //  The`id` does not represent the product, sub product or extra id in the database
         let id = uuid().toUpperCase().slice(0, 8);
 
         let productOrderKey = null;
 
+        if (qty <= 0) throw new Error("Cart quantity cant be less than 1 when adding to cart");
+
         console.trace("superItems=>"+superItem);
-
-        if (extras.length > 0) {
-            this.sumOfExtrasPrice = extras.reduce((a, {price}) => a + price, 0);
-            productOrderKey = uuid().toUpperCase().slice(0, 4);
-
-            this.productOrderKey = productOrderKey;
-            
-
-            for (var i = 0; i < extras.length; i++) {
-                extras[i].product_order_key = this.productOrderKey;
-            }
-        }
 
         let cartItem = this.items[id];
         if (!cartItem) {
             cartItem = this.items[id] = {
                 item: item, 
                 superItem: superItem, 
-                extras: extras, 
                 qty: 0, 
                 price: 0,
                 id : id
             };
         }
-
-        if (extras.length > 0 ) {
-            
-            cartItem.item.product_order_key = this.productOrderKey;
-        }   
-
-        console.log("addCart=>"+this.sumOfExtrasPrice);     
-
-        cartItem.qty++;
-        cartItem.price = (cartItem.item.price *  cartItem.qty) + this.sumOfExtrasPrice;
+        
+        cartItem.qty = cartItem.qty + qty;
+        cartItem.price = (cartItem.item.price *  cartItem.qty);
         this.totalItems++;
         this.totalPrice += cartItem.price;
 
