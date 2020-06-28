@@ -74,6 +74,7 @@ module.exports.createProduct = async (req, res) => {
 	let categoryId = parseInt(req.body.category);
 	let description = req.body.description;
 	let pKey = uuid().toUpperCase().slice(0, 3);
+	let brand_id = (parseInt(req.body.brand_id) >= 0) ? parseInt(req.body.brand_id) : null;
 
 
 	let product = {
@@ -84,6 +85,7 @@ module.exports.createProduct = async (req, res) => {
 		slug : slug(productName.toLowerCase()),
 		description : description,
 		pKey : pKey,
+		brand_id  : brand_id,
 		time_added : Date.now()
 	}
 

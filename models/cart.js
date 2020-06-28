@@ -31,7 +31,7 @@ module.exports = function Cart(cart) {
                 id : id
             };
         }
-        
+
         cartItem.qty = cartItem.qty + qty;
         cartItem.price = (cartItem.item.price *  cartItem.qty);
         this.totalItems++;
@@ -62,15 +62,6 @@ module.exports = function Cart(cart) {
         let sumOfItemExtrasPrice = 0;
 
         let sumOfItemExtrasPriceWithQty = 0;
-
-        if (cart.items[id].extras.length > 0) {
-
-             sumOfItemExtrasPrice = cart.items[id].extras.reduce((a, {price}) => a + price, 0);
-
-             sumOfItemExtrasPriceWithQty = sumOfItemExtrasPrice * cart.items[id].qty;
-        }
-
-
 
         let oldPricePerProduct = (cart.items[id].price - sumOfItemExtrasPrice)/cart.items[id].qty; 
 

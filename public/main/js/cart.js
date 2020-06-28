@@ -45,6 +45,7 @@
 	this.removeItem = (arg) =>  {
 	 	let notyf = new Notyf({
 		 		duration:3000,
+		 		background : '#8f4101',
 		 		  position: {
 		    		x: 'right',
 		    		y: 'top',

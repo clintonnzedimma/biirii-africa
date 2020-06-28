@@ -57,7 +57,7 @@
 	<section class="product-section">
 		<div class="container">
 			<div class="back-link">
-				<a href="#"> &lt;&lt; Go back</a>
+				<!-- <a href="#"> &lt;&lt; Go back</a> -->
 			</div>
 			<div class="row">
 				<div class="col-lg-6">
@@ -124,7 +124,7 @@
                         <div class="pro-qty">
                         	<!-- <span class="dec qty-btn">-</span> -->
                         	<input 
-                        	type="text"  
+                        	type="number"  
                         	value="1" 
                         	id="qtyValue"
                         	onchange="changeQty(this.value)"
@@ -148,19 +148,24 @@
 								</div>
 							</div>
 						</div>
-						<div class="panel">
-							<div class="panel-header" id="headingTwo">
-								<button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Brand Information </button>
-							</div>
-							<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-								<div class="panel-body">
-									<ul>
-										<li>Brand Name : Biirii Africa</li>
-									</ul>
+
+						<% if (product.brand.length > 0) { -%>
+							<div class="panel">
+								<div class="panel-header" id="headingTwo">
+									<button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Brand Information </button>
+								</div>
+								<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+									<div class="panel-body">
+										<ul>
+											<li>Brand Name : Biirii Africa</li>
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="panel">
+							
+						<% }  -%>
+							
+						<!-- <div class="panel">
 							<div class="panel-header" id="headingThree">
 								<button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">shipping & Returns</button>
 							</div>
@@ -171,7 +176,7 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="social-sharing">
 						<a href=""><i class="fa fa-google-plus"></i></a>
@@ -190,7 +195,7 @@
 
 	<!-- Related product section -->
 	<% let componentTitle = "Related Products" %>
-	<%include components/slidingProductList%>
+	<%//include components/slidingProductList%>
 	<!--  product section end -->
 
 
@@ -242,10 +247,22 @@ $(".qtybtn").on("click", function(){
 	if ($(this).hasClass('dec')) {
 		qtyValue = qtyValue - 1;
 	}
-	
+
 	if ($(this).hasClass('inc')) {
 		qtyValue = qtyValue + 1;
 	}	
+
+
+	if (qtyValue == 1) totalItemPriceWrapper.hide();
+
+	if (qtyValue > 1) totalItemPriceWrapper.show();
+
+
+
+	let price = qtyValue * productPrice;
+
+	$("#totalItemPrice").html(price.toLocaleString());
+
 });
 
 

@@ -32,7 +32,6 @@ route.get("/see-cart", async (req, res)=> {
 });
 
 
-
 route.get("/", mainHandler.IndexPage);
 
 route.get("/store", mainHandler.GeneralStorePage);
@@ -45,17 +44,17 @@ route.get("/checkout/success", mainHandler.PurchaseDetails);
 
 route.get("/store/products/:slug", mainHandler.ProductPage);
 
-route.get("/:super_category/", mainHandler.SuperCategoryHomePage);
+route.get("/store/:super_category/", mainHandler.SuperCategoryHomePage);
+
+route.get("/store/:super_category/categories/:category_slug", mainHandler.CategoryPage);
 
 
 
-
-
-
-
-route.get('/*' ,(req, res) => {
+route.get('/*', (req, res) => {
 	res.render("main/404" , {pageTitle : "Page not found "});
 });
+
+
 
 //service end points
 route.post("/test", (req, res)=> {

@@ -26,17 +26,20 @@ module.exports.SuperCategoryHomePage =  async (req, res)=> {
 
 
 	if (!Product.superCategories.includes(superCategory)) {
-		res.status(404).send('Not found');
+		res.redirect("/404");
 	}	
 
 	let fetchProductDataBySuperCategories = await Product.fetchBySuperCategories(superCategory);
 	let fetchedProducts = fetchProductDataBySuperCategories.products;
 	let fetchedCategories = fetchProductDataBySuperCategories.categories;
 
+	let latestProducts =  await Product.fetchAll();
+
 	res.render("main/home_page", 
 		{
-			pageTitle: `${helpers.ucwords(superCategory)} - BiiriiAfrica`,
+			pageTitle: `${helpers.ucwords(superCategory)} - Biirii Africa`,
 			superCategory: superCategory,
+			latestProducts: latestProducts,
 			products: fetchedProducts,
 			categories :fetchedCategories,
 		});	
@@ -47,13 +50,16 @@ module.exports.SuperCategoryHomePage =  async (req, res)=> {
 
 module.exports.GeneralStorePage = async (req, res)=> {
 
-	let products = await Product.fetchAll();
+	let products = await Product.fetchAll("RAND()");
+
+	let latestProducts =  await Product.fetchAll();
 
 	res.render("main/general_store", {
 		 pageTitle: `Online store - BiiriiAfrica`,
 		 products: products,
 		 superCategory: null,
 		 categories: [],
+		 latestProducts: latestProducts
 	 });
 }
 
@@ -67,7 +73,7 @@ module.exports.ProductPage = async (req, res)=> {
 
 
 	res.render("main/product", {
-		 pageTitle: `${product.name} - BiiriiAfrica`,
+		 pageTitle: `${product.name} - Biirii Africa`,
 		 product: product,
 		 superCategory: null
 	 });
@@ -75,7 +81,7 @@ module.exports.ProductPage = async (req, res)=> {
 
 
 
-module.exports.	CartPage = async(req, res)=> {
+module.exports.CartPage = async(req, res)=> {
 	let cart = new Cart(req.session.cart ? req.session.cart : {});
 	let products = (cart) ? cart.getItems() :  [];
 	let subs = await Product.fetchSubProducts();
@@ -102,7 +108,7 @@ module.exports.	CheckoutPage = async(req, res)=> {
 	console.log(cart.getItems());	
 
 	res.render("main/checkout", {
-		 pageTitle: `Checkout - BiiriiAfrica`,
+		 pageTitle: `Checkout - Biirii Africa`,
 		 products: products,
 		 subs : subs,
 		 superCategory: null,
@@ -125,7 +131,45 @@ module.exports.PurchaseDetails = (req, res)=> {
 				orderKey : orderKey
 			});		
 	} else {
-		return res.status(404).send("Not found.");
+		return res.redirect("/404");
 	}
+
+}
+
+
+
+module.exports.CategoryPage = async (req, res)=> {
+
+	let superCategory = req.params.super_category.toLowerCase();
+	let category_slug = req.params.category_slug.toLowerCase();
+
+	if (!Product.superCategories.includes(superCategory)) {
+		 return res.redirect("/404");
+	}	
+
+	let validateCategorySlugBySuper = await Product.validateCategorySlugBySuper({
+		super_category: superCategory,
+		category_slug: category_slug
+	});
+
+	if (validateCategorySlugBySuper.status == false){
+		 return res.redirect("/404");
+	} 
+
+	let category = await Product.fetchCategoryBySlug(category_slug);
+
+	let fetchedProducts = await Product.fetchByCategory(category.id);
+
+	let latestProducts =  await Product.fetchAll();
+
+	return res.render("main/category", 
+		{
+			pageTitle: `${helpers.ucwords(category.name)} | ${helpers.ucwords(superCategory)} - Biirii Africa`,
+			products: fetchedProducts,
+			superCategory: superCategory,
+			latestProducts: latestProducts,
+			category : category,
+			categories : []
+		});	
 
 }
