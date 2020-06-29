@@ -21,6 +21,41 @@ module.exports.IndexPage = (req, res)=> {
 	 });
 }
 
+
+module.exports.ReturnPolicyPage = (req, res)=> {
+	res.render("main/return_policy", {
+		 pageTitle: "Return Policy - Biirii Africa",
+		 superCategory: null
+	 });
+}
+
+
+module.exports.PrivacyPolicyPage = (req, res)=> {
+	res.render("main/impact_home", {
+		 pageTitle: "Priacy policy - Biirii Africa",
+		 superCategory: null
+	 });
+}
+
+
+
+
+module.exports.AboutPage = (req, res)=> {
+	res.render("main/about_page", {
+		 pageTitle: "About Us - Biirii Africa",
+		 superCategory: null
+	 });
+}
+
+
+module.exports.ImpactHomePage = (req, res)=> {
+	res.render("main/BOILERPLATE", {
+		 pageTitle: "Impact - Biirii Africa",
+		 superCategory: null
+	 });
+}
+
+
 module.exports.SuperCategoryHomePage =  async (req, res)=> {	
 	let superCategory = req.params.super_category.toLowerCase();
 

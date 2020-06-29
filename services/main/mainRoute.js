@@ -49,6 +49,11 @@ route.get("/store/:super_category/", mainHandler.SuperCategoryHomePage);
 route.get("/store/:super_category/categories/:category_slug", mainHandler.CategoryPage);
 
 
+//static pages
+route.get("/return-policy", mainHandler.ReturnPolicyPage);
+route.get("/privacy-policy", mainHandler.PrivacyPolicyPage);
+route.get("/impact", mainHandler.ImpactHomePage);
+route.get("/about-us", mainHandler.AboutPage);
 
 route.get('/*', (req, res) => {
 	res.render("main/404" , {pageTitle : "Page not found "});
