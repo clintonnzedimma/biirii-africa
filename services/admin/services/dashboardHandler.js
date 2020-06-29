@@ -74,9 +74,15 @@ module.exports.ProductList = (req, res) => {
 
 // Add product page  
 module.exports.AddProduct = (req, res) => {
-
-	db.query('SELECT * FROM categories ORDER BY id DESC', (err, row)=> {
-	  	res.render("dashboard/create_product", {pageTitle:`Add product`, categories : row});
+	db.query('SELECT * FROM brands ORDER BY id DESC', (err, brands)=> { 
+		db.query('SELECT * FROM categories ORDER BY id DESC', (err, categories)=> {
+		  	res.render("dashboard/create_product", 
+		  		{
+		  			pageTitle :`Add product`, 
+		  			categories : (categories.length > 0) ? categories : [],
+		  			brands : (brands.length > 0) ? brands : []
+		  		});
+		});
 	});
 }
 

@@ -2,7 +2,7 @@ const { Sequelize, Model, DataTypes } = require('sequelize');
 const db = require('../../database/config');
 const sequelize = require('../../database/sequelizeConfig');
 
-const superCategories = ['men', 'women', 'accessories'];
+const superCategories = ['men', 'women', 'accessories', 'kids'];
 
 module.exports.superCategories = superCategories;
 
@@ -59,11 +59,12 @@ module.exports.fetchBySuperCategories = (arg) => {
 
 
 // Fetch All Products
-module.exports.fetchAll = () => {
+module.exports.fetchAll = (orderBy = "id") => {
+
   return new Promise((resolve, reject)=> {
   		let result = {};
 
-   		db.query("SELECT * FROM products ORDER BY id DESC " ,(err, products)=>{
+   		db.query(`SELECT * FROM products ORDER BY ${orderBy} DESC`,(err, products)=>{
  	 		if (err) throw new Error(err)
 
  	 		db.query("SELECT * FROM sub_products", (err, sp)=>{
@@ -89,6 +90,7 @@ module.exports.fetchAll = () => {
 
 
 
+
 // Fetch One By object argument
 module.exports.fetchOne = (arg) => {
   return new Promise((resolve, reject)=> {
@@ -100,16 +102,26 @@ module.exports.fetchOne = (arg) => {
  	 			if (product.length > 0) {
  	 				product = product[0];
 
-		 	 		db.query("SELECT * FROM sub_products WHERE product_id = ?", product.id, (err, sp)=>{
-		 	 			if (err) throw new Error(err)
+ 	 				let brand_id = (product.brand_id) ? product.brand_id : 0;
 
+ 	 				db.query("SELECT * FROM brands WHERE id = ?", brand_id, (err, brands) => {
 
-		 	 			product.sub = sp;
+ 	 					if (err) throw new Error(err);
 
-		 	 			result = product;
+		 				db.query("SELECT * FROM sub_products WHERE product_id = ?", product.id, (err, sp)=>{
+			 	 			if (err) throw new Error(err);
 
-		 	 			resolve(result);
-		 	 		});	
+			 	 				
+			 	 			product.brand = (brands.length > 0) ? brands[0] : [];
+			 	 				
+			 	 			product.sub = sp;
+
+			 	 			result = product;
+
+			 	 			resolve(result);
+			 	 		});	
+
+ 	 				});
 
  	 			}else {
  	 				reject("Product not found");
@@ -141,3 +153,79 @@ module.exports.fetchSubProducts =  () => {
 
 
 
+
+// validate category slug by super category
+module.exports.validateCategorySlugBySuper =  (arg) => {
+  return new Promise((resolve, reject)=> {
+  		let result = {};
+
+  		db.query("SELECT * FROM categories WHERE super_category = ?", arg.super_category, (err, categories)=> {
+  			if (err) {
+  				reject(err);
+  				throw new Error(err);
+  			}
+
+			if (categories.length > 0 
+				&& 
+				categories.map(obj => obj.slug).includes(arg.category_slug)) {
+				resolve({status: true});
+			}else {
+				resolve({status: false});
+			}	
+  		});	
+   		
+	});
+}
+
+
+
+module.exports.fetchCategoryBySlug =  (slug) => {
+  return new Promise((resolve, reject)=> {
+  		let result = {};
+
+  		db.query("SELECT * FROM categories WHERE slug = ?",slug ,(err, row)=> {
+  			if (err) {
+  				reject(err);
+  				throw new Error(err);
+  			}
+
+  			if (row.length > 0) {
+  				resolve(row[0]);			
+  			}	
+  		});	
+   		
+	});
+}
+
+
+module.exports.fetchByCategory = (category_id) => {
+
+  return new Promise((resolve, reject)=> {
+  			let result = {};
+
+ 			db.query("SELECT * FROM products WHERE category_id = ?  ORDER BY id DESC", category_id,(err, products)=> {
+ 				if (err) reject(err);
+
+ 				if (products.length == 0) reject("No product exists");
+
+	 			db.query("SELECT * FROM sub_products",(err, subProducts)=> {
+	 				if (err) reject(err);
+
+	 				if (subProducts.length == 0) reject("No sub product exists");
+
+	 				  // adding associated sub product 
+	 				  products = products.map(p=> ({
+			        		...p,
+			        		sub : subProducts.filter(s => s.product_id == p.id) || []
+			   		  }));	
+
+			 		  result =  products;	
+
+			   		  resolve(result);
+
+	 			});
+ 			});
+ 			
+ 		
+ 	});
+};

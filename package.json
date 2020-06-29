@@ -26,10 +26,11 @@
     "express-mysql-session": "^2.1.4",
     "express-session": "^1.17.1",
     "forever": "^2.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.27.0",
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
+    "nodemailer": "^6.4.10",
     "notyf": "^3.6.0",
     "paystack": "^2.0.1",
     "pm2": "^4.3.0",
@@ -40,8 +41,8 @@
     "sharp": "^0.25.2",
     "slug": "^2.1.1",
     "uuid4": "^1.1.4",
-    "uuidv4": "^6.0.8",
-    "validator": "^13.0.0"
+    "uuidv4": "^6.1.1",
+    "validator": "^13.1.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.4",

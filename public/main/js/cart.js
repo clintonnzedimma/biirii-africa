@@ -5,7 +5,10 @@
  function Cart(el) {									
 
  	
-	this.add = (spId, pId) => {
+	this.add = (spId, pId, qty = 1) => {
+
+		if (qty < 1) throw new Error("Cannot add  quantity less than 1");
+
 	 	let notyf = new Notyf({
 	 		duration:3000,
 	 		  position: {
@@ -16,7 +19,7 @@
 
 		$.post(
 			'/json/cart/add', 
-			{id: spId}, 
+			{id: spId, qty: qty}, 
 			(res)=> {
 			console.log(res);
 			if (res.status == true) {
@@ -42,6 +45,7 @@
 	this.removeItem = (arg) =>  {
 	 	let notyf = new Notyf({
 		 		duration:3000,
+		 		background : '#8f4101',
 		 		  position: {
 		    		x: 'right',
 		    		y: 'top',

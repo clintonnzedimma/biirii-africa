@@ -21,7 +21,7 @@
 
 <% if (categories || categories.length > 0) { -%>
 	<%categories.forEach(category=> {-%>
-					<li><a href="#"><%=category.name %></a></li>
+					<li><a href="/store/<%=superCategory %>/categories/<%=category.slug %>"><%=category.name %></a></li>
 	<%}) -%>
 <% } %>
 

@@ -115,7 +115,25 @@
                   <%})%>
               </optgroup>   
         </select>                                        
-    </div>
+      </div>
+
+      <br>
+
+      <div>
+        <!-- Brand -->
+       <span style="color: #83e799!important;">Brands</span><br>
+       <select name="brand_id"  class="mdb-select category">
+         <option value="" disabled selected>-Choose Brand-</option>
+
+         <% if (brands.length > 0) { -%>
+            <% brands.forEach((brand)=> { %>
+                    <option value="<%=brand.id %>"><%=  helpers.ucwords(brand.name) %></option>
+             <%})%>                
+         <% } -%>
+     
+       </select>
+
+      </div>
 
 
  
