@@ -35,9 +35,10 @@
 			padding: 10px;
 			max-width: 450px;
 			width: 100%;
+			border-radius: 5px;
 		}
 
-		div.cart_product .row {
+		 div.cart_product .row {
 			display: flex;
 			flex-wrap: nowrap;
 			margin: auto;
@@ -45,13 +46,13 @@
 		}
 
 		div.product-image{
-			width: 150px;
+			width: 100px;
 			overflow: hidden;
 			border-radius: 10px;
 		}
 
 		.item_price{
-			color: #35a535;
+			color: #838683;
 		}
 
 		.quantity{
@@ -68,7 +69,7 @@
 		}
 		.product-details {
 			padding: 0 20px;
-			font-size: 22px;
+			font-size: 18px;
 		}
 
 		.total-quantity {
@@ -79,8 +80,8 @@
 		}
 
 		.total_item_price {
-			font-size: 24px;
-			color: #f67770;
+			font-size: 22px;
+			color: #080808;
 		}
 
 		.bottom-panel{
@@ -92,6 +93,12 @@
 			margin-bottom: 20px;
 			max-width: 1020px;
 			width: 100%;
+		}
+		@media screen and (min-width: 760px){
+			table.cart_item{
+				display: table;
+				width: 100%;
+			}
 		}
 	</style>
 	<!-- Page Preloder -->
@@ -113,41 +120,42 @@
 <% if (products.length > 0) { -%>
 		<div class="container">
 			<div id="cart" class="container">
-				<div class="row">
+				<table class="cart_item">
+					<thead>
+						<tr>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Total</th>
+						</tr>
+					</thead>
 
-					<% products.forEach (product => { -%>
-					<div id="#cart-item-<%=product.id %>" class="cart_item">
-
-						<div data-th="Product" class="cart_product">
-							<div class="row">
-								<div class="product-image"><img src="/img/products/<%=product.superItem.main_img %>" alt="<%=product.name %>" class="img-responsive"/></div>
-								<div class="product-details">
-									<span class="nomargin" style="font-size: 25px; text-transform: capitalize;">	<%= product.superItem.name %></span>
-									<div data-th="Price" class="item_price">&#8358;<%= product.item.price.toLocaleString() %></div>
-								</div>
+					<tbody>
+						<% products.forEach (product => { -%>
+							<tr id="#cart-item-<%=product.id %>" class="cart_item">
+		
+								<td data-th="Product" class="cart_product">
+									<div>
+										<div class="product-image"><img src="/img/products/<%=product.superItem.main_img %>" alt="<%=product.name %>" class="img-responsive"/></div>
+										<div class="product-details">
+											<span class="nomargin" style="font-size: 20px; text-transform: capitalize;">	<%= product.superItem.name %></span>
+											<div data-th="Price" class="item_price">&#8358;<%= product.item.price.toLocaleString() %></div>
+										</div>
+										<button class="btn remove-btn btn-sm" onclick="toggleRemoveDialog('<%=product.id%>')" >REMOVE</button>
+										
+									</div>
+								</td>
 								
-							</div>
-						</div>
-						
-						<div class="total-quantity">
-							<div data-th="Quantity" class="quantity">
-								<input type="number" class="form-control text-center" value="<%=product.qty %>" onchange="updateItemPrice(this.value,'<%=product.id%>' )">
-							</div>
-							
-							<div data-th="Subtotal" class="text-center total_item_price">&#8358;<span id="totalItemPrice-<%=product.id %>"><%=product.price.toLocaleString() %></span></div>
-						</div>
-
-						<div>
-							<button 
-							class="btn remove-btn btn-sm"
-							onclick="toggleRemoveDialog('<%=product.id%>')" 
-							>REMOVE</button>
-						</div>
-<!-- 									<div class="actions" data-th="">
-							<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-							<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>								
-						</div> -->
-					</div>
+								<td class="total-quantity">
+									<div data-th="Quantity" class="quantity">
+										<input type="number" class="form-control text-center" value="<%=product.qty %>" onchange="updateItemPrice(this.value,'<%=product.id%>' )">
+									</div>
+									
+								</td>
+		
+								<td>
+									<div data-th="Subtotal" class="text-center total_item_price">&#8358;<span id="totalItemPrice-<%=product.id %>"><%=product.price.toLocaleString() %></span></div>
+								</td>
+							</tr>
 
 					<!-- remove dialog modal -->
 					<div class="modal fade" id="removeDialog-<%=product.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -180,7 +188,9 @@
 					<% }); -%>	
 
 
-				</div>
+				
+					</tbody>
+				</table>
 
 				<div class="row">
 <!-- 								<tr class="visible-xs">
