@@ -56,6 +56,22 @@ module.exports.ImpactHomePage = (req, res)=> {
 }
 
 
+
+//Generated Pages
+module.exports.SystemReceiptPage = (req, res)=> {
+	let orderKey = req.params.key;
+	let name = req.params.name;  
+
+	return res.render("main/generate_receipt_page", {
+		 pageTitle: "Receipt",
+		 orderKey: orderKey,
+		 superCategory: null
+	 });
+}
+
+
+
+
 module.exports.SuperCategoryHomePage =  async (req, res)=> {	
 	let superCategory = req.params.super_category.toLowerCase();
 

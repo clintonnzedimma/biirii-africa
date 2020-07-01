@@ -7,6 +7,7 @@ const Cryptr = require('cryptr');
 
 const db = require('../../../database/config');
 const Cart = require('../../../models/cart');
+const Receipt = require('../../../models/receipt');
 const utilOrder = require('../util/order')
 const helpers = require('../../../helpers/helpers');
 const paystackPayment = require('../../../helpers/paystackPayment');
@@ -214,15 +215,31 @@ module.exports.submitOrder = (req, res) => {
 module.exports.pay = (req, res) => {
 	let cart = new Cart(req.session.cart ? req.session.cart : {});
 
+	let receipt = new Receipt({
+		key : req.session.order.key,
+		name : req.session.order.customer_name,
+		email : req.session.order.customer_email
+	});
+
 	
 	paystackPayment.init(req.body.reference, process.env.PAYSTACK_SK)
 	.then(resp => {
 		// success
 		utilOrder.saveCustomerDetails(req.session, cart, req.body.reference)
 		.then (()=>{
+
+
 			//empty cart
 			req.session.cart = null;
 			req.session.save();
+
+
+			receipt.send()
+			.then (res=> {
+				console.log(res);
+			}).catch(e => {
+				console.log(`Receipt ${e}`);
+			});
 
 			return res.json({status : true, message : "Transaction successful" });
 		}).catch((r)=>{

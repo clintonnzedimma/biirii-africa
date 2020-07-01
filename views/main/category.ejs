@@ -164,6 +164,18 @@
 						<% if (products.length > 0 ) { -%>
 							<%include components/productList%>
 						<% }  -%>
+
+
+						<% if (products.length == 0) { -%>
+
+							<h3>No Product for this category yet
+								<br>
+								<a href="/store" style="font-size: 16px">Continue shopping</a>
+							</h3>
+							
+						<% } -%>
+							
+						
 							
 						
 						<!-- Product filter section end -->

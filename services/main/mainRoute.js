@@ -55,6 +55,10 @@ route.get("/privacy-policy", mainHandler.PrivacyPolicyPage);
 route.get("/impact", mainHandler.ImpactHomePage);
 route.get("/about-us", mainHandler.AboutPage);
 
+//system pages
+route.get("/__system/receipt/:key/:name", mainHandler.SystemReceiptPage);
+
+
 route.get('/*', (req, res) => {
 	res.render("main/404" , {pageTitle : "Page not found "});
 });
