@@ -201,25 +201,28 @@ module.exports.fetchCategoryBySlug =  (slug) => {
 module.exports.fetchByCategory = (category_id) => {
 
   return new Promise((resolve, reject)=> {
-  			let result = {};
+  			let result = [];
 
  			db.query("SELECT * FROM products WHERE category_id = ?  ORDER BY id DESC", category_id,(err, products)=> {
  				if (err) reject(err);
 
- 				if (products.length == 0) reject("No product exists");
+ 				// if (products.length == 0) reject("No product exists");
 
 	 			db.query("SELECT * FROM sub_products",(err, subProducts)=> {
 	 				if (err) reject(err);
 
 	 				if (subProducts.length == 0) reject("No sub product exists");
 
+
+	 				if (products.length > 0) {
 	 				  // adding associated sub product 
 	 				  products = products.map(p=> ({
 			        		...p,
 			        		sub : subProducts.filter(s => s.product_id == p.id) || []
 			   		  }));	
 
-			 		  result =  products;	
+			 		  result =  products;
+	 				}
 
 			   		  resolve(result);
 
