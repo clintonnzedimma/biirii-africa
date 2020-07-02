@@ -6,6 +6,10 @@
 <body>
 
 	<style type="text/css">
+
+	body {
+		overflow-y: unset!important;
+	}
 	.p-qty {
 	    width: 94px;
 	    height: 36px;
@@ -64,28 +68,21 @@
 					<div class="product-pic-zoom---*">
 						<img class="product-big-img" src="/img/products/<%=product.main_img %>" alt="<%=product.name %> || Biirii Africa" id="productImg-<%=product.id %>">
 					</div>
+
+					<% if (moreImages.length > 0 ) { -%>
 					<div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
 						<!-- Multiple pictures of product -->
 						<div class="product-thumbs-track">
-
 							
-
-							<% if (moreImages.length > 0 ) { -%>
 							<div class="pt active" data-imgbigurl="/img/products/<%=product.main_img %>"><img src="/img/products/<%=product.main_img %>" alt=""></div>
 								   <% moreImages.forEach(image=> { -%>
-
 								   <div class="pt" data-imgbigurl="/img/products/<%=image.name %>"><img src="/img/products/<%=image.name %>" alt=""></div>
 										
 									<% }); -%>								
-							<% } -%>						
-
-
-			
-							
-							<div class="pt" data-imgbigurl="img/single-product/3.jpg"><img src="img/single-product/thumb-3.jpg" alt=""></div>
-							<div class="pt" data-imgbigurl="img/single-product/4.jpg"><img src="img/single-product/thumb-4.jpg" alt=""></div>
+													
 						</div>
 					</div>
+					<% } -%>
 				</div>
 				<div class="col-lg-6 product-details">
 					<h2 class="p-title"><%=product.name %> </h2>
@@ -170,7 +167,7 @@
 								<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 									<div class="panel-body">
 										<ul>
-											<li>Brand Name : Biirii Africa</li>
+											<li>Brand: <%=product.brand.name %></li>
 										</ul>
 									</div>
 								</div>
