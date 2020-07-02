@@ -232,3 +232,24 @@ module.exports.fetchByCategory = (category_id) => {
  		
  	});
 };
+
+
+module.exports.fetchMoreProductImages =  (pKey) => {
+  return new Promise((resolve, reject)=> {
+  		let result = {};
+
+  		db.query("SELECT * FROM product_images WHERE pKey = ?", pKey ,(err, row)=> {
+  			if (err) {
+  				reject(err);
+  				throw new Error(err);
+  			}
+
+  			if (row.length > 0) {
+  				resolve(row);			
+  			} else {
+  				resolve([]);
+  			}
+  		});	
+   		
+	});
+}
