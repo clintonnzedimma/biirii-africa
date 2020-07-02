@@ -356,3 +356,40 @@ module.exports.deleteSubProduct = (req, res) => {
 	  }
 	});
 }
+
+
+
+module.exports.uploadMorePhotosForProduct = async (req, res) => {
+	let images = req.body.images;
+	let pKey = req.body.pKey;
+	let productName = req.body.productName;
+
+	console.log(req.body);
+
+
+	let imgData = [];
+
+	for (var i = 0; i < images.length; i++) {
+		imgData[i] = [
+			null,
+			images[i],
+			pKey,
+			productName,
+			Date.now()	
+		];
+	}
+
+	console.log(imgData);
+
+	db.query("INSERT INTO product_images (`id`, `name`, `pKey`, `product_name`, `time_added`) VALUES ?", [imgData], (err, success)=> {
+		if (err)  throw new Error(err);
+
+		if (success) {
+			res.json({message:`${images.length} photo(s) saved for ${productName}`, status:true});
+		}
+	});
+
+	
+
+
+}

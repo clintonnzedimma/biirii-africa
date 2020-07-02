@@ -149,4 +149,21 @@ route.post('/json/edit-category',
 );
 
 
+
+
+route.post('/json/add-product-images', 
+	adminMiddleware.protectEndpoint,
+	(req, res, next)=> {
+		// setting  essential upload parameters 
+		req.session.uploadPath = "img/products";	
+		req.session.imgQuality = 70;
+		next();
+			
+	}, 
+	fileUploadMiddleware.uploadImages,
+	fileUploadMiddleware.resizeImages,
+	dashboardService.uploadMorePhotosForProduct,
+);
+
+
 module.exports = route;

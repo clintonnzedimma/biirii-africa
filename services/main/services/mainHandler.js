@@ -120,12 +120,15 @@ module.exports.ProductPage = async (req, res)=> {
 
 	let product = await Product.fetchOne({slug : req.params.slug});
 
+	let moreImages = await Product.fetchMoreProductImages(product.pKey);
+
 	console.log(product.name);
 
 
 	res.render("main/product", {
 		 pageTitle: `${product.name} - Biirii Africa`,
 		 product: product,
+		 moreImages : moreImages,
 		 superCategory: null
 	 });
 }

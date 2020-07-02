@@ -40,6 +40,45 @@
         padding: 0px !important;
     }
 
+    .multi-pic-modal {
+       max-width: 800px !important;    
+    }
+
+
+/*multi image*/
+input.multi{
+  all:unset;
+  margin:10px;
+  padding:10px 20px;
+  border:1px solid #e3e3e3;
+  border-radius:5px;
+  background-color: #f2f2f2;
+  font-family:sans-serif;
+}
+
+#thumbnail_1_wrapper, #thumbnail_2_wrapper, #thumbnail_3_wrapper{
+  width:150px;
+  height:150px;
+  background-color:#f2f2f2; 
+  border:1px solid #e3e3e3;
+  border-radius:10px;
+  margin:20px 105px;
+  display:inline-block;
+  position:relative;
+}
+
+#thumbnail_1, #thumbnail_2, #thumbnail_3{
+  display:none;
+  width: 100%;
+  height:auto;
+  position:absolute;
+  left:0;
+  bottom:0;
+}
+
+
+
+
 </style>
 
     <div id="card_content"> 
@@ -93,7 +132,15 @@
                                           aria-describedby="inputGroupFileAddon01">
                                         <label class="custom-file-label" for="inputGroupFile01">Choose Image</label>
                                       </div>
+
                                     </div>  
+
+
+
+                                      <p> 
+                                          <a href="#" onclick="openMultiplePictureModal()">Add more pictures</a>
+                                      </p>
+
 
                                     <br><br>                                      
                                     
@@ -151,6 +198,8 @@
       </div>
     </div>
 
+
+<!-- sub product modal -->
 <div id="spModal" class="modal">
   <div align="center">
     <p><h4>Sub products for <i><%=product.name %></i></h4> </p>
@@ -178,6 +227,47 @@
      </div>  
           
     <% } -%>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- multiple pic modal -->
+
+<div id="multiPicModal" class="modal multi-pic-modal" align="center">
+  <div align="center">
+  
+  <form id="multi-form" class="multi">
+  <input class="multi"  type="file" name="img" id="multiImg" onchange='displayThumbnail(this, "thumbnail_1")'>
+  
+  <input class="multi" type="file" name="img" id="multiImg" onchange='displayThumbnail(this, "thumbnail_2")'>
+  
+  <input class="multi" type="file" name="img" id="multiImg" onchange='displayThumbnail(this, "thumbnail_3")'>
+  
+  
+  <button  class="btn btn-success" type="button" onclick="uploadMultiImg()">Save</button>
+</form>
+
+<div id="thumbnail_1_wrapper">
+  <img src="#" id="thumbnail_1">
+</div>
+<div id="thumbnail_2_wrapper">
+  <img src="#" id="thumbnail_2">
+</div>
+<div id="thumbnail_3_wrapper">
+  <img src="#" id="thumbnail_3">
+</div>
+  
+
+
+
+    </article>
+    </div>
+
   </div>
 </div>
 
@@ -262,7 +352,93 @@ function edit() {
     });  
 
 }
-   
+
+/*
+ * Functions below are for the uploading of multiple pics for a product   
+*/
+function openMultiplePictureModal() {
+    $("#multiPicModal").modal("show");
+}
+
+
+function displayThumbnail(input, selector){
+    
+    if (input.files && input.files[0]) 
+    {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+      $('#'+selector).attr('src', e.target.result).css({
+            'display'   :'inline-block'            
+         });                    
+       };
+      reader.readAsDataURL(input.files[0]);
+ }
+}
+
+
+
+function uploadMultiImg(){
+    var formData = new FormData(document.getElementById("multi-form"));
+    var inputs = document.querySelectorAll('#multiImg');
+
+    console.log(inputs);
+
+    formData.append('pKey', '<%=product.pKey%>');
+    formData.append('productName', '<%=product.name%>');
+
+
+
+    console.log(formData);
+
+
+
+    $.ajax({
+        url : "<%= site.adminURL%>/json/add-product-images",
+        type:"POST",
+        data : formData,
+        contentType: false,
+        processData: false,       
+        success : (res)=>{
+            console.log(res);
+
+            if(res.status == false) {
+                 $.toast({
+                    text: `<h6>${res.message}</h6>`,
+                    showHideTransition: 'fade',
+                    icon: 'error',
+                    position: "top-right",
+                    loader:false
+                });
+
+                 setTimeout(()=>{ 
+                     $("#editBtn").attr("disabled", false);
+                    }, 1500);
+            }
+
+
+
+            if(res.status == true) {
+                $.toast({
+                    text: `<h6>${res.message}</h6>`,
+                    showHideTransition: 'slide',
+                    loader:false,
+                    icon: 'success',
+                    position: "top-right"
+                });
+
+
+                    setTimeout(()=>{ 
+
+                     console.log("successful");
+                     
+
+                    }, 2000);
+
+            } 
+        }
+    }); 
+}
+    
 </script>
 
 </body>
