@@ -293,15 +293,8 @@ nav {
         max-width: 80%;
     }
 }
-@media only screen and (max-width: 550px){
+@media only screen and (max-width: 367px){
     .logo a span{
         display: none;
-    }
-    .links a{
-        color: #f0f0f0;
-        font-size: 16px !important;
-        display: block;
-        text-align: center;
-        width: 100%;
     }
 }
