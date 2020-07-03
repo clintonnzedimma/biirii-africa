@@ -6,10 +6,14 @@
 <body>
 
 	<style type="text/css">
+
+		.empty-cart-wrapper{
+				margin-top: -2%
+		}
 		
 		._index {
-			margin-top: 4%;
-			margin-bottom: 4%;
+			margin-top: 1%;
+			margin-bottom: 2%;
 		}
 
 		.remove-btn {
@@ -115,9 +119,9 @@
 	<section class="_index">
 
 
+<% if (products.length > 0) { -%>
 <p><h2 align="center" style="font-weight: 500">Your cart</h2></p>
 
-<% if (products.length > 0) { -%>
 		<div class="container">
 			<div id="cart" class="container">
 				<div class="row">
@@ -223,6 +227,13 @@
 
 
 <% } else { -%>
+
+<div class="empty-cart-wrapper" align="center">
+		<div style="width: 80%">
+			<img src="img/empty_cart1.png" class="img-fluid">	
+		</div>	
+</div>
+
 	
 <% } -%>
 
