@@ -124,6 +124,8 @@ module.exports.ProductPage = async (req, res)=> {
 
 	console.log(product.name);
 
+	console.log(product);
+
 
 	res.render("main/product", {
 		 pageTitle: `${product.name} - Biirii Africa`,
