@@ -1,7 +1,73 @@
 	<style type="text/css">
+		@import "https://fonts.googleapis.com/css2?family=Livvic:wght@500&display=swap"
+
 		#top-super-nav-btn:hover {
 			text-decoration: underline;
 		}
+
+		.biirii-featured-text {
+			padding-top:10px;
+			padding-bottom: 10px;
+			background: #80dfe9;
+			color: #fff;
+			text-align: center
+		}
+
+
+		.biirii-featured-text > * {
+			color:#2d2d2d;
+		}	
+
+
+
+.biirii-ft-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.biirii-ft-slider-wrapper {
+  font-size: 15px;
+  color:#2d2d2d;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.biirii-ft-slider{
+  height: 17px;
+  padding-left:15px;
+  overflow: hidden;
+}
+.biirii-ft-slider div {
+  color: #2d2d2d;;
+  height: 50px;
+  margin-bottom: 50px;
+  padding: 2px 15px;
+  text-align: center;
+  box-sizing: border-box;
+}
+.biirii-ft-slider-text1 {
+  animation: slide 30s linear infinite;
+
+}
+.biirii-ft-slider-text2 {
+
+}
+.biirii-ft-slider-text3 {
+ 
+}
+@keyframes slide {
+  0% {margin-top:-300px;}
+  5% {margin-top:-200px;}
+  33% {margin-top:-200px;}
+  38% {margin-top:-100px;}
+  66% {margin-top:-100px;}
+  71% {margin-top:0px;}
+  100% {margin-top:0px;}
+}
+
+
 	</style>
 
 	<header class="sticky-top"><!-- should be fixed top -->
@@ -174,7 +240,7 @@
 									</li>
 									<li>
 										<ul  class="_panel">
-											<li>
+										<!-- 	<li>
 												<a>
 													<p>
 														<span>Sales</span>
@@ -184,7 +250,7 @@
 														<img src="/img/nav/sales.jpg" alt="">
 													</div>
 												</a>
-											</li>
+											</li> -->
 											<li class="nav-extend" data-extend="women">
 												<a>
 													<p>
@@ -201,7 +267,7 @@
 														<span>Men</span>
 													</p>
 													<div>
-														<img src="/img/nav/men.png" alt="">
+														<img src="/img/nav/men.jpg" alt="">
 													</div>
 												</a>
 											</li>
@@ -225,14 +291,24 @@
 													</div>
 												</a>
 											</li>
+											<li>
+												<a>
+													<p>
+														<span>Outlet</span>
+													</p>
+													<div>
+														<img src="/img/nav/outlets.jpg" alt="">
+													</div>
+												</a>
+											</li>
 											<li class="nav-extend" data-extend="other-links">
 												<a>
 													<p>
-														<span>More</span>
+														<span>Links</span>
 													</p>
-													<div>
-														<img src="/img/nav/more.png" alt="" style="object-fit: contain;">
-													</div>
+													<!-- <div>
+														<img src="/img/nav/accessories.jpg" alt="">
+													</div> -->
 												</a>
 											</li>
 										</ul>
@@ -515,43 +591,88 @@
 										<span class="fa fa-arrow-left">Back</span>
 									</div>
 									<div class="heading">
-										<span></span>
+										<span>Other Links</span>
 									</div>
 								</div>
 								<ul  class="_panel">
 									<li>
-										<a href="/how-to-sell">
+										<a href="/store/men/categories/pants">
 											<p>
-												<span>How to Sell</span>
+												<span>Pants</span>
 											</p>
+											<div>
+												<img src="/img/nav/male-pants.jpg" alt="">
+											</div>
 										</a>
 									</li>
 									<li>
-										<a href="/impact">
+										<a href="/store/men/categories/shorts">
 											<p>
-												<span>Impact</span>
+												<span>Shorts</span>
 											</p>
+											<div>
+												<img src="/img/nav/male-shorts.jpg" alt="">
+											</div>
 										</a>
 									</li>
 									<li>
-										<a href="/about-us">
+										<a href="/store/men/categories/male-tops">
 											<p>
-												<span>About</span>
+												<span>Top</span>
 											</p>
+											<div>
+												<img src="/img/nav/male-top.jpg" alt="">
+											</div>
 										</a>
 									</li>
 									<li>
-										<a href="/return-policy">
+										<a href="/store/men/categories/jackets">
 											<p>
-												<span>Return Policy</span>
+												<span>Jackets</span>
 											</p>
+											<div>
+												<img src="/img/nav/jackets.jpg" alt="">
+											</div>
 										</a>
 									</li>
 									<li>
-										<a href="/privacy-policy">
+										<a href="/store/men/categories/kaftans">
 											<p>
-												<span>Privacy Policy</span>
+												<span>Kaftans</span>
 											</p>
+											<div>
+												<img src="/img/nav/kaftans.jpg" alt="">
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="/store/men/categories/shirts">
+											<p>
+												<span>Shirts</span>
+											</p>
+											<div>
+												<img src="/img/nav/male-shirt.jpg" alt="">
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="/store/men/categories/jackets-and-blazers">
+											<p>
+												<span>Jacket &amp; Blazers</span>
+											</p>
+											<div>
+												<img src="/img/nav/blazers.jpg" alt="">
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="/store/men/categories/male-tee-shirts">
+											<p>
+												<span>Tee Shirts</span>
+											</p>
+											<div>
+												<img src="/img/nav/male-tee-shirts.jpg" alt="">
+											</div>
 										</a>
 									</li>
 								</ul>
@@ -591,3 +712,15 @@
 
 		</div>
 	</header>
+
+	<div class="biirii-featured-text">
+
+ 		<div class="biirii-ft-slider-wrapper">
+          <div class="biirii-ft-slider">
+              <div class="biirii-ft-slider-text1">BIIRII AFRICA</div>
+              <div class="biirii-ft-slider-text2">Get premium fashion apparel</div>
+              <div class="biirii-ft-slider-text3">Happy Biirii Day</div>
+          </div>
+        </div>		
+
+	</div>
