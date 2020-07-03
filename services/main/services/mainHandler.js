@@ -49,7 +49,7 @@ module.exports.AboutPage = (req, res)=> {
 
 
 module.exports.ImpactHomePage = (req, res)=> {
-	res.render("main/BOILERPLATE", {
+	res.render("main/impact_home", {
 		 pageTitle: "Impact - Biirii Africa",
 		 superCategory: null
 	 });
