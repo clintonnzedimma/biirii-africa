@@ -38,9 +38,9 @@ module.exports.PrivacyPolicyPage = (req, res)=> {
 }
 
 module.exports.HowToSellPage = (req, res)=> {
-	res.render("main/how_to_sell_page", {
-		 pageTitle: "How to sell - Biirii Africa",
-		 superCategory: null
+	res.render("main/how_to_sell", {
+		pageTitle: "How to sell - Biirii Africa",
+		superCategory: null
 	 });
 }
 
