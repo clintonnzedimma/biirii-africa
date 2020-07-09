@@ -179,6 +179,9 @@ ul.sub-menu h2{
 .container-logo{
     background: #ffffff;
     padding: 6px 15px;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
 }
 .logo-container{
     display: flex;
@@ -273,8 +276,27 @@ ul.sub-menu h2{
     text-transform: capitalize;
 }
 
+/*Currency Converter*/
+.currency{
+    float: left;
+    margin-top: 10px;
+}
+.currency-wrapper{}
+.currency-converter{
+    padding: 5px 10px;
+    box-shadow: 0 0 1px 1px #838282;
+    border: none;
+    outline: none;
+    height: 40px;
+    background: transparent;
+    color: inherit;
+}
+
 @media only screen and (min-width: 768px){
     .side-bar{
         display: none;
+    }
+    .currency-converter{
+        height: 30px;
     }
 }

@@ -20,6 +20,9 @@ const adminRoute = require("./services/admin/adminRoute");
 //Session
 const MySQLStoreOptions = require("./helpers/MySQLStoreOptions");
 
+//Custom Middleware
+const currencyMiddleware = require("./middlewares/currencyMiddleware");
+
 router = Router();
 
 app.use(cookieParser(process.env.SESSION_SECRET));
@@ -56,6 +59,9 @@ app.use(express.static(path.join(__dirname, "public"), staticCacheOptions));
 
 //setting custom public path for entry route
 app.use("/",express.static(path.join(__dirname, "public/main"), staticCacheOptions));
+
+//setting middleware to execute
+app.use(currencyMiddleware);
 
 
 

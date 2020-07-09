@@ -78,8 +78,16 @@ route.post("/test", (req, res)=> {
 
 	let cart = new Cart (req.session.cart ? req.session.cart : {});
 	console.log(cart);
-	res.json(cart.totalPrice);
+	res.json({
+		locals : res.app.locals.currency_choice, 
+		session: req.session.currency_choice
+	});
 });
+
+
+
+//currency
+route.post("/json/currency/change", mainService.changeCurrency);
 
 //cart
 route.post("/json/cart/add", mainService.addToCart);

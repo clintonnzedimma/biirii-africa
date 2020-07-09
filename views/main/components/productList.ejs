@@ -35,9 +35,9 @@
 				<div class="col-lg-3 col-sm-6" >
 					<div class="product-item">
 						<div class="pi-pic">
-							<img src="/img/products/<%=product.main_img %>" alt="<%=product.name %>" id="productImg-<%=product.id %>">
+							<a href="/store/products/<%=product.slug %>"><img src="/img/products/<%=product.main_img %>" alt="<%=product.name %>" id="productImg-<%=product.id %>">
+							</a>	
 							<div class="pi-links">
-
 								<% if (product.sub.length > 0) { -%>
 								<a href="#" class="add-card" onclick="addToCart(<%=product.sub[0].id%>, <%=product.id%>)"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
 								<% } -%>
@@ -45,7 +45,11 @@
 							</div>
 						</div>
 						<div class="pi-text">
-							<% if (product.sub.length > 0) { -%> <h6>&#8358; <%=product.sub[0].price.toLocaleString() %></h6><% } -%>
+							<% if (product.sub.length > 0) { -%> <h6><span id="currency-symbol">
+							<%-currencyConvert({to:currencyChoice,value :product.sub[0].price }).symbol%></span>
+							<%=currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString() %></h6>
+
+							<% } -%>
 							<p><a href="/store/products/<%=product.slug %>" class="product-link"><%=product.name %></a></p>
 						</div>
 					</div>

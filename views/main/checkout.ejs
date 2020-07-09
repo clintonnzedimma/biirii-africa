@@ -122,7 +122,10 @@
 						<ul class="payment-list">
 					<!-- 		<li>Paypal<a href="#"><img src="img/paypal.png" alt=""></a></li>
 							<li>Credit / Debit card<a href="#"><img src="img/mastercart.png" alt=""></a></li> -->
-							<li>Total: <span style="color: #333333;">&#8358;<%=totalPrice.toLocaleString() %></span> </li>
+							<li>Total: <span style="color: #333333;">
+								<%-currencyConvert({to:currencyChoice, value :totalPrice }).symbol%>
+								<%-currencyConvert({to:currencyChoice, value :totalPrice }).result.toLocaleString()%>
+							</span> </li>
 						</ul>
 
 						<p style="margin-bottom: 6%;">
@@ -142,7 +145,13 @@
 							<li>
 								<div class="pl-thumb"><img src="/img/products/<%=p.superItem.main_img %>" alt=""></div>
 								<h6><%=p.superItem.name %></h6>
-								<p>&#8358;<%=p.item.price.toLocaleString() %></p>
+								<!-- <p>&#8358;<%=p.item.price.toLocaleString() %></p> -->
+
+
+							<p>
+								<%-currencyConvert({to:currencyChoice, value :p.item.price }).symbol%>
+								<%-currencyConvert({to:currencyChoice, value :p.item.price }).result.toLocaleString()%>
+							</p>
 							</li>
 	<%})%>
 
@@ -150,8 +159,14 @@
 						</ul>
 
 						<ul class="price-list">
-							<span class="small-text"><li>Total: &#8358;<%=totalPrice.toLocaleString() %></li>
-								</span>
+							<!-- <span class="small-text"><li>Total: &#8358;<%=totalPrice.toLocaleString() %></li>
+								</span> -->
+
+							<span class="small-text">
+							<li>Total: <%-currencyConvert({to:currencyChoice, value :totalPrice }).symbol%><%=totalPrice.toLocaleString() %>
+								<%-currencyConvert({to:currencyChoice, value :totalPrice }).result.toLocaleString()%>
+							</li>
+								</span>	
 							<!-- <span class="small-text"><li>Shippingfree</li></span>
 							<li class="total">Total<span class="small-text">&#8358;<%=totalPrice.toLocaleString() %></span></li> -->
 						</ul>

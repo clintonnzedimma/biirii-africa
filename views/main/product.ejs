@@ -86,7 +86,9 @@
 				</div>
 				<div class="col-lg-6 product-details">
 					<h2 class="p-title"><%=product.name %> </h2>
-					<h3 class="p-price">&#8358;<%=product.sub[0].price.toLocaleString() %> </h3>
+				<!-- 	<h3 class="p-price">&#8358;<%=product.sub[0].price.toLocaleString() %> </h3> -->
+				<h3 class="p-price"><%-currencyConvert({to:currencyChoice, value :product.sub[0].price}).symbol%>
+								<%-currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString()%></h3>
 					<h4 class="p-stock">Available: <span>In Stock</span></h4>
 
 
@@ -144,7 +146,9 @@
                         	<!-- <span class="inc qty-btn">+</span> -->
                         </div> 
                         <br>
-                        <div class="" style="margin-left:20px; display: none;" id="itemTotalWrapper">&#8358;<span id="totalItemPrice"></span></div>                      
+                        <div class="" style="margin-left:20px; display: none;" id="itemTotalWrapper">
+                        	<%-currencyConvert({to:currencyChoice, value :product.sub[0].price}).symbol%>
+                        	<span id="totalItemPrice"></span></div>                      
                    	</div>
 					<a href="#" class="site-btn" onclick="addProductToCart('<%=product.sub[0].id%>', '<%=product.id%>' )">ADD TO CART</a>
 					<div id="accordion" class="accordion-area">
@@ -226,7 +230,7 @@ var totalItemPriceWrapper = $("#itemTotalWrapper");
 
 var productId = "<%=product.id%>";
 
-var productPrice = <%=product.sub[0].price%>;
+var productPrice = <%-currencyConvert({to:currencyChoice, value :product.sub[0].price }).result%>;
 
 function addProductToCart (sp_id, p_id) {
 	console.trace(qtyValue);
@@ -237,6 +241,8 @@ function changeQty(value){
 	qtyValue = value;
 
 	let price = qtyValue * productPrice;
+
+	if (price < 1000) price = parseFloat(price).toFixed(2); 
 
 	if (qtyValue == 1) totalItemPriceWrapper.hide();
 
@@ -268,8 +274,9 @@ $(".qtybtn").on("click", function(){
 	if (qtyValue > 1) totalItemPriceWrapper.show();
 
 
-
 	let price = qtyValue * productPrice;
+
+	if (price < 1000) price = parseFloat(price).toFixed(2); // for other currencies not NGN
 
 	$("#totalItemPrice").html(price.toLocaleString());
 

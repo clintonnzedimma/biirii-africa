@@ -29,7 +29,11 @@
 								</div> -->
 							</div>
 							<div class="pi-text">
-<% if (product.sub.length > 0) { -%> <h6>&#8358; <%=product.sub[0].price.toLocaleString() %></h6><% } -%>
+<% if (product.sub.length > 0) { -%> <h6>
+							<span id="currency-symbol">
+							<%-currencyConvert({to:currencyChoice,value :product.sub[0].price }).symbol%>
+							</span>
+							<span id="product-price"><%=currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString() %></span></h6><% } -%>
 								<p><a href="/store/products/<%=product.slug %>" class="product-link"><%=product.name %></a></p>
 							</div>
 					 </div>

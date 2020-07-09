@@ -81,12 +81,25 @@ module.exports.getCart = (req, res) => {
 	let cart  = null;
 	let data = null;
 
+	let CurrencyHelper = new helpers.Currency(req.session.currencies);
+
 	if (req.session.cart) {
 		cart = new Cart(req.session.cart ? req.session.cart : {});
 		data = cart.getData();
 
+
+		data.currency = {
+			totalPrice : CurrencyHelper.convert({
+				to: req.session.currency_choice,
+				value: data.totalPrice
+				}).result,
+			abbrev : req.session.currency_choice 
+		}
+
+		console.log(data);
+
 	}
-	res.json({status: true, cart: data}); 
+	return res.json({status: true, cart: data}); 
 }
 
 
@@ -94,9 +107,21 @@ module.exports.getItemById = (req, res) => {
 	let cart  = null;
 	let data = null;
 
+	let CurrencyHelper = new helpers.Currency(req.session.currencies);
+
 	if (req.session.cart) {
 		cart = new Cart(req.session.cart ? req.session.cart : {});
 		data = cart.getItemById(req.body.id);
+
+		data.currency = {
+			price : CurrencyHelper.convert({
+				to: req.session.currency_choice,
+				value: data.price
+				}).result,
+			abbrev : req.session.currency_choice 
+		}
+
+		
 	}
 
 	res.json({status: true, data: data}); 
@@ -110,6 +135,7 @@ module.exports.getItemTotalPrice = (req, res) => {
 	if (req.session.cart) {
 		cart = new Cart(req.session.cart ? req.session.cart : {});
 		data = cart.getItemTotalPrice(req.body.id);
+
 	}
 
 	console.trace("a=>"+data.item.price);
@@ -249,6 +275,33 @@ module.exports.pay = (req, res) => {
 
 	}).catch(resp => {
 		res.json({status: false, message : `payment failed`});
+	});
+}
+
+
+module.exports.changeCurrency= (req, res) => {
+	const availableCurrencies = ['NGN','USD', 'GBP', 'EUR'];
+
+	if (availableCurrencies.includes(req.body.currency_choice)) {
+		req.session.currency_choice = req.body.currency_choice;
+		req.session.save();
+
+		req.app.locals.currencyChoice = req.session.currency_choice;
+
+		return res.json({
+			message: `Currency set to ${req.session.currency_choice}`,
+			currency: req.session.currency_choice,
+			status: true 
+		});
+	}
+
+	req.session.currency_choice = 'NGN';
+	req.session.save();
+	req.app.locals.currencyChoice = req.session.currency_choice;
+	return res.json({
+		message: `Default currency set`,
+		currency: 'NGN',
+		status: true
 	});
 }
 

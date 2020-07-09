@@ -128,6 +128,11 @@
 			<div class="row navigation">
 				<nav>
 					<ul class="main-menu">
+						<li class="currency">
+							<div class="currency-wrapper">
+								<%- include("components/currencyChangerSelector") %>
+							</div>
+						</li>
 						<li>
 							<a href="/store">Store</a>
 						</li>
@@ -224,10 +229,13 @@
 									<span>Men</span>
 								</a>
 							</div> -->
-							<div class="container-logo">
+							<div class="container-logo row">
 								<div class="logo-container">
 									<img src="/img/logo-black.png" alt="" width="50px">
 									<!-- <span>Biirii</span> -->
+								</div>
+								<div class="currency-wrapper">
+									<%- include("components/currencyChangerSelector") %>
 								</div>
 							</div>
 							<nav class="panel-container">

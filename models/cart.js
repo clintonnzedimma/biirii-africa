@@ -1,6 +1,6 @@
 const { uuid } = require('uuidv4');
 
-const {countSubArrays} = require('../helpers/helpers');
+const helpers = require('../helpers/helpers');
 
 
 module.exports = function Cart(cart) {

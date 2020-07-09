@@ -105,6 +105,13 @@ module.exports.GeneralStorePage = async (req, res)=> {
 
 	let latestProducts =  await Product.fetchAll();
 
+	//currencies
+	let Currency = new helpers.Currency(req.session.currencies);
+
+	console.log(Currency);
+
+	console.log(res.locals);
+
 	res.render("main/general_store", {
 		 pageTitle: `Online store - BiiriiAfrica`,
 		 products: products,

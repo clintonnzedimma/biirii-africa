@@ -1,0 +1,7 @@
+<select name="currency_choice" id="currency_choice" class="currency-converter" onchange="changeCurrency(this.value)">
+	<option value="NGN" <% if (currencyChoice == 'NGN') { -%> selected <% } -%>>NGN</option>
+	<option value="USD" <% if (currencyChoice == 'USD') { -%> selected <% } -%>>USD</option>
+	<option value="GBP" <% if (currencyChoice == 'GBP') { -%> selected <% } -%>>GBP</option>
+	<option value="EUR" <% if (currencyChoice == 'EUR') { -%> selected <% } -%>>Euro</option>
+</select>
+

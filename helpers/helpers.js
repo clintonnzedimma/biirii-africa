@@ -61,3 +61,13 @@ module.exports.encrypt = (arg) => {
 module.exports.decrypt = (arg) => {
 	return cryptr.decrypt(arg);
 }
+
+
+module.exports.Currency = function (currencies) {
+		this.convert = (param)=> {
+			let result =  currencies.find (c=> param.to == c.abbrev);
+			result.result = (param.value * result.ngn_rate);
+			result.result = (param.to == 'NGN')? result.result : result.result.toFixed(2);
+			return result;
+		}
+}
