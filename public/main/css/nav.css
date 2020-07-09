@@ -277,14 +277,15 @@ ul.sub-menu h2{
 }
 
 /*Currency Converter*/
-.currency{
+li.currency{
     float: left;
     margin-top: 10px;
+    padding: 0;
 }
 .currency-wrapper{}
 .currency-converter{
     padding: 5px 10px;
-    box-shadow: 0 0 1px 1px #838282;
+    box-shadow: 0 0 3px 1px #b5b5b5a1;
     border: none;
     outline: none;
     height: 40px;
@@ -298,5 +299,6 @@ ul.sub-menu h2{
     }
     .currency-converter{
         height: 30px;
+        box-shadow: 0 0 1px 1px #838282;
     }
 }
