@@ -32,7 +32,7 @@ module.exports.ReturnPolicyPage = (req, res)=> {
 
 module.exports.PrivacyPolicyPage = (req, res)=> {
 	res.render("main/impact_home", {
-		 pageTitle: "Priacy policy - Biirii Africa",
+		 pageTitle: "Privacy policy - Biirii Africa",
 		 superCategory: null
 	 });
 }

@@ -39,16 +39,19 @@ module.exports = async function (req, res, next) {
 	try{
 		let CurrencyStore =  new store(await fetchCurrencies());	
 		req.session.currencies = CurrencyStore.data; 
-		req.session.save();
 		let CurrencyHelper = new helpers.Currency(req.session.currencies);
 		req.app.locals.currencyConvert = CurrencyHelper.convert;
+
+		if (!req.session.currency_choice) req.session.currency_choice = 'NGN';
 
 		if (req.session.currency_choice != 'NGN') {
 			req.app.locals.currencyChoice = req.session.currency_choice;	
 		}else {
-			req.app.locals.currencyChoice = 'NGN';
+			req.session.currency_choice = 'NGN';
+			req.app.locals.currencyChoice = req.session.currency_choice;
 		}
 		
+		req.session.save();
 	} catch(e){
 			console.log("CURRENCY MIDDLEWARE: Could not save currency data ")
 	}
