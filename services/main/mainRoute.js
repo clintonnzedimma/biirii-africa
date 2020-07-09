@@ -54,9 +54,8 @@ route.get("/return-policy", mainHandler.ReturnPolicyPage);
 route.get("/privacy-policy", mainHandler.PrivacyPolicyPage);
 route.get("/impact", mainHandler.ImpactHomePage);
 route.get("/about-us", mainHandler.AboutPage);
+route.get("/how-to-sell", mainHandler.HowToSellPage);
 
-//system pages
-route.get("/__system/receipt/:key/:name", mainHandler.SystemReceiptPage);
 
 
 route.get('/*', (req, res) => {

@@ -31,8 +31,15 @@ module.exports.ReturnPolicyPage = (req, res)=> {
 
 
 module.exports.PrivacyPolicyPage = (req, res)=> {
-	res.render("main/impact_home", {
+	res.render("main/privacy_policy", {
 		 pageTitle: "Privacy policy - Biirii Africa",
+		 superCategory: null
+	 });
+}
+
+module.exports.HowToSellPage = (req, res)=> {
+	res.render("main/how_to_sell_page", {
+		 pageTitle: "How to sell - Biirii Africa",
 		 superCategory: null
 	 });
 }
@@ -54,21 +61,6 @@ module.exports.ImpactHomePage = (req, res)=> {
 		 superCategory: null
 	 });
 }
-
-
-
-//Generated Pages
-module.exports.SystemReceiptPage = (req, res)=> {
-	let orderKey = req.params.key;
-	let name = req.params.name;  
-
-	return res.render("main/generate_receipt_page", {
-		 pageTitle: "Receipt",
-		 orderKey: orderKey,
-		 superCategory: null
-	 });
-}
-
 
 
 
