@@ -2,7 +2,7 @@
 <html lang="zxx">
 <head>
 <%include includes/metaMain%>
-<meta name="description" content="<%=product.name %> | <%=product.description %> | <%if(product.brand.name){-%><%=product.brand.name %><%}-%>">
+<meta name="description" content="<%=product.name %> | <%=product.description %> <%if(product.brand.name){-%>| | <%=product.brand.name %><%}-%>">
 <!-- Facebook and Twitter integration -->
 <meta property="og:type" content="og:product"/>
 <meta property="og:title" content="<%=product.name %>"/>
