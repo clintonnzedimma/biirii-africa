@@ -2,6 +2,27 @@
 <html lang="zxx">
 <head>
 <%include includes/metaMain%>
+<meta name="description" content="<%=product.name %> | <%=product.description %> | <%if(product.brand.name){-%><%=product.brand.name %><%}-%>">
+<!-- Facebook and Twitter integration -->
+<meta property="og:type" content="og:product"/>
+<meta property="og:title" content="<%=product.name %>"/>
+<meta property="og:description" content="<%=product.name %> | <%=product.description %> | <%if(product.brand.name){-%><%=product.brand.name %><%}-%>"/>
+<meta property="og:image" content="https://biiriiafrica.com/img/products/<%=product.main_img %>"/>
+<meta property="og:url"   content="https://biiriiafrica.com/store/products/<%=product.slug%>" />
+
+<meta property="product:price:amount" content="<%=product.sub[0].price%>">
+<meta property="product:price:currency" content="NGN">
+
+
+ <meta content="<%-currencyConvert({to:'USD', value :product.sub[0].price }).result%>">
+ <meta property="product:price:currency" content="USD"/>
+
+ <meta content="<%-currencyConvert({to:'GBP', value :product.sub[0].price }).result%>">
+ <meta property="product:price:currency"  content="GBP"/>
+
+ <meta content="<%-currencyConvert({to:'EUR', value :product.sub[0].price }).result%>">
+ <meta property="product:price:currency"  content="EUR"/>
+
 </head>
 <body>
 
