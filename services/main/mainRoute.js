@@ -55,6 +55,7 @@ route.get("/privacy-policy", mainHandler.PrivacyPolicyPage);
 route.get("/impact", mainHandler.ImpactHomePage);
 route.get("/about-us", mainHandler.AboutPage);
 route.get("/how-to-sell", mainHandler.HowToSellPage);
+route.get("/contact-us", mainHandler.ContactUs);
 
 
 

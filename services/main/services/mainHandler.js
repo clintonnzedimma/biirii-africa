@@ -44,8 +44,12 @@ module.exports.HowToSellPage = (req, res)=> {
 	 });
 }
 
-
-
+module.exports.ContactUs = (req,res)=> {
+	res.render("main/contact_us", {
+		pageTitle: "Contact Us - Biirii Africa",
+		superCategory: null
+	});
+}
 
 module.exports.AboutPage = (req, res)=> {
 	res.render("main/about_page", {
