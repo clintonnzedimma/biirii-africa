@@ -5,6 +5,7 @@ const Cart = require('../../../models/cart');
 //db models
 const Category = require('../../../models/db/Category');
 const Product = require('../../../models/db/Product');
+const Zone = require('../../../models/db/Zone');
 
 //helper
 const helpers = require('../../../helpers/helpers');
