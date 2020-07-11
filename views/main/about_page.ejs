@@ -44,6 +44,124 @@
 		font-weight: 600;
 	}
 </style>
+
+<!-- Contact Us styles -->
+<style>
+    .breadcrumb{
+        background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url("img/bg-2.jpg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 0;
+    }
+
+    .breadcrumb h2{
+        color: #dddddd;
+    }
+    .contact-holder{
+        
+        margin: 50px auto; 
+       max-width: 1140px;
+    }
+    div.contact-us{
+        display: flex;
+		flex-wrap: wrap;
+        justify-content: space-between;
+        margin: auto;
+    }
+    form.contact-form {
+        display: block;
+        margin-top: 0em;
+        max-width: 600px;
+        min-width: 350px;
+        padding: 0 20px 10px;
+        margin-bottom: 10px;
+        flex: 1;
+        text-align: center;
+    }
+    .contact-form input, .contact-form textarea {
+        width: 100%;
+        height: 44px;
+        padding: 0 18px;
+        background: #ffffff;
+        border-radius: 5px;
+        margin-bottom: 17px;
+        font-size: 14px;
+        border: 1px solid #ced4da;
+    }
+    .contact-form textarea {
+        width: 100%;
+        padding-top: 16px;
+        border-radius: 5px;
+        height: 175px;
+        margin-bottom: 32px;
+        border: 1px solid #ced4da;
+    }
+    .btn-1 {
+        display: inline-block;
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        min-width: 167px;
+        padding: 18px 47px 14px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        border: 1px solid #c4c4c4;
+        color: #c4c4c4;
+        line-height: normal;
+        cursor: pointer;
+        text-align: center;
+        background: #525050;
+    }
+    .contact-details{
+        width: 100%;
+        
+    }
+    .holder{
+        width: 100%;
+        padding: 10px 0;
+    }
+    .contact{
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        min-width: 250px;
+        max-height: 350px;
+        padding: 0 20px 10px;
+        margin-bottom: 10px;
+    }
+    .contact i{
+        display: inline-flex;
+        width: 60px;
+        height: 60px;
+        background: #f0f0f0;
+        color: #414141;
+        font-size: 30px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+    }
+    .holder h3{
+        text-align: center;
+    }
+    .phone{
+        display: flex;
+		max-width: initial;
+    }
+    .phone h4{
+        color: black;
+    }
+    .phone .num{
+        color: black;
+        
+    }
+    .text-content{
+        padding: 10px;
+        
+    }
+</style>
+
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -114,16 +232,15 @@
 
 		<div class="container">
 			<div class="desc">
-				<p>
-					At <span class="bold"></span>BIiRIIAFRICA.COM</span>, our purpose is clear;
-					Our goal is to spotlight the diversity in the African fashion retail industry and make these products available to the global market. Our online shop will allow our customers access ready-to-wear African designs while providing a platform for African designers to market their products on a larger scale.
-				</p>
+				<p>At Biirii Africa, we are building Africa's largest online fashion store to curate and sella wide range of high-quality outfits and accessories from African designers to loversof African fashion around the world.</p>
+				<p>Our goal is to spotlight the beautiful diversity in the African fashion retail industry,connecting both upcoming and established African fashion designers and clothingbrands to customers.</p>
+				<p>At Biirii, Our customers are at the heart of our business and we are committed toensure they have unlimited access to fashionable, high quality and sustainablymade ready-to-wear African designs from the best designers across different Africancountries and cities.</p>
 			</div>
 
 
 			<h3 class="heading">Our Mission</h3>
 			<div class="desc">
-				<p>Our mission is threefold; foster designer-client collaborations, inspire consumers to value cultural authenticity and pioneer industry change and sustainability for African textile. </p>
+				<p>Our mission is threefold; To foster designer-client collaborations, inspire consumers to value cultural authenticity and pioneer industry change and sustainability for African textiles.</p>
 			</div>
 
 
@@ -147,21 +264,68 @@
 
 			<h3 class="heading">Commitment to Customers</h3>
 			<div class="desc">
-				<p>When you shop on <span class="bold">BIiRIIAFRICA.COM</span>, we are committed to providing you with seamless online resources that help improve your shopping experience. We also assure you of the best possible product standards as we carefully curate our products to meet your needs.</p>
+				<p>When you shop on Biirii Africa, we are committed to providing you with seamless online resources that help improve your shopping experience. We also assure you of the best possible product standards as we carefully curate our products to meet your needs.</p>
 			</div>
 
 
 
 			<h3 class="heading">Commitment to our Vendors/Suppliers</h3>
 			<div class="desc">
-				<p>At <span class="bold">BIiRIIAFRICA.COM</span>, we assure our suppliers of a mutually-beneficial relationship that will foster business and brand expansion and increase sales volume. We are committed to ensuring our Suppliers understand and adhere to standard safety workplace practices.
-				We also commit to adhere to our agreements and providing online support to our suppliers in a timely manner.</p>
+				<p>At Biirii Africa, we assure our suppliers of a mutually-beneficial relationship that will foster business and brand expansion and increase sales volume. We are committed to ensuring our Suppliers understand and adhere to standard safety workplace practices.</p>
+				<p>We also commit to adhere to our agreements and providing online support to our suppliers in a timely manner.</p>
 			</div>
-
-
-
 			
 		</div>
+
+		<!-- Contact us -->
+        <div class="contact-holder">
+            <div class="heading-title text-center">
+                <h2>Contact Us</h2>
+                <p>Fill all the fields below</p>
+            </div>
+            <div class="container contact-us">
+                
+                <form class="contact-form">
+                    <input type="text" placeholder="Your name">
+                    <input type="text" placeholder="Your e-mail">
+                    <input type="text" placeholder="Subject">
+                    <textarea placeholder="Message"></textarea>
+                    <button class="btn-1">SEND NOW</button>
+                </form>
+                                    
+                <div class="row contact">
+                    <div class="col-md-4 phone">
+                            <a href="tel:+234 709 533 3336"><i class="fa fa-volume-control-phone"></i></a>
+                            <div class="text-content">
+                            <h4>Phone</h4>
+                            <p class="num">
+                                +234 709 533 3336
+                            </p>
+                        </div>
+                    </div>                 
+                    <div class="col-md-4 phone"><a href="#">
+                         <a href="mailto:contact@biiriiafrica.com"><i class="fa fa-envelope"></i></a>
+                        <div class="text-content">
+                           <h4>Mail Us</h4>
+                            <p class="num">
+                               contact@biiriiafrica.com
+                            </p>
+                        </div>
+                    </div>        
+                    <div class="col-md-4 phone"><a href="#"><i class="fa fa-map-marker"></i></a>
+                        <div class="text-content">
+                            <h4>Address</h4>
+                            <p class="num">
+                                No. 7b Peter Odili Road Trans Amadi Port Harcourt
+                            </p>
+                        </div>
+                    
+                    </div>             
+                </div>
+    
+            </div> 
+		</div>
+		
 	</section>
 	<!-- Index section end -->
 	<!-- Index section end -->
