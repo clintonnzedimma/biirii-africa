@@ -15,8 +15,10 @@ module.exports.saveCustomerDetails = (session, cart, txn_ref = null) => {
 			customer_phone : `${session.order.customer_phone}`,
 			customer_email : `${session.order.customer_email}`,
 			address : session.order.address,
-			is_not_pip : session.order.is_not_pip,
-			time_added : Date.now(),	
+			time_added : Date.now(),
+			zone_name : (session.order.zone_name) ? session.order.zone_name : null ,
+			zone_desc :  (session.order.zone_desc) ? session.order.zone_desc : null ,
+			zone_price :  (session.order.zone_price) ? 	session.order.zone_price : null		
 		}
 		
 		let cartProducts = cart.getItemsForOrder(session.order.key);

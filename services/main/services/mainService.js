@@ -196,6 +196,8 @@ module.exports.submitOrder = (req, res) => {
 		e = "Please enter valid PHONE NUMBER";
 	}else if (req.body.address.trim().length == 0) {
 		e = "You must fill your RESIDENTIAL ADDRESS";
+	} else if (req.body.zone_data == "null" || !req.body.zone_data) {
+		e = "Please select location";
 	}
 
 	console.log(req.body);
@@ -215,6 +217,23 @@ module.exports.submitOrder = (req, res) => {
 		     this.customer_email = formData.email.trim();;
 		     this.add_info  =  (formData.addInfo) ? formData.addInfo.trim() : null;
 		     this.address = formData.address.trim();
+
+			 //initializing zones
+		     this.zone_name = null;
+		     this.zone_desc = null;
+		     this.zone_price = parseInt(req.body.zp); // getting zone data price for security
+
+		     let z = formData.zone_data;
+
+		     if (z) {
+		     	console.log("Zone Condition met");
+
+		     	 z =  cryptr.decrypt(z); //decrypting zone data
+		     	 z = z.split(",");
+		     	 console.log("=>zone"+z);
+			     this.zone_name = z[0];
+			     this.zone_desc = z[1];
+		     }
 
 		}; 
 

@@ -215,17 +215,29 @@ module.exports.CustomerOrder = (req, res) => {
 	db.query("SELECT * FROM products", (err, products)=> {
 		db.query("SELECT * FROM all_orders WHERE order_key = ?", req.params.order_key, (err, allOrders)=> {
 			db.query("SELECT * FROM product_orders WHERE order_key = ?", req.params.order_key, (err, productOrders)=> {
-					 
-						let order = allOrders[0];
 
-						res.render("dashboard/order", 
-							{
-								pageTitle : `Order - ${req.params.order_key} - Dashboard`, 
-								order : order,
-								key : req.params.order_key,
-								productOrders : productOrders,
-								products : products
-							});
+
+				db.query("SELECT * FROM delivered_orders WHERE order_key = ?", req.params.order_key, (err, deliveredOrders)=> { 
+
+					let order = allOrders[0];
+					let timeDelivered = null;
+
+					if (deliveredOrders.length > 0) {
+						timeDelivered = deliveredOrders[0].time_added;
+					}
+
+					res.render("dashboard/order", 
+						{
+							pageTitle : `Order - ${req.params.order_key} - Dashboard`, 
+							order : order,
+							key : req.params.order_key,
+							productOrders : productOrders,
+							timeDelivered : timeDelivered,
+							products : products
+						});
+			});
+					 
+
 				
 			});	
 		})

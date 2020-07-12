@@ -114,20 +114,17 @@
                                 </div>
                             </div>
 
-                             <hr />
 
+                            <hr />
                             <div class="row">
                                 <div class="col-sm-3 col-md-2 col-5">
-                                    <label style="font-weight:bold;">Is someone else picking up?</label>
+                                    <label style="font-weight:bold;">Location</label>
                                 </div>
                                 <div class="col-md-8 col-6">
-                                   <% if (order.is_not_pip) { -%>
-                                       YES
-                                   <% } else { -%>
-                                       NO
-                                   <% } -%>
+                                    <%=order.zone_name%>  [<%=order.zone_desc%>]
                                 </div>
-                            </div>                            
+                            </div>
+
 
 
                             <hr />
@@ -154,16 +151,37 @@
                                 </div>
                                 <div class="col-md-8 col-6">
                                    &#8358;  <%=order.amount.toLocaleString()%>
- 
-                                      
                                    
                                 </div>
                             </div>
 
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3 col-md-2 col-5">
+                                    <label style="font-weight:bold;">Shipping Fee Paid</label>
+                                </div>
+                                <div class="col-md-8 col-6">
+                                   &#8358; <%=order.zone_price.toLocaleString()%>
+                                </div>
+                            </div> 
+
+
+                           <hr />
+                            <div class="row">
+                                <div class="col-sm-3 col-md-2 col-5">
+                                    <label style="font-weight:bold;">Total</label>
+                                </div>
+                                <div class="col-md-8 col-6">
+                                   &#8358; <%=(order.zone_price + order.amount).toLocaleString()%>
+                                </div>
+                            </div>                            
+
+
+
                             <br>
                             <% if (order.is_delivered) { -%>
                               <div class="alert alert-warning">
-                                This order was marked as delivered on {{date}}
+                                This order was marked as delivered on <%=helpers.formatTime(timeDelivered,  "D MMM Y");  %>
                               </div>
                             <% } else { -%>
                                   <div id="deliveredBtn"><button class="btn btn-success" onclick="markAsDelivered('<%=order.order_key%>')"><i class="material-icons fit">check</i>Mark as delivered</button></div>

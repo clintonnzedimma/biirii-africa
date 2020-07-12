@@ -120,6 +120,24 @@ module.exports.GeneralStorePage = async (req, res)=> {
 
 
 
+
+module.exports.NewProducts = async (req, res)=> {
+
+	let products = await Product.fetchAll();
+
+	//currencies
+	let Currency = new helpers.Currency(req.session.currencies);
+
+	res.render("main/new_products", {
+		 pageTitle: `New in - Biirii Africa`,
+		 products: products,
+		 superCategory: null,
+		 categories: []
+	 });
+}
+
+
+
 module.exports.ProductPage = async (req, res)=> {
 
 	let product = await Product.fetchOne({slug : req.params.slug});
@@ -164,13 +182,14 @@ module.exports.	CheckoutPage = async(req, res)=> {
 	let cart = new Cart(req.session.cart ? req.session.cart : {});
 	let products = (cart) ? cart.getItems() :  [];
 	let subs = await Product.fetchSubProducts();
+	let zones = await Zone.fetchAll() || [];
 
-	console.log(cart.getItems());	
 
-	res.render("main/checkout", {
+	return res.render("main/checkout", {
 		 pageTitle: `Checkout - Biirii Africa`,
 		 products: products,
 		 subs : subs,
+		 zones : zones,
 		 superCategory: null,
 		 totalPrice : cart.totalPrice,
 		 categories: []

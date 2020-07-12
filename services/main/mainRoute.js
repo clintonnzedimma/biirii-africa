@@ -36,6 +36,8 @@ route.get("/", mainHandler.IndexPage);
 
 route.get("/store", mainHandler.GeneralStorePage);
 
+route.get("/store/new-in", mainHandler.NewProducts);
+
 route.get("/cart", mainHandler.CartPage);
 
 route.get("/checkout", mainHandler.CheckoutPage);

@@ -22,6 +22,21 @@
 		    font-size: 14px;
 		   			
 		}
+
+		select.zones {
+			width: 100%;
+		    height: 44px;
+		    border: none;
+		    padding: 0 18px;
+		    background: #f0f0f0;
+		    border-radius: 40px;
+		    margin-bottom: 20px;
+		    font-size: 14px;			
+		}
+
+		span.data-holder {
+			padding: 0px!important;
+		}
 	</style>
 	<!-- Page Preloder -->
 	<!-- <div id="preloder">
@@ -88,6 +103,26 @@
 							</div>
 
 							<div class="col-md-12">
+
+								<select id="zone_data" class="zones">
+									<option value="null">-Select Location- </option>
+
+								<% if (zones.length > 0 ) { -%>
+
+								<%zones.forEach(zone =>{ %>
+									<option
+									ngn-price="<%=zone.price %>"
+									currency-price="<%=currencyConvert({to:currencyChoice, value :zone.price }).result%>"
+									value="<%=helpers.encrypt([zone.name, zone.description,zone.price]);  %>"
+									location-name="<%=zone.description %>"
+									>
+										<%=zone.description%>		
+									</option>
+								<% }) -%>
+									
+								<% } -%>
+								</select>
+
 								<input type="text" id ="address"  placeholder="Address">
 
 								<textarea id="addInfo" class="checkout-textarea" placeholder="Additional Information"></textarea>
@@ -122,10 +157,21 @@
 						<ul class="payment-list">
 					<!-- 		<li>Paypal<a href="#"><img src="img/paypal.png" alt=""></a></li>
 							<li>Credit / Debit card<a href="#"><img src="img/mastercart.png" alt=""></a></li> -->
-							<li>Total: <span style="color: #333333;">
+							<li>Cart: <span class="data-holder" style="color: #333333;">
 								<%-currencyConvert({to:currencyChoice, value :totalPrice }).symbol%>
 								<%-currencyConvert({to:currencyChoice, value :totalPrice }).result.toLocaleString()%>
 							</span> </li>
+
+
+							<li id="ShipCostDetails" style="display: none;">
+								<p>Shipping cost: <%-currencyConvert({to:currencyChoice, value :totalPrice }).symbol%><span class="data-holder" id="shipPrice"></span> <small> - <span class="data-holder" id="shipLocation"></span></small>
+								</p>
+
+								<p>
+									Total: <%-currencyConvert({to:currencyChoice, value :totalPrice }).symbol%><span class="data-holder" id="totalCost"></span>
+								</p>
+							</li>	
+
 						</ul>
 
 						<p style="margin-bottom: 6%;">
@@ -151,7 +197,9 @@
 							<p>
 								<%-currencyConvert({to:currencyChoice, value :p.item.price }).symbol%>
 								<%-currencyConvert({to:currencyChoice, value :p.item.price }).result.toLocaleString()%>
-							</p>
+							</p>							
+
+
 							</li>
 	<%})%>
 
@@ -165,6 +213,8 @@
 							<span class="small-text">
 							<li>Total: <%-currencyConvert({to:currencyChoice, value :totalPrice }).symbol%><%-currencyConvert({to:currencyChoice, value :totalPrice }).result.toLocaleString()%>
 							</li>
+
+
 								</span>	
 							<!-- <span class="small-text"><li>Shippingfree</li></span>
 							<li class="total">Total<span class="small-text">&#8358;<%=totalPrice.toLocaleString() %></span></li> -->
@@ -186,6 +236,9 @@
 
 <script type="text/javascript">
 
+ var localZonePrice = 0;
+ var currencyZonePrice = 0;
+
 
   $.busyLoadSetup({
     background: "rgba(45, 45, 45, 0.98)",
@@ -195,12 +248,14 @@
     textPosition:"bottom",
     textMargin: "3rem"
   }); 
+
+
  	function togglePay() {
 
 		 var handler = PaystackPop.setup({ 
 		        key: '<%=site.paystackPK%>', //put your public key here
 		        email: `${$("#email").val().trim()}`, //put your customer's email here
-		        amount: <%=totalPrice%> * 100, //amount the customer is supposed to pay in kobo
+		        amount: <%=totalPrice%> * 100 + (localZonePrice * 100), //amount the customer is supposed to pay in kobo
 		        metadata: {
 		            custom_fields: [
 		                {
@@ -273,7 +328,9 @@
 				email : $('#email').val(),
 				phone : $('#phone').val(),
 				address : $('#address').val(),
-				addInfo : $("#addInfo").val()
+				addInfo : $("#addInfo").val(),
+				zone_data :$("#zone_data :checked").val(),
+				zp : localZonePrice
 			}
 
 			console.log(formData);
@@ -315,10 +372,24 @@
  			notyf.error(res.message);
  		});
 
-
- 
-
  	}
+
+$("select#zone_data").on('change', function () {
+	localZonePrice = parseInt($('option:selected', this).attr('ngn-price'));
+	currencyZonePrice = parseInt($('option:selected', this).attr('currency-price'));
+
+
+	//Ship details context
+	if ($(this).val() == "null") $('#ShipCostDetails').hide();
+	if ($(this).val() != "null") $('#ShipCostDetails').show();
+	let cartPrice = parseInt(<%=currencyConvert({to:currencyChoice, value :totalPrice }).result%>);
+	let locationName = $('option:selected', this).attr('location-name');
+
+	$("#shipPrice").html(currencyZonePrice.toLocaleString()); 
+	$("#totalCost").html((currencyZonePrice + cartPrice).toLocaleString()); 
+	$("#shipLocation").html(locationName);
+
+});
  </script>
 
 
