@@ -191,6 +191,10 @@
 							<li>
 								<div class="pl-thumb"><img src="/img/products/<%=p.superItem.main_img %>" alt=""></div>
 								<h6><%=p.superItem.name %></h6>
+								<% if (p.size) { -%>
+								 <small style="font-style: italic;"><%=p.size %></small>
+								<% } -%>
+								
 								<!-- <p>&#8358;<%=p.item.price.toLocaleString() %></p> -->
 
 

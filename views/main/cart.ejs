@@ -8,6 +8,11 @@
 
 	<style type="text/css">
 
+
+		.item_size {
+			font-style: italic !important;
+		}
+
 		.empty-cart-wrapper{
 				margin-top: -2%
 		}
@@ -141,10 +146,18 @@
 
 										<span id="product-price"><%-currencyConvert({to:currencyChoice, value :product.item.price }).symbol%></span>
 
-										<span id="product-price"><%=currencyConvert({to:currencyChoice, value :product.item.price }).result.toLocaleString()%></span>										
-
-
+										<span id="product-price"><%=currencyConvert({to:currencyChoice, value :product.item.price }).result.toLocaleString()%></span>						
 									</div>
+
+
+									<% if (product.size) { -%>
+									<div data-th="Size">
+										<span style="font-size: 13px">Size : 
+											<small id="product-size-<%=product.id%>" class="item_size"><%=product.size %></small></span>
+
+									</div>											
+									<% } -%>
+
 
 
 								</div>
@@ -156,6 +169,17 @@
 							<div data-th="Quantity" class="quantity">
 								<input type="number" min="1" class="form-control text-center" value="<%=product.qty %>" onchange="updateItemPrice(this.value,'<%=product.id%>' )">
 							</div>
+
+							<div data-th="Size" class="quantity">
+								<select id="size" class="form-control" onchange="updateItemSize(this.value,'<%=product.id%>')">
+									<option value="XS" <% if (product.size == 'XS') { -%>selected<% } -%>>XS</option>
+									<option value="S" <% if (product.size == 'S') { -%>selected<% } -%>>S</option>
+									<option value="M" <% if (product.size == 'M') { -%>selected<% } -%>>M</option>
+									<option value="L" <% if (product.size == 'L') { -%>selected<% } -%>>L</option>
+									<option value="XL" <% if (product.size == 'XL') { -%>selected<% } -%>>XL</option>
+								</select>
+							</div>
+
 							
 							<div data-th="Subtotal" class="text-center total_item_price">	
 								<span id="currency-symbol"><%-currencyConvert({to:currencyChoice, value :product.item.price }).symbol%></span>
@@ -217,7 +241,7 @@
 <!-- 								<tr class="visible-xs">
 						<td class="text-center"><strong>Total 1.99</strong></td>
 					</tr> -->
-					<div class="bottom-paneljustify-content-md-center align="right">
+					<div class="bottom-paneljustify-content-md-center" align="right">
 						<!-- <a href="/store" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a> -->
 					</div>
 				</div>
@@ -314,8 +338,17 @@
 
 
  			});		
+ 	}	
 
- 	}		
+
+
+ 	function updateItemSize(arg, id) {
+ 		let itemSizeDisplayElement = $(`#product-size-${id}`);
+
+ 		Cart.updateSizeById(id, arg).then (res => {
+ 			itemSizeDisplayElement.html(arg);
+ 		});
+ 	}	
 	</script>
 
 	</body>

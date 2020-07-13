@@ -24,6 +24,10 @@ module.exports.addToCart = (req, res)=> {
 
 	let qty = parseInt(req.body.qty);
 
+	let size = req.body.size ? req.body.size : null;
+
+	console.log(size);
+
 	console.log(qty);
 
 	let extrasId = [];
@@ -40,7 +44,7 @@ module.exports.addToCart = (req, res)=> {
 				if (req.body.extras) {
 					ordereredExtras = extras;
 					if (product.length > 0 ) {
-						cart.add(sp[0], product[0], qty);
+						cart.add(sp[0], product[0], qty, size);
 						req.session.cart = cart;
 						return res.json({
 							status: true, 
@@ -56,7 +60,7 @@ module.exports.addToCart = (req, res)=> {
 				//if no extras
 				if (!req.body.extras) {
 					if (product.length > 0 ) {
-						cart.add(sp[0], product[0], qty);
+						cart.add(sp[0], product[0], qty, size);
 						req.session.cart = cart;
 						return res.json({
 							status: true, 
@@ -169,12 +173,23 @@ module.exports.removeCartItem = (req, res) => {
 }
 
 
-
+//Update item quantity
 module.exports.updateQty = (req, res) => {
 	let cart = new Cart(req.session.cart ? req.session.cart : {});
 	cart.setQty(req.body.id, req.body.qty);
 	res.json({status: true, message : `updated quantity`}); 
 }
+
+
+
+
+//Update item size
+module.exports.updateSize = (req, res) => {
+	let cart = new Cart(req.session.cart ? req.session.cart : {});
+	cart.setSize(req.body.id, req.body.size);
+	res.json({status: true, message : `updated quantity`}); 
+}
+
 
 
 
@@ -323,4 +338,6 @@ module.exports.changeCurrency= (req, res) => {
 		status: true
 	});
 }
+
+
 
