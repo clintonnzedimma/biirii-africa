@@ -96,6 +96,7 @@ route.post("/json/cart/add", mainService.addToCart);
 route.post("/json/cart/get", mainService.getCart);
 route.post("/json/cart/get/item", mainService.getItemById);
 route.post("/json/cart/update/qty", mainService.updateQty);
+route.post("/json/cart/update/size", mainService.updateSize);
 route.post("/json/cart/delete", mainService.removeCartItem);
 
 

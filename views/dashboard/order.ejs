@@ -215,6 +215,10 @@
                                                 <h5 class="card-title"><a href="#" title="View Product"><%=products.find(obj => obj.id === p.product_id).name%></a></h5>
                                                 <p class="card-text">Quantity ordered: <b><%=p.qty%> </b></p>
 
+                                                <% if (p.size) { -%>
+                                                   <p class="card-text">Size: <b><%=p.size%> </b></p>
+                                                <% } -%>
+
                                                 <% if (p.product_order_key) { -%>
                                                 <!-- Extras here -->
                                                 <small>Extras</small>: 

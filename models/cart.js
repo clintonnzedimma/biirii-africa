@@ -10,7 +10,7 @@ module.exports = function Cart(cart) {
     this.sumOfExtrasPrice = 0;
     this.productOrderKey = null;
 
-    this.add = function(item, superItem, qty = 1) {
+    this.add = function(item, superItem, qty = 1, size = null) {
         // `id` is a random generated string used to identify an item added to the cart
         //  The`id` does not represent the product, sub product or extra id in the database
         let id = uuid().toUpperCase().slice(0, 8);
@@ -28,6 +28,7 @@ module.exports = function Cart(cart) {
                 superItem: superItem, 
                 qty: 0, 
                 price: 0,
+                size : size,
                 id : id
             };
         }
@@ -127,6 +128,7 @@ module.exports = function Cart(cart) {
             arr[i].push(Date.now());
             arr[i].push(items[i].price);
             arr[i].push(items[i].qty);
+            arr[i].push(items[i].size);
             arr[i].push(discount_code);
             arr[i].push(discount_percent);
         }       
@@ -160,6 +162,12 @@ module.exports = function Cart(cart) {
             }
         }
         return val;
+    }
+
+
+
+    this.setSize = function (id, size) { 
+         cart.items[id].size = size;
     }
 
 };

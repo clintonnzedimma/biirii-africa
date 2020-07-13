@@ -27,7 +27,7 @@ module.exports.saveCustomerDetails = (session, cart, txn_ref = null) => {
 			if (err) {
 				reject("Couldnt insert customer details");
 			}else {
-				db.query("INSERT INTO product_orders (id, order_key, product_order_key, product_id, sub_product_id, time_added, price, qty, discount_code, discount_percent) VALUES ? ", [cartProducts],(err, productOrderInsert)=> {
+				db.query("INSERT INTO product_orders (id, order_key, product_order_key, product_id, sub_product_id, time_added, price, qty, size, discount_code, discount_percent) VALUES ? ", [cartProducts],(err, productOrderInsert)=> {
 					if (err) {
 						reject("Couldnt insert products orders from cart");
 					} else {

@@ -5,7 +5,7 @@
  function Cart(el) {									
 
  	
-	this.add = (spId, pId, qty = 1) => {
+	this.add = (spId, pId, qty = 1, size = 'XS') => {
 
 		if (qty < 1) throw new Error("Cannot add  quantity less than 1");
 
@@ -19,7 +19,7 @@
 
 		$.post(
 			'/json/cart/add', 
-			{id: spId, qty: qty}, 
+			{id: spId, qty: qty, size: size}, 
 			(res)=> {
 			console.log(res);
 			if (res.status == true) {
@@ -134,12 +134,31 @@
 					this.updateEl(); 
 					resolve(res);
 				}else {
-					resolve(reject);
+					resolve(res);
 				}
 			});
 
 		});
 	}
+
+
+
+	this.updateSizeById = (id, size) => {
+		return new Promise((resolve, reject)=> {
+			$.post(
+				'/json/cart/update/size',
+				{id : id, size : size},
+				(res)=> {
+				if (res.status == true) {
+					resolve(res);
+				}else {
+					resolve(res);
+				}
+			});
+
+		});
+	}
+
 
 
 
