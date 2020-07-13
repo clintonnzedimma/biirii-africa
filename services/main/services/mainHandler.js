@@ -184,6 +184,10 @@ module.exports.	CheckoutPage = async(req, res)=> {
 	let subs = await Product.fetchSubProducts();
 	let zones = await Zone.fetchAll() || [];
 
+	if (products.length == 0) {
+		return res.redirect("/cart");
+	}
+
 
 	return res.render("main/checkout", {
 		 pageTitle: `Checkout - Biirii Africa`,
