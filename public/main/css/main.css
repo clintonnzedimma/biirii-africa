@@ -202,7 +202,7 @@ nav {
     object-position: center 20%;
 }
 
-._image-wrapper::before {
+._image-wrapper::after {
     content: "";
     position: absolute;
     top: 0;
