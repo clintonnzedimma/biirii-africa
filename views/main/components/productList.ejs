@@ -11,9 +11,12 @@
 		padding-top: 22px;
 		height: auto;
 	}
+	.product-item .pi-text h6{
+		padding: 0;
+	}
 	.product-link {
 		color: #000;
-		width: 100%;
+		width: 150px;
 		display: block;
 		white-space: nowrap;
 		text-overflow: ellipsis;
@@ -66,7 +69,7 @@
 							<%=currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString() %></h6>
 
 							<% } -%>
-							<p><a href="/store/products/<%=product.slug %>" class="product-link"><%=product.name %></a></p>
+							<p><a href="/store/products/<%=product.slug %>" class="product-link" title="<%=product.name %>"><%=product.name %></a></p>
 						</div>
 					</div>
 				</div>
