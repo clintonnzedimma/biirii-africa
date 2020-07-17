@@ -63,17 +63,21 @@ input.multi{
   border:1px solid #e3e3e3;
   border-radius:10px;
   margin:20px 105px;
-  display:inline-block;
-  position:relative;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
 }
 
 #thumbnail_1, #thumbnail_2, #thumbnail_3{
   display:none;
   width: 100%;
-  height:auto;
+  height:100%;
   position:absolute;
   left:0;
+  top: 0;
   bottom:0;
+  object-fit: cover;
+  object-position: center;
 }
 
 
