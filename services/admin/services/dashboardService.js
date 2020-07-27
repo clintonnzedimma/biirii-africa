@@ -162,7 +162,7 @@ module.exports.modifyProduct = async (req, res) => {
 
 	 db.query("SELECT * FROM products WHERE  name = ?", [productName], (err, row)=> {
 
-	 	if (err) { throw new err; }
+	 	if (err) { throw new Error(err); }
 
 	 	if (row.length > 0) {
 	 	  const oldImg = row[0].main_img; // old image name
@@ -218,8 +218,37 @@ module.exports.modifyProduct = async (req, res) => {
 
 
 	});	
-
 }
+
+
+module.exports.deleteProduct = (req, res) => {
+	let pKey = req.body.pKey;
+
+
+	db.query("DELETE FROM products WHERE pKey = ? ", [pKey],(err, productIsDeleted)=>{
+		if (err) { throw new Error(err); }
+
+		if (productIsDeleted) {
+
+			console.log("Deleted product "+pKey);
+
+			// try and delete sub products	
+			try {
+				db.query("DELETE FROM sub_products WHERE product_key = ?", [pKey], (err, spIsDeleted)=>{
+							
+				});			
+			} catch(e) {
+
+			}
+
+			return res.json({message:"Deleted product successfully", status: true});
+		}
+
+	});
+}
+
+
+
 
 module.exports.modifyCategory = (req, res)=> {
 	let imgName =   (req.body.chkImg === 'IMAGE_CHANGED') ? req.body.images : req.body.chkImg;

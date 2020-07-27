@@ -81,6 +81,10 @@ input.multi{
 }
 
 
+._modal-delete-product{
+    height: 220px;
+}
+
 
 
 </style>
@@ -184,6 +188,8 @@ input.multi{
                         <!-- Send button -->
                         <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="button" onclick="edit()">Save changes</button>
 
+                         <button class="btn btn-outline-danger btn-rounded btn-block z-depth-0 my-4 waves-effect" type="button" onclick="openDeleteModal()">Remove</button>
+
 
                         <input type="text" name="chkImg" style="display: none;" value="<%=product.main_img %>">
 
@@ -236,6 +242,20 @@ input.multi{
 
 
 
+
+
+<div id="deleteModal" class="modal _modal-delete-product" align="center">
+  <div align="center">
+    <p style="margin-top: 12%">
+      <small>Are you sure you want to remove  </small><br>
+      <span style="color: #5d5d5d"><%=product.name %>?</span>
+      <br>
+
+      <a type="button" onclick="deleteProduct('<%=product.pKey%>')" class="btn btn-sm btn-danger">Yes</a>
+      <a type="button" onclick="" rel="modal:close" class="btn btn-sm btn-success">No</a>
+     </p>
+  </div>
+</div>
 
 
 
@@ -438,6 +458,41 @@ function uploadMultiImg(){
             } 
         }
     }); 
+}
+
+
+function openDeleteModal() {
+  $("#deleteModal").modal('open');
+}
+
+
+
+
+function deleteProduct(pKey) {
+   $.ajax({
+          url : "<%= site.adminURL%>/json/product/delete",
+          type:"POST",
+          data : {pKey: pKey},     
+          success : (res)=>{
+              console.log(res);
+
+              if(res.status == true) {
+                  $.toast({
+                      text: `<h6>${res.message}</h6>`,
+                      showHideTransition: 'slide',
+                      loader:false,
+                      icon: 'success',
+                      position: "top-right"
+                  });
+
+                  setTimeout(()=>{ 
+                    console.log("successful");
+                       window.location.href = "<%= site.adminURL%>/products"; 
+                    }, 2000);
+
+              } 
+          }
+      }); 
 }
     
 </script>
