@@ -99,16 +99,19 @@ module.exports.EditProduct = (req, res) => {
 			db.query('SELECT * FROM categories ORDER BY id ASC', (err, categories)=> {
 					db.query('SELECT * FROM sub_products WHERE product_key = ?', [pKey], (err, subProducts)=> {
 
+						db.query('SELECT * FROM brands ORDER BY id DESC', (err, brands)=> { 
+							if (categories.length > 0) {
+								res.render("dashboard/edit_product", 
+									{
+										pageTitle:`Edit products - ${product[0].name}`, 
+										product: product[0],
+										categories : categories,
+										brands : brands,
+										subProducts : (subProducts.length > 0) ? subProducts : []
+								});
+							}
 
-						if (categories.length > 0) {
-							res.render("dashboard/edit_product", 
-								{
-									pageTitle:`Edit products - ${product[0].name}`, 
-									product: product[0],
-									categories : categories,
-									subProducts : (subProducts.length > 0) ? subProducts : []
-							});
-						}
+						});			
 
 					});				
 
@@ -289,3 +292,39 @@ module.exports.DeliveredOrders = (req, res) => {
 	});
 
 }
+
+
+
+module.exports.BrandList = (req, res) => {
+
+	db.query("SELECT * FROM brands ORDER BY id DESC", (err, brands)=>{
+
+		if (err) { throw new Error (err);}
+
+		res.render("dashboard/all_brands", {
+			pageTitle:`Brands`, 
+			brands : brands
+		});
+
+	});	
+}
+
+
+
+module.exports.AddBrand = (req, res) => {
+		res.render("dashboard/create_brand", {
+			pageTitle:`Create Brand`, 
+		});
+}
+
+
+module.exports.EditBrand = (req, res) => {
+		db.query("SELECT * FROM brands WHERE id = ?",req.params.id,(err, brands)=> {
+
+			res.render("dashboard/edit_brand", {
+				pageTitle:`Modify Brand - ${brands[0].name} `,
+				brand : brands[0] 
+			});
+		});
+}
+

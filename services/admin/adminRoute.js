@@ -68,6 +68,12 @@ route.get('/orders/new', adminMiddleware.isLoggedIn, dashboardHandler.NewOrders)
 
 route.get('/orders/delivered', adminMiddleware.isLoggedIn, dashboardHandler.DeliveredOrders);
 
+route.get('/brands', adminMiddleware.isLoggedIn, dashboardHandler.BrandList);
+
+route.get('/brands/add', adminMiddleware.isLoggedIn, dashboardHandler.AddBrand);
+
+
+route.get('/brands/edit/:id', adminMiddleware.isLoggedIn, dashboardHandler.EditBrand);
 
 route.get("/logout", adminMiddleware.logout);
 
@@ -81,11 +87,13 @@ route.post('/json/auth', authService);
 
 //Dashboard service api route point
 route.post('/json/test',  dashboardService.test);
-route.post('/json/product/delete',  dashboardService.deleteProduct);
-route.post('/json/order/add/delivered',  dashboardService.setOrderAsDelivered);
-route.post('/json/product/sub/create',  dashboardService.createSubProduct);
-route.post('/json/product/sub/modify',  dashboardService.modifySubProduct);
-route.post('/json/product/sub/delete',  dashboardService.deleteSubProduct);
+route.post('/json/product/delete', adminMiddleware.protectEndpoint, dashboardService.deleteProduct);
+route.post('/json/order/add/delivered', adminMiddleware.protectEndpoint, dashboardService.setOrderAsDelivered);
+route.post('/json/product/sub/create',adminMiddleware.protectEndpoint,  dashboardService.createSubProduct);
+route.post('/json/product/sub/modify', adminMiddleware.protectEndpoint, dashboardService.modifySubProduct);
+route.post('/json/product/sub/delete', adminMiddleware.protectEndpoint, dashboardService.deleteSubProduct);
+route.post('/json/brands/create', adminMiddleware.protectEndpoint,  dashboardService.CreateBrand);
+route.post('/json/brands/edit',adminMiddleware.protectEndpoint,  dashboardService.ModifyBrand);
 
 route.post('/json/add-category', 
 	adminMiddleware.protectEndpoint,

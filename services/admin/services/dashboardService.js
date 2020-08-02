@@ -143,6 +143,7 @@ module.exports.modifyProduct = async (req, res) => {
 	let categoryId = parseInt(req.body.category);
 	let price = parseInt(req.body.price);
 	let description = req.body.description;
+	let brand_id = req.body.brand_id;
 
 
 	console.trace(req.body.images);
@@ -153,6 +154,7 @@ module.exports.modifyProduct = async (req, res) => {
 		category_id : categoryId, 
 		slug : slug(productName.toLowerCase()),
 		description : description,
+		brand_id : brand_id,
 		time_updated : Date.now()
 	}
 
@@ -418,7 +420,74 @@ module.exports.uploadMorePhotosForProduct = async (req, res) => {
 		}
 	});
 
-	
+}
+
+
+module.exports.CreateBrand = (req, res) => {
+	let e = null;
+
+	if (req.body.name.length  == 0) {
+		e = "Brand name cant be empty !";	
+	}
+
+
+	if (e) {
+		return res.json({
+			status : false,
+			message : e
+		});
+	}
+
+	let brand = {
+		id : null,
+		name : req.body.name,
+		time_added : Date.now()
+	}
+
+	db.query("INSERT INTO brands SET ? ", brand, (err, isCreated)=> {
+		if (isCreated) {
+			return res.json({
+				status : true,
+				message : `Added '${brand.name}' to brands`
+			});	
+		}
+	});
+
+}
+
+
+module.exports.ModifyBrand = (req, res) => {
+
+	let e = null;
+
+	if (req.body.name.length  == 0) {
+		e = "Brand name cant be empty !";	
+	}
+
+
+
+	if (e) {
+		return res.json({
+			status : false,
+			message : e
+		});
+	}
+
+	let brand = {
+		name : req.body.name,
+		time_updated : Date.now()
+	}
+
+	db.query("UPDATE brands SET ? WHERE id = ?", [brand, req.body.id], (err, isCreated)=> {
+		if (isCreated) {
+			return res.json({
+				status : true,
+				message : `Modified successfully`
+			});	
+		}
+	});
+
 
 
 }
+

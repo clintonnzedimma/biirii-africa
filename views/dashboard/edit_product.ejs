@@ -156,15 +156,71 @@ input.multi{
                                       <div>
                                          <!-- Category -->
                                        <span style="color: #83e799!important;">Category</span><br>
-                                        <select name="category" class="mdb-select category">
+   <!--                                      <select name="category" class="mdb-select category">
                                             <option value="" disabled selected>-Choose category-</option>
                                              <% categories.forEach((category)=> { %>
                                              <option value="<%=category.id %>" <% if (category.id == product.category_id) { -%>
                                                  selected
                                              <% }%>><%=  helpers.ucwords(category.name) %></option>
                                              <%})%>
-                                        </select>                                        
+                                        </select>   -->
+
+
+
+  <select name="category" class="mdb-select category">
+            <option value="" disabled selected>-Choose category-</option>
+    
+              <optgroup label="Men">
+                  <% categories.forEach((category)=> { %>
+                      <% if (category.super_category == 'men') { -%>
+                          <option value="<%=category.id %>" <% if (category.id == product.category_id) { -%> selected
+                            <% }%>><%=  helpers.ucwords(category.name) %></option>
+                         <% } -%> 
+                 <%})%>  
+              </optgroup>
+
+
+              <optgroup label="Women">
+                  <% categories.forEach((category)=> { %>
+                      <% if (category.super_category == 'women') { -%>
+                          <option value="<%=category.id %>" <% if (category.id == product.category_id) { -%> selected
+                            <% }%>><%=  helpers.ucwords(category.name) %></option>
+                     <% } -%>
+                 <%})%>  
+              </optgroup>              
+
+
+
+              <optgroup label="Accessories">
+                  <% categories.forEach((category)=> { %>
+                      <% if (category.super_category == 'accessories') { -%>
+                          <option value="<%=category.id %>" <% if (category.id == product.category_id) { -%>  selected
+                            <% }%>><%=  helpers.ucwords(category.name) %></option>
+                      <% } -%>
+                  <%})%>
+              </optgroup>   
+        </select>  
+
+
                                     </div>
+                                    <br>
+                                     <div>
+                                        <!-- Brand -->
+                                       <span style="color: #83e799!important;">Brands</span><br>
+                                       <select name="brand_id"  class="mdb-select category">
+                                         <option value="" disabled selected>-Choose Brand-</option>
+
+                                         <% if (brands.length > 0) { -%>
+                                            <% brands.forEach((brand)=> { %>
+                                                    <option value="<%=brand.id %>" <% if (brand.id == product.brand_id) { -%>
+                                                 selected
+                                             <% }%>><%=  helpers.ucwords(brand.name) %></option>
+                                             <%})%>                
+                                         <% } -%>
+                                     
+                                       </select>
+
+                                      </div>
 
 
 

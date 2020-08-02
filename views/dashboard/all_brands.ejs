@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include includes/metaMain %>
+</head>
+<body>
+<style type="text/css">
+    div.card-body{
+        overflow-x: auto;
+    }
+</style>
+
+
+<!-- header starts here -->
+<% include includes/header %>
+<!-- header ends here -->
+
+
+             <div align="center"><h2>brands</h2></div>
+            <!-- cards view for products  -->
+        <div id="card_content">
+            <div class="card">
+                <div class="card-body">
+
+                    <div>
+                         <button type="button" class="btn btn-outline-warning waves-effect" onclick="window.location.href='<%= site.adminURL%>/brands/add'">Add brand</button>
+                    </div>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <!-- <th scope="col">NO</th> -->
+                            <th scope="col">brand name</th>
+                            <th scope="col">Last updated</th>
+                            <th scope="col"><!-- Action --></th>
+                        </thead>
+                        <tbody>
+                            <% if (brands.length > 0) { %>
+                                
+                                <% brands.forEach((brand)=> { %>
+                                    <tr>
+                                        <!-- <th scope="row">1</th> -->
+                                        <td><h4><%= brand.name %> </h4></td>
+
+
+                                        <td>
+                                            <% if (brand.time_updated) { %>
+                                               <%=helpers.formatTime(brand.time_updated, "D MMM Y")%>
+                                            <% } else { %>
+                                               
+                                            <% } %>
+                                            
+                                        </td>
+
+                                      <td><button type="button" onclick="window.location.href='<%= site.adminURL%>/brands/edit/<%= brand.id %>'" class="btn btn-info">Edit</button></td>
+                                     <!--  <td><button type="button" onclick="deletebrand(<%= brand.id %>)'" class="btn btn-danger">Delete</button></td> -->
+                                    </tr>
+
+                                <% })  %>    
+
+                            <% } else if(brands.length == 0) {%>
+                                <div><h3>No brands yet</h3></div>
+                            <% } %> 
+                                
+                     
+                            
+                        </tbody>
+                    </table>    
+                </div>
+            </div>
+
+            
+<!-- footer starts here -->
+<% include includes/footer %>
+<!-- footer ends here -->
+
+</body>
+</html>
