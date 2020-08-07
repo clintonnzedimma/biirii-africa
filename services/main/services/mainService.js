@@ -207,7 +207,7 @@ module.exports.submitOrder = (req, res) => {
 		e = "Please enter a valid EMAIL !";
 	} else if(req.body.phone.trim() == '' || req.body.phone.trim().length == 0){
 		e = "PHONE NUMBER is required !";
-	}else if (req.body.phone.trim() && req.body.phone.trim().length != 11) {
+	}else if (req.body.phone.trim() && req.body.phone.trim().length <7) {
 		e = "Please enter valid PHONE NUMBER";
 	}else if (req.body.address.trim().length == 0) {
 		e = "You must fill your RESIDENTIAL ADDRESS";
