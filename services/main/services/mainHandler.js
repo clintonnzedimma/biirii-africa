@@ -1,4 +1,5 @@
 const moment = require('moment');
+const slug = require('slug');
 const db = require('../../../database/config');
 const Cart = require('../../../models/cart');
 
@@ -6,14 +7,28 @@ const Cart = require('../../../models/cart');
 const Category = require('../../../models/db/Category');
 const Product = require('../../../models/db/Product');
 const Zone = require('../../../models/db/Zone');
+const Brand = require('../../../models/db/Brand');
 
 //helper
 const helpers = require('../../../helpers/helpers');
 
+
+module.exports.test = async(req,res) => {
+
+	let brands  = await Brand.fetchAll();
+
+	for (var i = 0; i < brands.length; i++) {
+			db.query("UPDATE brands SET slug = ? WHERE id = ?",[slug(brands[i].name.toLowerCase()),brands[i].id],(err, worked)=> {
+
+			});
+	}
+}
+
+
+
 /*
 * Static handlers below
 */
-
 
 module.exports.IndexPage = (req, res)=> {
 	res.render("main/index", {
@@ -203,9 +218,7 @@ module.exports.	CheckoutPage = async(req, res)=> {
 
 
 module.exports.PurchaseDetails = (req, res)=> {
-	/*NB: Validate order key later*/
 	let orderKey = req.session.order.key;  
-
 
 	if (orderKey) {
 		return res.render("main/purchase_details", 
@@ -255,4 +268,40 @@ module.exports.CategoryPage = async (req, res)=> {
 			categories : []
 		});	
 
+}
+
+
+module.exports.AllBrandsPage = async (req, res)=> {
+	let brands  = await Brand.fetchAll();
+
+	return res.render("main/all_brands", 
+		{
+			pageTitle: `Shop by Brands - Biirii Africa`,
+			brands : brands,
+			superCategory: null
+		});	
+}
+
+
+module.exports.BrandPage = async (req, res)=> {
+	let brand  = await Brand.fetchBySlug(req.params.slug);
+
+	if (brand.length == 0) {
+		return res.redirect("/404");
+	} 
+
+	brand = brand[0];
+
+	let products = await Product.fetchByBrand(brand.id);
+
+	console.log(products);
+
+	return res.render("main/brand_page", 
+		{
+			pageTitle: `${brand.name} - Biirii Africa`,
+			brand : brand,
+			products : products,
+			superCategory: null,
+			categories : []
+		});	
 }

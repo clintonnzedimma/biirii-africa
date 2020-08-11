@@ -92,8 +92,32 @@ route.post('/json/order/add/delivered', adminMiddleware.protectEndpoint, dashboa
 route.post('/json/product/sub/create',adminMiddleware.protectEndpoint,  dashboardService.createSubProduct);
 route.post('/json/product/sub/modify', adminMiddleware.protectEndpoint, dashboardService.modifySubProduct);
 route.post('/json/product/sub/delete', adminMiddleware.protectEndpoint, dashboardService.deleteSubProduct);
-route.post('/json/brands/create', adminMiddleware.protectEndpoint,  dashboardService.CreateBrand);
-route.post('/json/brands/edit',adminMiddleware.protectEndpoint,  dashboardService.ModifyBrand);
+
+route.post('/json/brands/create', 
+	adminMiddleware.protectEndpoint, 	
+	(req, res, next)=> {
+		// setting  essential upload parameters for category
+		req.session.uploadPath = "img/brands";	
+		req.session.imgQuality = 65;
+		next();
+			
+	}, 
+	fileUploadMiddleware.uploadImages,
+	fileUploadMiddleware.resizeImages,
+	 dashboardService.CreateBrand);
+
+
+route.post('/json/brands/edit',
+	adminMiddleware.protectEndpoint, 
+	(req, res, next)=> {
+		// setting  essential upload parameters for category
+		req.session.uploadPath = "img/brands";	
+		req.session.imgQuality = 65;
+		next();	
+	},
+	fileUploadMiddleware.uploadImages,
+	fileUploadMiddleware.resizeImages,
+ 	dashboardService.ModifyBrand);
 
 route.post('/json/add-category', 
 	adminMiddleware.protectEndpoint,

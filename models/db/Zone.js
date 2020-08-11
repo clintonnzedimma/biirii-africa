@@ -1,6 +1,5 @@
-const { Sequelize, Model, DataTypes } = require('sequelize');
 const db = require('../../database/config');
-const sequelize = require('../../database/sequelizeConfig');
+
 
 // Fetch All Zones
 module.exports.fetchAll = () => {
@@ -16,3 +15,5 @@ module.exports.fetchAll = () => {
  	 	});
 	});
 }
+
+

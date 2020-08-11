@@ -54,6 +54,19 @@
                     <!-- Form -->
                     <form class="text-center" style="color: #757575;" action="#!">
 
+                        <% if(brand.main_img){ %>
+                         <div class="img-container">
+                            <img src="/img/brands/<%=brand.main_img %>" width="300" id="thumbnail" class="img-fluid">
+                        </div> 
+                        <%}%>
+
+
+
+                        <% if(!brand.main_img){ %>
+                         <div class="img-container">
+                            <img src="/img/brands/<%=brand.main_img %>" width="300" id="thumbnail" class="img-fluid">
+                        </div> 
+                        <%}%>
                                     <!-- Name -->
                                     <div class="md-form mt-3">
                                         <input type="text" id="materialContactFormName" class="form-control" name="name" value="<%=brand.name %>" required>
@@ -61,15 +74,26 @@
                                     </div>
 
    
-                    
+                                    <!-- Upload input -->
+                        <br>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                          </div>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="img-input" name="img" 
+                              aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="img-input">Choose Image</label>
+                          </div>
+                        </div>  
 
-                                    <!-- Copy -->
-<!--                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="materialContactFormCopy">
-                                        <label class="form-check-label" for="materialContactFormCopy">A random text</label>
-                                    </div>
- -->
-                        <!-- Material form contact -->                            
+
+                      
+                         <input type="text" name="chkImg" style="display: none;" value="<%=brand.main_img %>">
+
+                          <input type="text" name="id" style="display: none;" value="<%=brand.id %>">
+                       
+                       
 
                         <!-- Send button -->
                         <button id="edit-btn" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="button" onclick="modify()">Save changes</button>
@@ -98,21 +122,31 @@
     $("#thumbnail").previewImageFrom("#img-input");
 
 
+
+$("#img-input").change(function () {
+    $("input[name=chkImg]").val("IMAGE_CHANGED");
+});
+
+
 function modify () {
 
-    let formData = {
-        name : $("input[name=name]").val(),
-        id : "<%=brand.id%>"
+    let form = $('form')[0]; 
+    let formData = new FormData(form);
+    //console.log(formData.values());
+    for (let value of formData.values()) {
+       console.log(value); 
     }
     
-    console.log(formData);
+    console.log(formData.values());
 
     $("#edit-btn").attr("disabled", true);
 
     $.ajax({
         url : "<%= site.adminURL%>/json/brands/edit",
         type:"POST",
-        data : formData,      
+        data : formData,
+        contentType: false,
+        processData: false,        
         success : (res)=>{
             console.log(res);
 

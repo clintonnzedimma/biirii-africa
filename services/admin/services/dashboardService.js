@@ -424,6 +424,8 @@ module.exports.uploadMorePhotosForProduct = async (req, res) => {
 
 
 module.exports.CreateBrand = (req, res) => {
+	let image = (req.body.images) ? req.body.images : null ;
+
 	let e = null;
 
 	if (req.body.name.length  == 0) {
@@ -441,7 +443,9 @@ module.exports.CreateBrand = (req, res) => {
 	let brand = {
 		id : null,
 		name : req.body.name,
-		time_added : Date.now()
+		slug: slug(req.body.name.toLowerCase()),
+		time_added : Date.now(),
+		main_img : image
 	}
 
 	db.query("INSERT INTO brands SET ? ", brand, (err, isCreated)=> {
@@ -456,15 +460,17 @@ module.exports.CreateBrand = (req, res) => {
 }
 
 
-module.exports.ModifyBrand = (req, res) => {
+
+module.exports.ModifyBrand =(req, res) => {
+	let image = (req.body.chkImg === 'IMAGE_CHANGED') ? req.body.images : req.body.chkImg;
 
 	let e = null;
+
+	console.log(req.body);
 
 	if (req.body.name.length  == 0) {
 		e = "Brand name cant be empty !";	
 	}
-
-
 
 	if (e) {
 		return res.json({
@@ -475,8 +481,29 @@ module.exports.ModifyBrand = (req, res) => {
 
 	let brand = {
 		name : req.body.name,
-		time_updated : Date.now()
+		slug: slug(req.body.name.toLowerCase()),
+		time_updated : Date.now(),
+		main_img: image
 	}
+
+	if (req.body.chkImg === "IMAGE_CHANGED") {
+		try{
+			db.query("SELECT * FROM brands WHERE id = ?",[req.body.id],(err, row)=> {
+				if (err) { throw new Error(err)}
+
+				 try {
+	  				console.log("deleted old product image");
+	  				fs.unlinkSync(`public/img/brands/${row[0].main_img}`);
+	  			} catch (exception) {
+	  				
+	  			}
+
+			});
+		} catch(exception) {
+
+		}
+	}
+
 
 	db.query("UPDATE brands SET ? WHERE id = ?", [brand, req.body.id], (err, isCreated)=> {
 		if (isCreated) {
@@ -486,8 +513,6 @@ module.exports.ModifyBrand = (req, res) => {
 			});	
 		}
 	});
-
-
 
 }
 

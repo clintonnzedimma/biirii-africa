@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<%include includes/metaMain%>	
+</head>
+<body>
+
+	<!-- Header section -->
+	<%include includes/header%>
+	<!-- Header section end -->
+
+
+	<!-- Page info -->
+	<div class="page-top-info">
+		<div class="container">
+			<h4><%=brand.name %></h4>
+			<div class="site-pagination">
+				<a href="/">Home</a> /
+				<a href="/brands">Store</a> /
+				<a href="/brands/<%=brand.name %>"><%=brand.name %></a> 
+			</div>
+		</div>
+	</div>
+	<!-- Page info end -->
+
+
+	<!-- Category section -->
+	<section class="category-section spad">
+		<div class="container">
+			
+
+				<div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
+						<!-- Product filter section -->
+						<% if (products.length > 0 ) { -%>
+							<%include components/productList%>
+						<% }  -%>
+
+
+						<% if (products.length == 0) { -%>
+
+							<h3>No Product for this Brand yet
+								<br>
+								<a href="/store" style="font-size: 16px">Continue shopping</a>
+							</h3>
+							
+						<% } -%>
+							
+						
+							
+						
+						<!-- Product filter section end -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Category section end -->
+
+
+
+
+	<!-- Footer component start -->
+	<%include includes/footer%>
+	<!-- Footer component end -->
+	</body>
+</html>

@@ -281,6 +281,16 @@ module.exports.pay = (req, res) => {
 		email : req.session.order.customer_email
 	});
 
+
+	// checking if transaction refereence exists
+	db.query("SELECT txn_ref FROM paid_orders WHERE txn_ref = ?", req.body.reference, (err,row)=> {
+		if (err ) { throw new Error(err)}
+
+		if (row.length > 0) {
+			return res.json({status : false, message : "Transaction failed. Transaction reference exists" });
+		}	
+	});
+
 	
 	paystackPayment.init(req.body.reference, process.env.PAYSTACK_SK)
 	.then(resp => {

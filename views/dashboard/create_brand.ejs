@@ -53,12 +53,32 @@
                     <!-- Form -->
                     <form class="text-center" style="color: #757575;" action="#!">
 
-                                    <!-- Name -->
-                                    <div class="md-form mt-3">
-                                        <input type="text" id="materialContactFormName" class="form-control" name="brand_name" value="" required>
-                                        <label>Brand name</label>
-                                    </div>
-                    
+
+                        <div class="img-container">
+                            <img src="https://dummyimage.com/600x400/55595c/fff" width="300" id="thumbnail" class="img-fluid">
+                        </div> 
+                        <!-- Name -->
+                        <div class="md-form mt-3">
+                            <input type="text" id="materialContactFormName" class="form-control" name="name" value="" required>
+                            <label>Brand name</label>
+                        </div>
+
+
+                                    <!-- Upload input -->
+                        <br>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                          </div>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="img-input" name="img" 
+                              aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="img-input">Choose Image</label>
+                          </div>
+                        </div>  
+
+
+        
 
                         <!-- Send button -->
                         <button id="add-btn" class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="button" onclick="add()">Add</button>
@@ -89,16 +109,21 @@
 
 function add() {
 
-    let formData = {
-        name : $("input[name=brand_name]").val(),
+    let form = $('form')[0]; 
+    let formData = new FormData(form);
+    //console.log(formData.values());
+    for (let value of formData.values()) {
+       console.log(value); 
     }
-       
+   
     $("#add-btn").attr("disabled", true);
 
     $.ajax({
         url : "<%= site.adminURL%>/json/brands/create",
         type:"POST",
-        data : formData,      
+        data : formData,
+        contentType: false,
+        processData: false,       
         success : (res)=>{
             console.log(res);
 
