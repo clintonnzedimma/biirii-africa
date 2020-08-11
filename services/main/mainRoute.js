@@ -18,7 +18,7 @@ const Product = require('../../models/db/Product');
 //setting custom public path for entry route
 app.use("/online-store/products/",express.static(path.join(__dirname, "public/main")));
 
-route.get("/test", mainHandler.test);
+//route.get("/test", mainHandler.test);
 route.get("/see-cart", async (req, res)=> {
 	let cart = new Cart(req.session.cart ? req.session.cart : {});
 	let products = (req.session.cart) ? cart.getItems() :  [];
