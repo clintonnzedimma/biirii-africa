@@ -424,7 +424,7 @@ module.exports.uploadMorePhotosForProduct = async (req, res) => {
 
 
 module.exports.CreateBrand = (req, res) => {
-	let image = (req.body.images) ? req.body.images : null ;
+	let image = (req.body.images.length > 0) ? req.body.images : null ;
 
 	let e = null;
 
