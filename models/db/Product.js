@@ -57,12 +57,14 @@ module.exports.fetchBySuperCategories = (arg) => {
 
 
 // Fetch All Products
-module.exports.fetchAll = (orderBy = "id") => {
+module.exports.fetchAll = (orderBy = "id", limit = 1000) => {
+
+
 
   return new Promise((resolve, reject)=> {
   		let result = {};
 
-   		db.query(`SELECT * FROM products ORDER BY ${orderBy} DESC`,(err, products)=>{
+   		db.query(`SELECT * FROM products ORDER BY ${orderBy} DESC LIMIT ${limit}`,(err, products)=>{
  	 		if (err) throw new Error(err)
 
  	 		db.query("SELECT * FROM sub_products", (err, sp)=>{

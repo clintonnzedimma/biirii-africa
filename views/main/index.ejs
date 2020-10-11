@@ -73,8 +73,8 @@
 	<section class="_index">
 		<div class="_header"></div>
 		<div class="_wrapper">
-			<div class="_image-wrapper">
-				<img src="img/bg2.jpg" alt="Biirii Africa - The best of African Fashion">
+			<div class="_image-wrapper" id="">
+				<img src="img/outdoor-bg-1.jpg" alt="Biirii Africa - The best of African Fashion">
 			</div>
 			<div class="_content">
 				<div class="_splash">
@@ -101,19 +101,19 @@
 		10% {opacity: 1;}
 		}
 
-		._image-wrapper img{
-			animation: fades 10s ease-in-out infinite;
-		}
+/*		._image-wrapper img{
+			animation: fades 5s ease-in-out infinite;
+		}*/
 	</style>
 
 	<script>
 		window.onload = ()=>{
-			let i = 0;
+			let i = 2;
 			setInterval(()=>{
 				i++
-				if(i > 2){ i = 1};
-				document.querySelector("._image-wrapper img").setAttribute("src",`img/bg${i}.jpg`)
-			}, 10000)
+				if(i > 4 ){ i = 1};
+				document.querySelector("._image-wrapper img").setAttribute("src",`img/outdoor-bg-${i}.jpg`)
+			}, 5000)
 		}
 	</script>
 

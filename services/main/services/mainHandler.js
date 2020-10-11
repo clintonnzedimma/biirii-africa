@@ -113,16 +113,13 @@ module.exports.SuperCategoryHomePage =  async (req, res)=> {
 
 module.exports.GeneralStorePage = async (req, res)=> {
 
-	let products = await Product.fetchAll("RAND()");
+	let products = await Product.fetchAll("RAND()", limit = 40);
 
 	let latestProducts =  await Product.fetchAll();
 
 	//currencies
 	let Currency = new helpers.Currency(req.session.currencies);
 
-	console.log(Currency);
-
-	console.log(res.locals);
 
 	res.render("main/general_store", {
 		 pageTitle: `Online store - BiiriiAfrica`,
