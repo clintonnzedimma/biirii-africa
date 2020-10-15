@@ -8,6 +8,7 @@ const Category = require('../../../models/db/Category');
 const Product = require('../../../models/db/Product');
 const Zone = require('../../../models/db/Zone');
 const Brand = require('../../../models/db/Brand');
+const Promotion = require('../../../models/db/Promotion');
 
 //helper
 const helpers = require('../../../helpers/helpers');
@@ -30,10 +31,13 @@ module.exports.test = async(req,res) => {
 * Static handlers below
 */
 
-module.exports.IndexPage = (req, res)=> {
+module.exports.IndexPage = async (req, res)=> {
+	let promo = await Promotion.fetchOneActive();
+
 	res.render("main/index", {
 		 pageTitle: "Welcome to Biirii Africa",
-		 superCategory: null
+		 superCategory: null,
+		 promo : promo[0] || null
 	 });
 }
 
@@ -115,10 +119,14 @@ module.exports.GeneralStorePage = async (req, res)=> {
 
 	let products = await Product.fetchAll("RAND()", limit = 40);
 
-	let latestProducts =  await Product.fetchAll();
+	let promo = await Promotion.fetchOneActive();
+
+	let latestProducts =  await Product.fetchAll(10);
 
 	//currencies
 	let Currency = new helpers.Currency(req.session.currencies);
+
+	console.log(promo);
 
 
 	res.render("main/general_store", {
@@ -126,7 +134,8 @@ module.exports.GeneralStorePage = async (req, res)=> {
 		 products: products,
 		 superCategory: null,
 		 categories: [],
-		 latestProducts: latestProducts
+		 latestProducts: latestProducts,
+		 promo: promo[0] || null
 	 });
 }
 
@@ -155,10 +164,6 @@ module.exports.ProductPage = async (req, res)=> {
 	let product = await Product.fetchOne({slug : req.params.slug});
 
 	let moreImages = await Product.fetchMoreProductImages(product.pKey);
-
-	console.log(product.name);
-
-	console.log(product);
 
 
 	res.render("main/product", {
@@ -253,7 +258,7 @@ module.exports.CategoryPage = async (req, res)=> {
 
 	let fetchedProducts = await Product.fetchByCategory(category.id);
 
-	let latestProducts =  await Product.fetchAll();
+	let latestProducts =  await Product.fetchAll(10);
 
 	return res.render("main/category", 
 		{

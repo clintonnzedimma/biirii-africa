@@ -423,7 +423,7 @@ module.exports.uploadMorePhotosForProduct = async (req, res) => {
 }
 
 
-module.exports.CreateBrand = (req, res) => {
+module.exports.createBrand = (req, res) => {
 	let image = (req.body.images.length > 0) ? req.body.images : null ;
 
 	let e = null;
@@ -461,7 +461,8 @@ module.exports.CreateBrand = (req, res) => {
 
 
 
-module.exports.ModifyBrand =(req, res) => {
+
+module.exports.modifyBrand =(req, res) => {
 	let image = (req.body.chkImg === 'IMAGE_CHANGED') ? req.body.images : req.body.chkImg;
 
 	let e = null;
@@ -515,4 +516,66 @@ module.exports.ModifyBrand =(req, res) => {
 	});
 
 }
+
+
+
+module.exports.handlePromotion =(req, res) => {
+	let image = (req.body.chkImg === 'IMAGE_CHANGED') ? req.body.images : req.body.chkImg;
+
+	let e = null;
+
+	if (req.body.name.length  == 0) {
+		e = "Promo name cannot be empty !";	
+	}
+
+	if (e) {
+		return res.json({
+			status : false,
+			message : e
+		});
+	}
+
+	let promotion = {
+		name : req.body.name,
+		updatedAt : Date.now(),
+		img: image,
+		status : req.body.status
+	}
+
+	if (req.body.chkImg === "IMAGE_CHANGED") {
+		try{
+			db.query("SELECT * FROM promotions WHERE id = 1",(err, promo)=> {
+				if (err)  throw new Error(err)
+
+				 try {
+	  				console.log("deleted image");
+	  				fs.unlinkSync(`public/img/promo/${promo[0].img}`);
+	  			} catch (exception) {
+	  				
+	  			}
+
+			});
+		} catch(exception) {
+
+		}
+	}
+
+
+	db.query("UPDATE promotions SET ? WHERE id = 1", [promotion, req.body.id], (err, isCreated)=> {
+		if (isCreated) {
+			return res.json({
+				status : true,
+				message : `Saved promo successfully`
+			});	
+		}
+	});
+
+}
+
+
+
+
+
+
+
 

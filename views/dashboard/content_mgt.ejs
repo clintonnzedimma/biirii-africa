@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<% include includes/metaMain %>
+</head>
+<body>
+
+
+
+
+
+<!-- header starts here -->
+<% include includes/header %>
+<!-- header ends here -->
+
+            <!-- cards view for dashboard to explain main info  -->
+            <div align="center"><h2>Content Management</h2></div>
+
+            <div align="center">
+              <div id="__notifyAdminIndex"></div>
+            </div>
+            
+        <div class="row nav-cards" align="center" style="width: 90%; margin:auto;">
+            <a href="<%= site.adminURL%>/content-mgt/promotion">
+                <div class="col-xs-6 col-sm-6 hvr-bob navCardWrapper">
+                    <div class="card card-body">
+                          <div align="center" style="margin:auto;">
+                              <h1><i class="fa fa-bullhorn icon"></i></h1>
+                          </div>
+                          <!-- <p class="card-text"> </p> -->
+                          <div class="flex-row">
+                            <a class="card-link">Promotions</a>
+                          </div>
+                    </div>
+                </div>                
+            </a>           
+        </div>
+
+
+
+
+
+
+
+<!-- footer starts here -->
+<% include includes/footer %>
+<!-- footer ends here -->
+
+</body>
+</html>

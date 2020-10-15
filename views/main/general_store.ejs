@@ -98,6 +98,22 @@
 <% } -%>
 
 
+	<!-- Promo -->
+	<% if (promo) { -%>
+	<!-- Modal -->
+	<div class="modal fade" id="promoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+
+	      <div class="modal-body" align="center">
+	        <img src="/img/promo/<%=promo.img %>">
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+	<% } -%>
+
 
 	<!-- Footer component start -->
 	<%include includes/footer%>
@@ -106,6 +122,13 @@
 
 <script type="text/javascript">
     	// This javascript section activates the AOS library (aos.js) 
+
+
+		setTimeout(()=>{
+        		$('#promoModal').modal('show'); 
+    	}, 3000);
+
+
       AOS.init({
         easing: 'ease-in-out-sine'
       });

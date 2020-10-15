@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const route = express.Router();
-const  {uuid}  = require('uuidv4');
+const { v4: uuid } = require('uuidv4');
 
 
 const db = require('../../database/config');
@@ -75,6 +75,11 @@ route.get('/brands/add', adminMiddleware.isLoggedIn, dashboardHandler.AddBrand);
 
 route.get('/brands/edit/:id', adminMiddleware.isLoggedIn, dashboardHandler.EditBrand);
 
+
+route.get("/content-mgt", adminMiddleware.isLoggedIn, dashboardHandler.ContentMgtHome);
+
+route.get("/content-mgt/promotion", adminMiddleware.isLoggedIn, dashboardHandler.Promotion);
+
 route.get("/logout", adminMiddleware.logout);
 
 //error 404
@@ -104,7 +109,7 @@ route.post('/json/brands/create',
 	}, 
 	fileUploadMiddleware.uploadImages,
 	fileUploadMiddleware.resizeImages,
-	 dashboardService.CreateBrand);
+	 dashboardService.createBrand);
 
 
 route.post('/json/brands/edit',
@@ -117,7 +122,7 @@ route.post('/json/brands/edit',
 	},
 	fileUploadMiddleware.uploadImages,
 	fileUploadMiddleware.resizeImages,
- 	dashboardService.ModifyBrand);
+ 	dashboardService.modifyBrand);
 
 route.post('/json/add-category', 
 	adminMiddleware.protectEndpoint,
@@ -196,6 +201,21 @@ route.post('/json/add-product-images',
 	fileUploadMiddleware.uploadImages,
 	fileUploadMiddleware.resizeImages,
 	dashboardService.uploadMorePhotosForProduct,
+);
+
+
+route.post('/json/promotion/handle', 
+	adminMiddleware.protectEndpoint,
+	(req, res, next)=> {
+		// setting  essential upload parameters 
+		req.session.uploadPath = "img/promo";	
+		req.session.imgQuality = 70;
+		next();
+			
+	}, 
+	fileUploadMiddleware.uploadImages,
+	fileUploadMiddleware.resizeImages,
+	dashboardService.handlePromotion,
 );
 
 

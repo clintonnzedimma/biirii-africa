@@ -5,7 +5,7 @@
 */
 
 
-const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 const multer = require("multer");
 const sharp = require("sharp");
 const multerStorage = multer.memoryStorage();
@@ -58,7 +58,7 @@ module.exports.resizeImages = async (req, res, next) => {
   req.body.images = [];
   await Promise.all(
     req.files.map(async file => {
-      const newFilename = `biirii-${uuid()}.jpeg`;
+      const newFilename = `biirii-${uuidv4()}.jpeg`;
 
       await sharp(file.buffer)
         .resize({

@@ -95,6 +95,23 @@
 	<%include includes/footer%>
 	<!-- Footer component end -->
 
+
+	<!-- Promo -->
+	<% if (promo) { -%>
+	<!-- Modal -->
+	<div class="modal fade" id="promoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+
+	      <div class="modal-body" align="center">
+	        <img src="/img/promo/<%=promo.img %>">
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+	<% } -%>
+
 	<style>
 		@keyframes fades {
 		0% {opacity: 0;}
@@ -106,7 +123,13 @@
 		}*/
 	</style>
 
+
 	<script>
+
+  		setTimeout(()=>{
+        		$('#promoModal').modal('show'); 
+    	}, 3000);
+
 		window.onload = ()=>{
 			let i = 2;
 			setInterval(()=>{

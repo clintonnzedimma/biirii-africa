@@ -328,3 +328,27 @@ module.exports.EditBrand = (req, res) => {
 		});
 }
 
+
+
+/**
+* # The following modules below are CONTENT MANAGEMENT #
+*/
+
+
+module.exports.ContentMgtHome = (req, res) => {
+	res.render("dashboard/content_mgt", {
+		pageTitle : `Content Management`
+	});
+}
+
+
+module.exports.Promotion = (req, res) => {
+	db.query("SELECT * FROM promotions WHERE id = 1",(err, promotion)=> {
+		promotion = promotion[0];
+
+		res.render("dashboard/promotion_page", {
+			pageTitle : `Promotion`,
+			promotion : promotion
+		});	
+	});
+}

@@ -1,4 +1,4 @@
-const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 
 const helpers = require('../helpers/helpers');
 
@@ -13,7 +13,7 @@ module.exports = function Cart(cart) {
     this.add = function(item, superItem, qty = 1, size = null) {
         // `id` is a random generated string used to identify an item added to the cart
         //  The`id` does not represent the product, sub product or extra id in the database
-        let id = uuid().toUpperCase().slice(0, 8);
+        let id = uuidv4().toUpperCase().slice(0, 8);
 
         let productOrderKey = null;
 

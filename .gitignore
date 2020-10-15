@@ -8,6 +8,10 @@ test/
 
 !public/img/categories/.gitkeep
 
+!public/img/brands/.gitkeep
+
+!public/img/promo/.gitkeep
+
 biirii.sublime-project
 
 biirii.sublime-workspace
