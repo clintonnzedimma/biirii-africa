@@ -7,17 +7,17 @@ module.exports.superCategories = superCategories;
 
 
 // Fetch All Products By Super categories
-module.exports.fetchBySuperCategories = (arg) => {
+module.exports.fetchBySuperCategories = (sup, limit) => {
   return new Promise((resolve, reject)=> {
   		let result = {};
 
-   		db.query("SELECT * FROM categories WHERE super_category = ? ",arg,(err, categories)=>{
+   		db.query("SELECT * FROM categories WHERE super_category = ? ",sup,(err, categories)=>{
  			if (err) reject(err);
 
  			if (categories.length == 0) reject("No category exists");
 
 
- 			db.query("SELECT * FROM products  ORDER BY id DESC",(err, products)=> {
+ 			db.query(`SELECT * FROM products  ORDER BY RAND()  LIMIT ${limit}`,(err, products)=> {
  				if (err) reject(err);
 
  				if (products.length == 0) reject("No product exists");

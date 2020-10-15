@@ -96,11 +96,11 @@ module.exports.SuperCategoryHomePage =  async (req, res)=> {
 		res.redirect("/404");
 	}	
 
-	let fetchProductDataBySuperCategories = await Product.fetchBySuperCategories(superCategory);
+	let fetchProductDataBySuperCategories = await Product.fetchBySuperCategories(superCategory,40);
 	let fetchedProducts = fetchProductDataBySuperCategories.products;
 	let fetchedCategories = fetchProductDataBySuperCategories.categories;
 
-	let latestProducts =  await Product.fetchAll();
+	let latestProducts =  await Product.fetchAll(10);
 
 	res.render("main/home_page", 
 		{
