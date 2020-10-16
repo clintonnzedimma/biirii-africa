@@ -34,7 +34,7 @@ module.exports.test = async(req,res) => {
 module.exports.IndexPage = async (req, res)=> {
 	let promo = await Promotion.fetchOneActive();
 
-	res.render("main/index", {
+	return res.render("main/index", {
 		 pageTitle: "Welcome to Biirii Africa",
 		 superCategory: null,
 		 promo : promo[0] || null
@@ -43,7 +43,7 @@ module.exports.IndexPage = async (req, res)=> {
 
 
 module.exports.ReturnPolicyPage = (req, res)=> {
-	res.render("main/return_policy", {
+	return res.render("main/return_policy", {
 		 pageTitle: "Return Policy - Biirii Africa",
 		 superCategory: null
 	 });
@@ -51,28 +51,28 @@ module.exports.ReturnPolicyPage = (req, res)=> {
 
 
 module.exports.PrivacyPolicyPage = (req, res)=> {
-	res.render("main/privacy_policy", {
+	return res.render("main/privacy_policy", {
 		 pageTitle: "Privacy policy - Biirii Africa",
 		 superCategory: null
 	 });
 }
 
 module.exports.HowToSellPage = (req, res)=> {
-	res.render("main/how_to_sell", {
+	return res.render("main/how_to_sell", {
 		pageTitle: "How to sell - Biirii Africa",
 		superCategory: null
 	 });
 }
 
 module.exports.ContactUs = (req,res)=> {
-	res.render("main/contact_us", {
+	return res.render("main/contact_us", {
 		pageTitle: "Contact Us - Biirii Africa",
 		superCategory: null
 	});
 }
 
 module.exports.AboutPage = (req, res)=> {
-	res.render("main/about_page", {
+	return res.render("main/about_page", {
 		 pageTitle: "About Us - Biirii Africa",
 		 superCategory: null
 	 });
@@ -80,7 +80,7 @@ module.exports.AboutPage = (req, res)=> {
 
 
 module.exports.ImpactHomePage = (req, res)=> {
-	res.render("main/impact_home", {
+	return res.render("main/impact_home", {
 		 pageTitle: "Impact - Biirii Africa",
 		 superCategory: null
 	 });
@@ -100,9 +100,9 @@ module.exports.SuperCategoryHomePage =  async (req, res)=> {
 	let fetchedProducts = fetchProductDataBySuperCategories.products;
 	let fetchedCategories = fetchProductDataBySuperCategories.categories;
 
-	let latestProducts =  await Product.fetchAll(10);
+	let latestProducts =  await Product.fetchAll('id',10);
 
-	res.render("main/home_page", 
+	return res.render("main/home_page", 
 		{
 			pageTitle: `${helpers.ucwords(superCategory)} - Biirii Africa`,
 			superCategory: superCategory,
@@ -121,15 +121,13 @@ module.exports.GeneralStorePage = async (req, res)=> {
 
 	let promo = await Promotion.fetchOneActive();
 
-	let latestProducts =  await Product.fetchAll(10);
+	let latestProducts =  await Product.fetchAll('id', limit = 12);
 
 	//currencies
 	let Currency = new helpers.Currency(req.session.currencies);
 
-	console.log(promo);
 
-
-	res.render("main/general_store", {
+	return res.render("main/general_store", {
 		 pageTitle: `Online store - BiiriiAfrica`,
 		 products: products,
 		 superCategory: null,
@@ -149,7 +147,7 @@ module.exports.NewProducts = async (req, res)=> {
 	//currencies
 	let Currency = new helpers.Currency(req.session.currencies);
 
-	res.render("main/new_products", {
+	return res.render("main/new_products", {
 		 pageTitle: `New in - Biirii Africa`,
 		 products: products,
 		 superCategory: null,
@@ -166,7 +164,7 @@ module.exports.ProductPage = async (req, res)=> {
 	let moreImages = await Product.fetchMoreProductImages(product.pKey);
 
 
-	res.render("main/product", {
+	return res.render("main/product", {
 		 pageTitle: `${product.name} - Biirii Africa`,
 		 product: product,
 		 moreImages : moreImages,
@@ -183,7 +181,7 @@ module.exports.CartPage = async(req, res)=> {
 
 	console.log(cart.getItems());	
 
-	res.render("main/cart", {
+	return res.render("main/cart", {
 		 pageTitle: `Cart - BiiriiAfrica`,
 		 products: products,
 		 subs : subs,
@@ -258,7 +256,7 @@ module.exports.CategoryPage = async (req, res)=> {
 
 	let fetchedProducts = await Product.fetchByCategory(category.id);
 
-	let latestProducts =  await Product.fetchAll(10);
+	let latestProducts =  await Product.fetchAll('id',10);
 
 	return res.render("main/category", 
 		{
@@ -295,8 +293,6 @@ module.exports.BrandPage = async (req, res)=> {
 	brand = brand[0];
 
 	let products = await Product.fetchByBrand(brand.id);
-
-	console.log(products);
 
 	return res.render("main/brand_page", 
 		{

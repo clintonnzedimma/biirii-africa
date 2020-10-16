@@ -18,6 +18,7 @@
 					</div>
 				</div> -->
 
+
 				<%featuredProducts.forEach(product => {%>
 					<div class="product-item">
 							<div class="pi-pic">
@@ -33,7 +34,8 @@
 							<span id="currency-symbol">
 							<%-currencyConvert({to:currencyChoice,value :product.sub[0].price }).symbol%>
 							</span>
-							<span id="product-price"><%=currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString() %></span></h6><% } -%>
+							<span id="product-price"><%=currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString() %></span></h6>
+<% } -%>
 								<p><a href="/store/products/<%=product.slug %>" class="product-link"><%=product.name %></a></p>
 							</div>
 					 </div>
