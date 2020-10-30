@@ -1,3 +1,19 @@
+<% 
+function roundToUp5(num) {
+	return (Math.ceil(num / 5) * 5) + 10;
+}
+%>
+<style>
+	.discount-percent{
+		position: absolute;
+		background: #f51167;
+		padding: 10px;
+		left: -10px;
+		top: -10px;
+		color: #fff;
+	}
+</style>
+
 	<section class="top-letest-product-section">
 		<div class="container">
 			<div class="section-title">
@@ -20,6 +36,8 @@
 
 
 				<%featuredProducts.forEach(product => {%>
+
+
 					<div class="product-item">
 							<div class="pi-pic">
 								<div class="tag-new">New</div>
@@ -31,10 +49,34 @@
 							</div>
 							<div class="pi-text">
 <% if (product.sub.length > 0) { -%> <h6>
+<% 
+	/**
+	* COMPONENT LOGIC
+	* Computing discount if product sub has more than 1  sub
+	 */
+	var discountPercentage = product.discount_percent/100;
+	let nonDiscountPrice = product.sub[0].price;
+	var discountPrice = product.sub[0].price - (discountPercentage * product.sub[0].price) ; 
+-%>
+
+
+
 							<span id="currency-symbol">
 							<%-currencyConvert({to:currencyChoice,value :product.sub[0].price }).symbol%>
 							</span>
-							<span id="product-price"><%=currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString() %></span></h6>
+							<span id="product-price">						<% // if product is naira
+								if(currencyChoice === "NGN") {%><%-currencyConvert({to:currencyChoice, value :Math.trunc(roundToUp5(discountPrice)) }).result.toLocaleString() %>
+								<% } else {-%>
+									<%=currencyConvert({to:currencyChoice, value :discountPrice }).result.toLocaleString() %>
+								<% } -%></span></h6>
+								
+							 <% // if product has discount
+							 if (product.discount_percent > 0) { -%>
+								<h6 class="discounted"><span id="currency-symbol">
+								<%-currencyConvert({to:currencyChoice,value :discountPrice }).symbol%></span>
+								<%=currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString() %></h6>
+							<% }-%>
+								
 <% } -%>
 								<p><a href="/store/products/<%=product.slug %>" class="product-link"><%=product.name %></a></p>
 							</div>

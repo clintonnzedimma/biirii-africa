@@ -21,6 +21,11 @@ module.exports = function Cart(cart) {
 
         console.trace("superItems=>"+superItem);
 
+        // Computing discount price
+        discountPercentage = superItem.discount_percent/100;
+        item.price = item.price - (discountPercentage * item.price);
+        item.noDiscountPrice = item.price;
+
         let cartItem = this.items[id];
         if (!cartItem) {
             cartItem = this.items[id] = {
@@ -84,8 +89,7 @@ module.exports = function Cart(cart) {
         cart.totalPrice += cart.items[id].price; 
 
         console.log("totalPrice =>"+cart.totalPrice);
-    /*    console.trace("totalItems=>"+cart.totalItems);
-        console.trace("totalPrice=>"+cart.totalPrice);  */  
+ 
     };
 
     this.getData = function () {
@@ -112,7 +116,7 @@ module.exports = function Cart(cart) {
     }
 
 
-    this.getItemsForOrder = function(order_key, discount_code = null, discount_percent = null) {
+    this.getItemsForOrder = function(order_key, discount_code = null) {
         let items = this.getItems();
         let arr  = [];   
         for (var i = 0; i < items.length; i++) {
@@ -130,7 +134,7 @@ module.exports = function Cart(cart) {
             arr[i].push(items[i].qty);
             arr[i].push(items[i].size);
             arr[i].push(discount_code);
-            arr[i].push(discount_percent);
+            arr[i].push(items[i].superItem.discount_percent);
         }       
         return arr;
     }

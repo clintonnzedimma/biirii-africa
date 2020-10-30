@@ -75,7 +75,25 @@ module.exports.fetchAll = (orderBy = "id", limit = 1000) => {
 	 				products = products.map(p=> ({
 		        		...p,
 		        		sub: sp.filter(s=> s.product_id == p.id) 
-		   		 	}));	 	 			
+						}));
+
+
+					// products = products.map(p=> ({
+					// 	...p,
+					// 	sub: sp.filter((s)=> {
+
+
+													
+					// 		let discountPercentage = p.discount_percent/100;
+
+					// 		s.discountPrice = s.price - (discountPercentage * s.price);		
+
+					// 	}) 
+					// 	}));
+						
+					// 	console.log(products);
+
+											
 
  	 				resolve(products);
  	 			}	else {

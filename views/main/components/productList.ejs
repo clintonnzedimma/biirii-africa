@@ -1,4 +1,8 @@
-	
+<% 
+function roundToUp5(num) {
+	return (Math.ceil(num / 5) * 5);
+}
+%>	
 <style type="text/css">
 	.product-item {
 		border: .5px solid #eee;
@@ -6,6 +10,7 @@
 		overflow: hidden;
 		padding: 10px;
 		margin: 10px 0;
+		position: relative;
 	}
 	.product-item .pi-text {
 		padding-top: 22px;
@@ -21,6 +26,19 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
+	}
+	h6.discounted{
+		font-size: 12px;
+		font-weight: 500!important;
+		text-decoration: line-through;
+	}
+	.discount-percent{
+		position: absolute;
+		background: #f51167;
+		padding: 10px;
+		left: -10px;
+		top: -10px;
+		color: #fff;
 	}
 	@media only screen and (max-width: 746px){
 		.product-link{
@@ -56,22 +74,50 @@
 <% products.forEach(product =>  { -%>
 
 
+
 				<div class="col-lg-3 col-sm-6" >
 					<div class="product-item">
 						<div class="pi-pic">
+						
+<% if (product.discount_percent > 0 ) { -%>
+	<span class="discount-percent"> <%= product.discount_percent%>% off </span>
+<%}%>
 							<a href="/store/products/<%=product.slug %>"><img src="/img/products/<%=product.main_img %>" alt="<%=product.name %>" id="productImg-<%=product.id %>">
 							</a>	
 							<div class="pi-links">
 								<% if (product.sub.length > 0) { -%>
+
+<% 
+	var discountPercentage = product.discount_percent/100;
+
+	let nonDiscountPrice = product.sub[0].price;
+
+	var discountPrice = product.sub[0].price - (discountPercentage * product.sub[0].price) ; 
+-%>
+
 								<a href="#" class="add-card" onclick="addToCart(<%=product.sub[0].id%>, <%=product.id%>)"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
 								<% } -%>
 								<!-- <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a> -->
 							</div>
+
 						</div>
 						<div class="pi-text">
-							<% if (product.sub.length > 0) { -%> <h6><span id="currency-symbol">
-							<%-currencyConvert({to:currencyChoice,value :product.sub[0].price }).symbol%></span>
-							<%=currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString() %></h6>
+							<% if (product.sub.length > 0) { -%>
+
+							 <% // if product has discount
+							 if (product.discount_percent > 0) { -%>
+								<h6 class="discounted"><span id="currency-symbol">
+								<%-currencyConvert({to:currencyChoice,value :discountPrice }).symbol%></span>
+								<%=currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString() %></h6>
+							<% }-%>
+
+								<h6><span id="currency-symbol"><%-currencyConvert({to:currencyChoice,value :discountPrice }).symbol%> </span>
+							<% // if product is naira
+								if(currencyChoice === "NGN") {%><%-currencyConvert({to:currencyChoice, value :Math.trunc(roundToUp5(discountPrice)) }).result.toLocaleString() %>
+								<% } else {-%>
+									<%=currencyConvert({to:currencyChoice, value :discountPrice }).result.toLocaleString() %>
+								<% } -%></h6>
+					
 
 							<% } -%>
 							<p><a href="/store/products/<%=product.slug %>" class="product-link" title="<%=product.name %>"><%=product.name %></a></p>

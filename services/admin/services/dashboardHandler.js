@@ -10,7 +10,7 @@ const Category = require('../../../models/db/Category');
 
 //Dashboard entry point
 module.exports.Index = (req, res) => {
-	res.render("dashboard/login");
+	return res.render("dashboard/login");
 }
 
 
@@ -29,7 +29,7 @@ module.exports.Home = (req, res) => {
 		db.query("SELECT * FROM product_orders" , (err, productOrders)=>{
 			if (err) { throw new Error (err);}
 
-			res.render("dashboard/index",
+			return res.render("dashboard/index",
 			 {
 			 	pageTitle:`Home - Dashboard (${req.session.adminUsername})`,
 			 	orders : (allOrders.length > 0) ? allOrders : null,
@@ -45,11 +45,11 @@ module.exports.Home = (req, res) => {
 
 // Orders page 
 module.exports.OrderList = (req, res) => {
-	res.render("dashboard/order_list", {pageTitle:`Orders`});
+	return res.render("dashboard/order_list", {pageTitle:`Orders`});
 }
 
 module.exports.OrderMenu = (req, res) => {
-	res.render("dashboard/order_menu", {pageTitle:`Order menu`});
+	return res.render("dashboard/order_menu", {pageTitle:`Order menu`});
 }
 
 
@@ -59,7 +59,7 @@ module.exports.ProductList = (req, res) => {
 
 	db.query('SELECT * FROM products ORDER BY id DESC', (err, row)=> {
 		db.query('SELECT * FROM categories ORDER BY id ASC', (err, categories)=> {
-			res.render("dashboard/products", 
+			return res.render("dashboard/products", 
 				{
 					pageTitle:`Products`, 
 					products: row, 
@@ -76,7 +76,7 @@ module.exports.ProductList = (req, res) => {
 module.exports.AddProduct = (req, res) => {
 	db.query('SELECT * FROM brands ORDER BY id DESC', (err, brands)=> { 
 		db.query('SELECT * FROM categories ORDER BY id DESC', (err, categories)=> {
-		  	res.render("dashboard/create_product", 
+		  	return res.render("dashboard/create_product", 
 		  		{
 		  			pageTitle :`Add product`, 
 		  			categories : (categories.length > 0) ? categories : [],
@@ -101,12 +101,13 @@ module.exports.EditProduct = (req, res) => {
 
 						db.query('SELECT * FROM brands ORDER BY id DESC', (err, brands)=> { 
 							if (categories.length > 0) {
-								res.render("dashboard/edit_product", 
+								return res.render("dashboard/edit_product", 
 									{
 										pageTitle:`Edit products - ${product[0].name}`, 
 										product: product[0],
 										categories : categories,
 										brands : brands,
+										hasDiscount : (product[0].discount_percent > 0) ? true :false,
 										subProducts : (subProducts.length > 0) ? subProducts : []
 								});
 							}
@@ -133,7 +134,7 @@ module.exports.AddSubProduct = (req, res) => {
 		if (!row) res.status(400).send("Not found");
 
 
-	  	res.render("dashboard/add_sub_product", 
+	  	return res.render("dashboard/add_sub_product", 
 	  		{
 	  			pageTitle:`Add variety - ${row[0].name}`,
 	  			product : row[0]
@@ -159,7 +160,7 @@ module.exports.EditSubProduct = (req, res) => {
 			let p = row[0];
 
 
-			res.render("dashboard/edit_sub_product", 
+			return res.render("dashboard/edit_sub_product", 
 				{
 					pageTitle : `Edit variety - ${p.name} - ${sp.name}`,
 					subProduct : sp,
@@ -175,7 +176,7 @@ module.exports.EditSubProduct = (req, res) => {
 // Categories page  
 module.exports.Categories = (req, res) => {
 	db.query('SELECT * FROM categories ORDER BY id DESC', (err, row)=> {
-	  	res.render("dashboard/categories", {pageTitle:`Categories`, categories : row});
+	  	return res.render("dashboard/categories", {pageTitle:`Categories`, categories : row});
 	});
 }
 
@@ -183,7 +184,7 @@ module.exports.Categories = (req, res) => {
 module.exports.AddCategory = (req, res) => {
 	db.query("SELECT * FROM super_categories",(err, superCategories)=> {
 
-		res.render("dashboard/create_category", 
+		return res.render("dashboard/create_category", 
 			{
 				pageTitle:`Add category`,
 				superCategories : superCategories
@@ -200,7 +201,7 @@ module.exports.EditCategory = (req, res) => {
 	db.query('SELECT * FROM categories WHERE id = ?', id, (err, row)=> {
 
 		if (row.length > 0) {
-			res.render("dashboard/edit_category", 
+			return res.render("dashboard/edit_category", 
 				{
 					pageTitle:`Edit category - ${row[0].name}`,
 					category : row[0]
@@ -229,7 +230,7 @@ module.exports.CustomerOrder = (req, res) => {
 						timeDelivered = deliveredOrders[0].time_added;
 					}
 
-					res.render("dashboard/order", 
+					return res.render("dashboard/order", 
 						{
 							pageTitle : `Order - ${req.params.order_key} - Dashboard`, 
 							order : order,
@@ -258,7 +259,7 @@ module.exports.NewOrders = (req, res) => {
 		db.query("SELECT * FROM product_orders" , (err, productOrders)=>{
 			if (err) { throw new Error (err);}
 
-			res.render("dashboard/new_orders_list",
+			return res.render("dashboard/new_orders_list",
 			 {
 			 	pageTitle:`New orders`,
 			 	orders : (allOrders.length > 0) ? allOrders : null,
@@ -281,7 +282,7 @@ module.exports.DeliveredOrders = (req, res) => {
 		db.query("SELECT * FROM delivered_orders" , (err, deliveredOrders)=>{
 			if (err) { throw new Error (err);}
 
-			res.render("dashboard/delivered_order_list",
+			return res.render("dashboard/delivered_order_list",
 			 {
 			 	pageTitle:`Delivered orders`,
 			 	orders : (allOrders.length > 0) ? allOrders : null,
@@ -301,7 +302,7 @@ module.exports.BrandList = (req, res) => {
 
 		if (err) { throw new Error (err);}
 
-		res.render("dashboard/all_brands", {
+		return res.render("dashboard/all_brands", {
 			pageTitle:`Brands`, 
 			brands : brands
 		});
@@ -312,7 +313,7 @@ module.exports.BrandList = (req, res) => {
 
 
 module.exports.AddBrand = (req, res) => {
-		res.render("dashboard/create_brand", {
+		return res.render("dashboard/create_brand", {
 			pageTitle:`Create Brand`, 
 		});
 }
@@ -321,7 +322,7 @@ module.exports.AddBrand = (req, res) => {
 module.exports.EditBrand = (req, res) => {
 		db.query("SELECT * FROM brands WHERE id = ?",req.params.id,(err, brands)=> {
 
-			res.render("dashboard/edit_brand", {
+			return res.render("dashboard/edit_brand", {
 				pageTitle:`Modify Brand - ${brands[0].name} `,
 				brand : brands[0] 
 			});
@@ -336,7 +337,7 @@ module.exports.EditBrand = (req, res) => {
 
 
 module.exports.ContentMgtHome = (req, res) => {
-	res.render("dashboard/content_mgt", {
+	return res.render("dashboard/content_mgt", {
 		pageTitle : `Content Management`
 	});
 }
@@ -346,7 +347,7 @@ module.exports.Promotion = (req, res) => {
 	db.query("SELECT * FROM promotions WHERE id = 1",(err, promotion)=> {
 		promotion = promotion[0];
 
-		res.render("dashboard/promotion_page", {
+		return res.render("dashboard/promotion_page", {
 			pageTitle : `Promotion`,
 			promotion : promotion
 		});	

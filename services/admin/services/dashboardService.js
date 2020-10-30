@@ -144,6 +144,7 @@ module.exports.modifyProduct = async (req, res) => {
 	let price = parseInt(req.body.price);
 	let description = req.body.description;
 	let brand_id = req.body.brand_id;
+	let discount_percent = parseInt(req.body.discount_percent);
 
 
 	console.trace(req.body.images);
@@ -155,6 +156,7 @@ module.exports.modifyProduct = async (req, res) => {
 		slug : slug(productName.toLowerCase()),
 		description : description,
 		brand_id : brand_id,
+		discount_percent : discount_percent,
 		time_updated : Date.now()
 	}
 
@@ -182,7 +184,9 @@ module.exports.modifyProduct = async (req, res) => {
   			message = "Please your product description cannot be empty";
   		} else if (price < 500){
   			message = "Price should not be less than 500";
-  		} else {
+  		} else if (discount_percent < 0 || discount_percent > 99){
+			message = "Discount should range from  1 - 99";
+		} else {
   			status = true;
   			message = "Product modified";
   		}

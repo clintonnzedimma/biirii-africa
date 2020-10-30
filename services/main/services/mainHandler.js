@@ -163,10 +163,13 @@ module.exports.ProductPage = async (req, res)=> {
 
 	let moreImages = await Product.fetchMoreProductImages(product.pKey);
 
+	let discountPrice = product.sub[0].price - ((product.discount_percent/100) * product.sub[0].price)
+
 
 	return res.render("main/product", {
 		 pageTitle: `${product.name} - Biirii Africa`,
 		 product: product,
+		 discountPrice : discountPrice,
 		 moreImages : moreImages,
 		 superCategory: null
 	 });

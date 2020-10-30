@@ -206,6 +206,7 @@
 
                                  <% if (products && productOrders) { -%>
                                      <% productOrders.forEach(p => { -%>
+
                                    <!-- Product -->
                                     <div class="col-12 col-md-6 col-lg-4 product">
                                         <div class="card">
@@ -218,6 +219,17 @@
                                                 <% if (p.size) { -%>
                                                    <p class="card-text">Size: <b><%=p.size%> </b></p>
                                                 <% } -%>
+
+
+                                                <% if ( p.discount_percent && p.discount_percent > 0 ) { -%>
+
+                                                   <p class="card-text">
+                                                    <b style="font-size:17px">Discount Info </b>
+                                                    <br>
+
+                                                   Bought at a discount of <b><%=p.discount_percent%>% </b> 
+                                                   </p>
+                                                <% } -%>                                               
 
                                                 <% if (p.product_order_key) { -%>
                                                 <!-- Extras here -->

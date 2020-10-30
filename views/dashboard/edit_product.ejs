@@ -86,9 +86,26 @@ input.multi{
 }
 
 
+<% if(hasDiscount) {%>
+.has-discount {
+  display: block !important;
+}
+
+#showDiscountBtn {
+  display: none;
+}
+
+<%} else {-%>
+#showDiscountBtn {
+  display: block;
+}
+
+<%} -%>
+
+
+ 
 
 </style>
-
     <div id="card_content"> 
 
         <div class="row">
@@ -126,6 +143,9 @@ input.multi{
                                         <label>Name</label>
                                     </div>
 
+                                    
+
+                                    
 
 
 
@@ -230,6 +250,20 @@ input.multi{
                                         <textarea id="materialDescription" class="form-control md-textarea" rows="3" name="description"><%=product.description %></textarea>
                                         <label for="materialDescription">Description</label>
                                     </div>
+
+                                    <!-- Discount Percentage -->
+                                    <div class="sc" style="display:none">
+                                      <p id="showDiscountBtn"><a href="#" onclick="toggleDiscountField('show')">Add Discount</a></p>
+
+                                      <p id="hideDiscountBtn"><a href="#" onclick="toggleDiscountField('hide')">Remove Discount</a></p>
+                                    </div>
+
+                                    <div class="md-form mt-3" id="discountField">
+                                      <input type="number" id="discount_percent" class="form-control"
+                                      name="discount_percent" value="<%= product.discount_percent%>" min="0" max="99" required>
+                                      <label for="discount_percent">Discount (%)</label>
+                                   </div>
+
 
                                     <!-- Copy -->
 <!--                                     <div class="form-check">
@@ -356,6 +390,8 @@ input.multi{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <script src="<%= site.adminURL%>/assets/jquery.preview-img.js"></script>
 <script type="text/javascript">
+const hasDiscount = <%=hasDiscount %>;
+
 $("#thumbnail").previewImageFrom("#img-input");
 
 $("#img-input").change(function () {
@@ -549,6 +585,23 @@ function deleteProduct(pKey) {
               } 
           }
       }); 
+}
+
+function toggleDiscountField(param) {
+  
+  if(param == "show") {
+    $("#discount_percent").val(1);
+    $("#discountField").show();
+    $("#showDiscountBtn").hide();
+    $("#hideDiscountBtn").show();
+  }
+
+  if(param == "hide") {
+     $("#showDiscountBtn").show();
+    $("#discount_percent").val(0);
+    $("#discountField").hide();
+    $("#hideDiscountBtn").hide();
+  }
 }
     
 </script>

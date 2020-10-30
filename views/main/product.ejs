@@ -10,17 +10,17 @@
 <meta property="og:image" content="https://biiriiafrica.com/img/products/<%=product.main_img %>"/>
 <meta property="og:url"   content="https://biiriiafrica.com/store/products/<%=product.slug%>" />
 
-<meta property="product:price:amount" content="<%=product.sub[0].price%>">
+<meta property="product:price:amount" content="<%=discountPrice%>">
 <meta property="product:price:currency" content="NGN">
 
 
- <meta content="<%-currencyConvert({to:'USD', value :product.sub[0].price }).result%>">
+ <meta content="<%-currencyConvert({to:'USD', value :discountPrice}).result%>">
  <meta property="product:price:currency" content="USD"/>
 
- <meta content="<%-currencyConvert({to:'GBP', value :product.sub[0].price }).result%>">
+ <meta content="<%-currencyConvert({to:'GBP', value :discountPrice}).result%>">
  <meta property="product:price:currency"  content="GBP"/>
 
- <meta content="<%-currencyConvert({to:'EUR', value :product.sub[0].price }).result%>">
+ <meta content="<%-currencyConvert({to:'EUR', value :discountPrice }).result%>">
  <meta property="product:price:currency"  content="EUR"/>
 
 </head>
@@ -51,7 +51,25 @@
 	    color: #404040;
 	}
 
+	small.discounted{
+		font-size: 13px !important;
+		font-weight: 500!important;
+		text-decoration: line-through;
+	}
 
+	.blink-txt {
+		animation: blinker 1.5s linear infinite;
+	}
+
+	.brand-link {
+		color:#f51167;
+	}
+
+	@keyframes blinker {
+		50% {
+			opacity: 0;
+		}
+	}
 
 
 	</style>
@@ -109,9 +127,20 @@
 					<h2 class="p-title"><%=product.name %> </h2>
 				<!-- 	<h3 class="p-price">&#8358;<%=product.sub[0].price.toLocaleString() %> </h3> -->
 				<h3 class="p-price"><%-currencyConvert({to:currencyChoice, value :product.sub[0].price}).symbol%>
-								<%-currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString()%></h3>
-					<h4 class="p-stock">Available: <span>In Stock</span></h4>
+								<%-currencyConvert({to:currencyChoice, value :discountPrice }).result.toLocaleString()%>
 
+									
+								<% if (product.discount_percent > 0){%>			<!--Actual price -->
+								<small class="discounted">
+								<%-currencyConvert({to:currencyChoice, value :product.sub[0].price}).symbol%>
+								<%-currencyConvert({to:currencyChoice, value :product.sub[0].price }).result.toLocaleString()%>
+								 </small>	
+								</h3>
+								<% } %>	
+					<h4 class="p-stock">Available: <span>In Stock</span></h4>
+<% if (product.discount_percent > 0 ) { -%>
+<h2 class="p-stock" style="font-size:18px">Discount: <span class="blink-txt"><%= product.discount_percent%>% off</span></h2>
+<%}%>
 
 <!-- 					<div class="p-rating">
 						<i class="fa fa-star-o"></i>
@@ -190,7 +219,7 @@
 								<div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 									<div class="panel-body">
 										<ul>
-											<li>Brand: <a href="/brands/<%=product.brand.slug %>"><%=product.brand.name %></a></li>
+											<li>Brand: <a href="/brands/<%=product.brand.slug %>" class="brand-link" target="_blank"><%=product.brand.name %></a></li>
 										</ul>
 									</div>
 								</div>
@@ -250,7 +279,7 @@ var totalItemPriceWrapper = $("#itemTotalWrapper");
 
 var productId = "<%=product.id%>";
 
-var productPrice = <%-currencyConvert({to:currencyChoice, value :product.sub[0].price }).result%>;
+var productPrice = <%-currencyConvert({to:currencyChoice, value :discountPrice }).result%>;
 
 function addProductToCart (sp_id, p_id) {
 	console.trace(qtyValue);
