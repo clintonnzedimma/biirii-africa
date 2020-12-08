@@ -12,6 +12,10 @@ function roundToUp5(num) {
 		top: -10px;
 		color: #fff;
 	}
+
+	.ft a{
+		color :#000 !important
+	}
 </style>
 
 	<section class="top-letest-product-section">
@@ -78,7 +82,7 @@ function roundToUp5(num) {
 							<% }-%>
 								
 <% } -%>
-								<p><a href="/store/products/<%=product.slug %>" class="product-link"><%=product.name %></a></p>
+								<p class="ft"><a href="/store/products/<%=product.slug %>" class="product-link"><%=product.name %></a></p>
 							</div>
 					 </div>
 				<%})%>

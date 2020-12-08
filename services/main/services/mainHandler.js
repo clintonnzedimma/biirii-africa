@@ -34,10 +34,16 @@ module.exports.test = async(req,res) => {
 module.exports.IndexPage = async (req, res)=> {
 	let promo = await Promotion.fetchOneActive();
 
+	let brands = await Brand.fetchWithImages();
+
+	let featuredProducts = await Product.fetchInStock();
+
 	return res.render("main/index", {
 		 pageTitle: "Welcome to Biirii Africa",
 		 superCategory: null,
-		 promo : promo[0] || null
+		 promo : promo[0] || null,
+		 brands : brands || null,
+		 products : featuredProducts || null
 	 });
 }
 

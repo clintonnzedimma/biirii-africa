@@ -73,9 +73,9 @@
 		.shop-now{
 			position: relative;
 			height: 350px;
-			background: url("img/bg.jpg");
+			background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(img/bg1.jpg);
 			background-size: cover;
-			background-position: top;
+			background-position: bottom;
 		}
 		.shop-now span{
 			display: block;
@@ -90,6 +90,7 @@
 			transform: translateX(-50%);
 		}
 		.shop-now button{
+			cursor :pointer;
 			display: block;
 			padding: 5px 22px;
 			font-size: 18px;
@@ -148,24 +149,31 @@
 
 	<section class="_extras">
 		<div class="_gifts">
-			<p>GET YOUR GIFTS ON TIME! <br> CHECK OUT THE LAST-CHANCE DATES NOW > </p>
-			<span>FYI, we've extended our returns window until 31 January! </span>
+			<p>SHOP WITH BIIRII THIS DECEMBER </p>
+			<span> </span>
 		</div>
 
+<% if (products.length > 0) { -%>	
+	<!-- latest product section -->
+	<% let componentTitle = "Latest Products" %>
+	<%let featuredProducts = products %>
+	<%include components/slidingProductList%>
+	<!-- latest product section end -->
+<% } -%>
 		<div class="_outlets">
-			<h2>OUTLET</h2>
-			<p> EXTRA 20% OFF OUTLET <br> With code: EXTRA20FEELS </p>
+			<h2>SLAY WITH BIIRII </h2>
+			<!--<p> EXTRA 20% OFF OUTLET <br> With code: EXTRA20FEELS </p> -->
 
-			<span class="deals">SERIOUSLY, THE DEALS DON'T STOP!</span>
-			<span>Seleted styles marked down ass shown</span>
+			<span class="deals">DETTY DECEMBER SPECIAL </span>
+			<span>SHOP PREMIUM AFRICAN FASHION THIS CHRISTMAS</span>
 		</div>
 
 		<div class="shop-now">
-			<span>The December Style Edit</span>
-			<button>Shop now</button>
+			<span>BIIRII DECEMBER VIBES</span>
+			<button onclick="window.location='/store'">Shop now</button>
 		</div>
 
-		<div class="showproducts">
+	<!-- 	<div class="showproducts">
 			<div class="cozzy">
 				<img src="/img/products/biirii-fc1464fb-ed51-4129-866a-470bf2faf78c.jpeg" alt="">
 				<div class="_info">
@@ -194,10 +202,55 @@
 					<span>Love yourself</span>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="info"></div>
 	</section>
 
+
+
+
+
+
+ <!-- Brands -->
+
+ 	<!-- Index section -->
+	<section class="_index portfolio" align="center">
+	
+		<div align="center"><h3>BRANDS </h3></div>
+		<br>
+
+		<div class="container center-block">
+		  <div class="row container bootstrap snippet" style="justify-content: space-around;">
+
+		  	<div class="projects-container scrollimation in">
+		  		<div class="row">
+			    <% brands.forEach( brand=> { -%>
+
+				<% 
+					let image = (brand.main_img) ? `img/brands/${brand.main_img}` : "/img/brand-fallback.png";
+				%>
+
+				 <article class="col-md-4 col-sm-6 portfolio-item web-design apps psd">
+						<div class="portfolio-thumb in">
+							<a href="/brands/<%=brand.slug%>" class="main-link">
+								<img class="img-responsive img-center" src="<%=image %>" width="350" height="280"  alt="<%=brand.name%>">
+								<!-- <span class="overlay-mask"></span> -->
+
+								<h2  style="color: #403e3e"><%=brand.name %></h2>
+							</a>
+
+						</div>
+
+					</article>
+		
+
+			    <% }) -%>
+				</div>
+			</div>
+		  </div>
+		</div>
+	</section>
+	<!-- Index section end -->
 
 	<!-- Footer component start -->
 	<%include includes/footer%>
