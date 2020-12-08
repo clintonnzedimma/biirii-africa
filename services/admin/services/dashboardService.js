@@ -145,6 +145,7 @@ module.exports.modifyProduct = async (req, res) => {
 	let description = req.body.description;
 	let brand_id = req.body.brand_id;
 	let discount_percent = parseInt(req.body.discount_percent);
+	let outOfStock = (req.body.out_of_stock) ? 1 : null; 
 
 
 	console.trace(req.body.images);
@@ -156,6 +157,7 @@ module.exports.modifyProduct = async (req, res) => {
 		slug : slug(productName.toLowerCase()),
 		description : description,
 		brand_id : brand_id,
+		out_of_stock : outOfStock,
 		discount_percent : discount_percent,
 		time_updated : Date.now()
 	}

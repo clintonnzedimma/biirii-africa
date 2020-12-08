@@ -45,6 +45,13 @@ function roundToUp5(num) {
 			white-space: normal;
 		}
 	}
+
+	span.out_of_stock{
+		font-size: 11px;
+		background: #2f3563;
+		color: #fff;
+		padding: 2px;
+	}
 </style>
 
 
@@ -95,7 +102,9 @@ function roundToUp5(num) {
 	var discountPrice = product.sub[0].price - (discountPercentage * product.sub[0].price) ; 
 -%>
 
+<%if(!product.out_of_stock) {%>
 								<a href="#" class="add-card" onclick="addToCart(<%=product.sub[0].id%>, <%=product.id%>)"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+<% } %>
 								<% } -%>
 								<!-- <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a> -->
 							</div>
@@ -120,7 +129,17 @@ function roundToUp5(num) {
 					
 
 							<% } -%>
-							<p><a href="/store/products/<%=product.slug %>" class="product-link" title="<%=product.name %>"><%=product.name %></a></p>
+
+						
+							<p>
+
+							<%if(product.out_of_stock == 1) {%>
+							<span class="out_of_stock"> Out of stock </span> <br>
+
+							<% }%>
+
+							<a href="/store/products/<%=product.slug %>" class="product-link" title="<%=product.name %>"><%=product.name %></a>
+							</p>
 						</div>
 					</div>
 				</div>

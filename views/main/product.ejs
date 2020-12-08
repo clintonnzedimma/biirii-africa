@@ -137,7 +137,10 @@
 								 </small>	
 								</h3>
 								<% } %>	
-					<h4 class="p-stock">Available: <span>In Stock</span></h4>
+					<h4 class="p-stock">Available:
+					 <% if(!product.out_of_stock){%><span>In Stock</span> <%}%>
+					  <% if(product.out_of_stock){%><span>Out of Stock</span> <%}%>
+					 </h4>
 <% if (product.discount_percent > 0 ) { -%>
 <h2 class="p-stock" style="font-size:18px">Discount: <span class="blink-txt"><%= product.discount_percent%>% off</span></h2>
 <%}%>
@@ -198,7 +201,17 @@
                         	<%-currencyConvert({to:currencyChoice, value :product.sub[0].price}).symbol%>
                         	<span id="totalItemPrice"></span></div>                      
                    	</div>
+
+				    <% if(!product.out_of_stock){%>
 					<a href="#" class="site-btn" onclick="addProductToCart('<%=product.sub[0].id%>', '<%=product.id%>' )">ADD TO CART</a>
+					<% }%>
+
+				    <% if(product.out_of_stock){%>
+					<a  class="site-btn" style="background:#686666; color:#202020">ADD TO CART</a>
+					
+					<% }%>
+
+
 					<div id="accordion" class="accordion-area">
 						<div class="panel">
 							<div class="panel-header" id="headingOne">
