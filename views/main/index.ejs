@@ -23,52 +23,6 @@
 	<%include includes/header%>
 	<!-- Header section end -->
 
-	<!-- Hero section -->
-	<!-- <section class="hero-section">
-		<div class="hero-slider owl-carousel">
-			<div class="hs-item set-bg" data-setbg="img/bg.jpg">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-6 col-lg-7 text-white">
-							<span>New Arrivals</span>
-							<h2>denim jackets</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-							<a href="#" class="site-btn sb-line">DISCOVER</a>
-							<a href="#" class="site-btn sb-white">ADD TO CART</a>
-						</div>
-					</div>
-					<div class="offer-card text-white">
-						<span>from</span>
-						<h2>$29</h2>
-						<p>SHOP NOW</p>
-					</div>
-				</div>
-			</div>
-			<div class="hs-item set-bg" data-setbg="img/bg-2.jpg">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-6 col-lg-7 text-white">
-							<span>New Arrivals</span>
-							<h2>denim jackets</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-							<a href="#" class="site-btn sb-line">DISCOVER</a>
-							<a href="#" class="site-btn sb-white">ADD TO CART</a>
-						</div>
-					</div>
-					<div class="offer-card text-white">
-						<span>from</span>
-						<h2>$29</h2>
-						<p>SHOP NOW</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="slide-num-holder" id="snh-1"></div>
-		</div>
-	</section> -->
-	<!-- Hero section end -->
-
 	<!-- Index section -->
 	<section class="_index">
 		<div class="_header"></div>
@@ -89,6 +43,160 @@
 		</div>
 	</section>
 	<!-- Index section end -->
+
+	<style>
+		._extras > div{
+			margin: 10px 0;
+			padding: 10px;
+		}
+		div._gifts{
+			padding: 30px 10px;
+			background: url("img/outdoor-bg-4.jpg");
+			text-align: center;
+		}
+		._gifts p{
+			display: inline;
+			max-width: 450px;
+			width: 90%;
+			background: #e4e2e2;
+			font-size: 6vmin;
+			color: #000000;
+			box-shadow: 7px 0 0 #e4e2e2, -7px 0 0 #e4e2e2;
+		}
+		._gifts span{
+			display: inline-block;
+			background: #e4e2e2;
+			font-size: 4vmin;
+			color: #000000;
+			box-shadow: 7px 0 0 #e4e2e2, -7px 0 0 #e4e2e2;
+		}
+		.shop-now{
+			position: relative;
+			height: 350px;
+			background: url("img/bg.jpg");
+			background-size: cover;
+			background-position: top;
+		}
+		.shop-now span{
+			display: block;
+			width: 70%;
+			color: #cac8c8;
+			text-align: center;
+			font-size: 10vmin;
+			font-weight: 700;
+			position: absolute;
+			bottom: 20%;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+		.shop-now button{
+			display: block;
+			padding: 5px 22px;
+			font-size: 18px;
+			background: #cac8c8;
+			border: none;
+			outline: none;
+			position: absolute;
+			bottom: 10%;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+		._outlets{
+			text-align: center;
+			background-color: lawngreen;
+		}
+		._outlets h2{
+			font-size: 7vmin;
+		}
+		._outlets p{
+			display: inline;
+			background: #000000;
+			color: white;
+			box-shadow: 7px 0 0 #000000, -7px 0 0 #000000;
+			font-size: 10vmin;
+			font-weight: 700;
+		}
+		._outlets span{
+			display: block;
+			width: fit-content;
+			max-width: 700px;
+			background-color: #000000;
+			color: #ffffff;
+			margin: 10px auto;
+			padding: 5px;
+			font-size: 14px;
+		}
+		._outlets span.deals{
+			font-size: 4.5vmin;
+			font-weight: 700;
+		}
+		.showproducts{
+			display: grid;
+			grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+			gap: 10px;
+		}
+		.cozzy ._info {
+			padding: 5px;
+			text-align: center;
+		}
+		._info h3 {
+			font-size: 18px;
+			font-weight: 500;
+			margin: 10px 0;
+		}
+	</style>
+
+	<section class="_extras">
+		<div class="_gifts">
+			<p>GET YOUR GIFTS ON TIME! <br> CHECK OUT THE LAST-CHANCE DATES NOW > </p>
+			<span>FYI, we've extended our returns window until 31 January! </span>
+		</div>
+
+		<div class="_outlets">
+			<h2>OUTLET</h2>
+			<p> EXTRA 20% OFF OUTLET <br> With code: EXTRA20FEELS </p>
+
+			<span class="deals">SERIOUSLY, THE DEALS DON'T STOP!</span>
+			<span>Seleted styles marked down ass shown</span>
+		</div>
+
+		<div class="shop-now">
+			<span>The December Style Edit</span>
+			<button>Shop now</button>
+		</div>
+
+		<div class="showproducts">
+			<div class="cozzy">
+				<img src="/img/products/biirii-fc1464fb-ed51-4129-866a-470bf2faf78c.jpeg" alt="">
+				<div class="_info">
+					<h3>Cosy Coats</h3>
+					<span>Outdoor date, anyone?</span>
+				</div>
+			</div>
+			<div class="cozzy">
+				<img src="/img/products/biirii-fc1464fb-ed51-4129-866a-470bf2faf78c.jpeg" alt="">
+				<div class="_info">
+					<h3>Winter Bits</h3>
+					<span>No cold feet here</span>
+				</div>
+			</div>
+			<div class="cozzy">
+				<img src="/img/products/biirii-fc1464fb-ed51-4129-866a-470bf2faf78c.jpeg" alt="">
+				<div class="_info">
+					<h3>KnitWear</h3>
+					<span>Snug as bug</span>
+				</div>
+			</div>
+			<div class="cozzy">
+				<img src="/img/products/biirii-fc1464fb-ed51-4129-866a-470bf2faf78c.jpeg" alt="">
+				<div class="_info">
+					<h3>Face + body Faves</h3>
+					<span>Love yourself</span>
+				</div>
+			</div>
+		</div>
+		<div class="info"></div>
+	</section>
 
 
 	<!-- Footer component start -->
