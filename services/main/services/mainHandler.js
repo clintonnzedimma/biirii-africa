@@ -36,7 +36,7 @@ module.exports.IndexPage = async (req, res)=> {
 
 	let brands = await Brand.fetchWithImages();
 
-	let featuredProducts = await Product.fetchInStock();
+	let featuredProducts = await Product.fetchInStock("RAND()", 16);
 
 	return res.render("main/index", {
 		 pageTitle: "Welcome to Biirii Africa",

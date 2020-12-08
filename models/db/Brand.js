@@ -38,7 +38,7 @@ module.exports.fetchWithImages = () => {
 	return new Promise((resolve, reject)=> {
 			let result = {};
   
-			 db.query(`SELECT * FROM brands WHERE main_img IS NOT NULL ORDER BY RAND() LIMIT 8`,(err, brands)=>{
+			 db.query(`SELECT * FROM brands WHERE main_img IS NOT NULL ORDER BY RAND() LIMIT 6`,(err, brands)=>{
 				if (err) throw new Error(err)
 				if (brands.length == 0 ) reject("No brand with image");
 				if (brands.length > 0) resolve(brands);	
