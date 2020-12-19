@@ -463,3 +463,140 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 19, 2020 at 08:21 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Database: biirii
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table brands
+--
+
+CREATE TABLE brands (
+  id int(11) NOT NULL,
+  name varchar(255) DEFAULT NULL,
+  main_img varchar(255) DEFAULT NULL,
+  email varchar(255) DEFAULT NULL,
+  slug varchar(255) DEFAULT NULL,
+  time_added bigint(20) DEFAULT NULL,
+  time_updated bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table brands
+--
+
+INSERT INTO brands (id, name, main_img, email, slug, time_added, time_updated) VALUES
+(1, 'Akpos Okudu', NULL, NULL, 'akpos-okudu', 1593684537437, NULL),
+(2, 'Pleo Gabani', NULL, NULL, 'pleo-gabani', 1593684537437, NULL),
+(3, 'Mosun Ogunnusi', NULL, NULL, 'mosun-ogunnusi', 1593684537437, NULL),
+(4, 'Pendo Designs', NULL, NULL, 'pendo-designs', 1593684537437, NULL),
+(5, 'Ogemallen', NULL, NULL, 'ogemallen', 1593684537437, NULL),
+(6, 'House of Bo', NULL, NULL, 'house-of-bo', 1593684537437, NULL),
+(7, 'Ghian Couture', NULL, NULL, 'ghian-couture', 1593684537437, NULL),
+(8, 'Stylesbynerd', NULL, NULL, 'stylesbynerd', 1593684537437, NULL),
+(9, 'Zateemee', NULL, NULL, 'zateemee', 1593684537437, NULL),
+(10, 'Sammies Couture', NULL, NULL, 'sammies-couture', 1593684537437, NULL),
+(11, 'Minengiby', NULL, NULL, 'minengiby', 1596133297211, NULL),
+(12, 'Black Billionaire', NULL, NULL, 'black-billionaire', 1596133297211, NULL),
+(13, 'Scillas By Osaki', NULL, NULL, 'scillas-by-osaki', 1596133297211, NULL),
+(14, 'Viona Culture', NULL, NULL, 'viona-culture', 1596133297211, NULL),
+(15, 'Victor Kwesi', NULL, NULL, 'victor-kwesi', 1596133297211, NULL),
+(16, 'Cute Cut By Joy', NULL, NULL, 'cute-cut-by-joy', 1596133297211, NULL),
+(17, 'Menji', NULL, NULL, 'menji', 1596133297211, NULL),
+(18, 'Nike', 'biirii-0c675f9a-edfd-46b4-a28f-a71ed3b87b6a.jpeg', NULL, 'nike', 1596392196463, 1597254086310),
+(19, 'Adidas', NULL, NULL, 'adidas', 1596392983874, 1596393637875),
+(20, 'ABC', 'biirii-48d92598-9c35-4fc3-b7de-e5bb777e595e.jpeg', NULL, 'abc', 1597139497778, 1597145969751),
+(21, 'XYZa', 'biirii-95f30477-dd00-4c9a-b315-01824f5059a7.jpeg', NULL, 'xyza', 1597311720735, 1597311796378),
+(22, 'PQR', NULL, NULL, 'pqr', 1597312061927, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table brands
+--
+ALTER TABLE brands
+  ADD PRIMARY KEY (id);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table brands
+--
+ALTER TABLE brands
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+COMMIT;
+
+
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 19, 2020 at 09:02 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+--
+-- Database: `biirii`
+--
+-- --------------------------------------------------------
+--
+-- Table structure for table `products`
+--
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `time_added` bigint(20) DEFAULT NULL,
+  `time_updated` bigint(20) DEFAULT NULL,
+  `out_of_stock` int(11) DEFAULT NULL,
+  `main_img` varchar(255) DEFAULT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `pKey` varchar(255) DEFAULT NULL,
+  `discount_percent` int(11) NOT NULL DEFAULT 0,
+  `brand_id` int(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Indexes for dumped tables
+--
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `pKey` (`pKey`),
+  ADD UNIQUE KEY `slug` (`slug`);
+--
+-- AUTO_INCREMENT for dumped tables
+--
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
