@@ -16,6 +16,12 @@ function roundToUp5(num) {
 	.ft a{
 		color :#000 !important
 	}
+	.product-item {
+		border: 1px solid #cdd0d0;
+		border-radius: 5px;
+		padding: 10px;
+		position: relative;
+	}
 </style>
 
 	<section class="top-letest-product-section">
@@ -43,8 +49,8 @@ function roundToUp5(num) {
 
 
 					<div class="product-item">
+						<div class="tag-new">New</div>
 							<div class="pi-pic" style="height: 250px; overflow: hidden;">
-								<div class="tag-new">New</div>
 								<img src="/img/products/<%=product.main_img %>" alt="<%=product.name %>" style="object-fit: contain; object-position: center; height: 100%;">
 	<!-- 							<div class="pi-links">
 									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
