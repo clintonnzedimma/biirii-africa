@@ -304,23 +304,13 @@ module.exports.pay = (req, res) => {
 			req.session.save();
 
 
-			// sending receipt to customer
-			receipt.sendToBuyer()
+			receipt.send()
 			.then (res=> {
 				console.log(res);
 			}).catch(e => {
 				console.log(`Receipt ${e}`);
 			});
 
-
-			// sending receipt to admin
-			receipt.sendToAdmin()
-			.then (res=> {
-				console.log(res);
-			}).catch(e => {
-				console.log(`Receipt ${e}`);
-			});
-			
 			return res.json({status : true, message : "Transaction successful" });
 		}).catch((r)=>{
 			console.log(r);
