@@ -451,6 +451,7 @@ module.exports.createBrand = (req, res) => {
 		name : req.body.name,
 		slug: slug(req.body.name.toLowerCase()),
 		time_added : Date.now(),
+		email : req.body.email,
 		main_img : image
 	}
 
@@ -490,6 +491,7 @@ module.exports.modifyBrand =(req, res) => {
 		name : req.body.name,
 		slug: slug(req.body.name.toLowerCase()),
 		time_updated : Date.now(),
+		email : req.body.email,
 		main_img: image
 	}
 
