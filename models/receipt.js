@@ -32,7 +32,7 @@ module.exports = function Receipt(param) {
 			 method: 'get', //you can set what request you want to be
 			 url: `${process.env.PHP_SERVICE_URL}/admin_email_send.php`,
 			 params: {
-			   receiver_mail: 'novacomng@gmail.com' ,
+			   receiver_mail: process.env.NOTIFICATION_MAIL,
 			   customer_name: this.param.name ,
 			   order_key: this.param.key
 			 }
