@@ -46,9 +46,12 @@ route.get("/checkout/success", mainHandler.PurchaseDetails);
 
 route.get("/store/products/:slug", mainHandler.ProductPage);
 
+route.get("/store/search", mainHandler.SearchProductPage);
+
 route.get("/store/:super_category/", mainHandler.SuperCategoryHomePage);
 
 route.get("/store/:super_category/categories/:category_slug", mainHandler.CategoryPage);
+
 
 
 //static pages

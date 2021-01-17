@@ -172,12 +172,15 @@ module.exports.ProductPage = async (req, res)=> {
 	let discountPrice = product.sub[0].price - ((product.discount_percent/100) * product.sub[0].price)
 
 
+	let productLink = `https://biiriiafrica.com/store/products/${product.slug}`;
+
 	return res.render("main/product", {
 		 pageTitle: `${product.name} - Biirii Africa`,
 		 product: product,
 		 discountPrice : discountPrice,
 		 moreImages : moreImages,
-		 superCategory: null
+		 superCategory: null,
+		 productLink : productLink
 	 });
 }
 
@@ -311,4 +314,24 @@ module.exports.BrandPage = async (req, res)=> {
 			superCategory: null,
 			categories : []
 		});	
+}
+
+
+
+
+module.exports.SearchProductPage = async (req, res)=> {
+
+	let query = req.query.q;
+	let products = await Product.search(query);
+
+	//currencies
+	let Currency = new helpers.Currency(req.session.currencies);
+
+	return res.render("main/search_page", {
+		 pageTitle: `Results or "${query}" - Biirii Africa`,
+		 products: products,
+		 query : query,
+		 superCategory: null,
+		 categories: []
+	 });
 }

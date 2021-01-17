@@ -337,4 +337,71 @@ module.exports.fetchInStock = (orderBy = "id", limit = 1000) => {
 			});
 	  });
   }
+
+
+  // Fetch in stock 
+module.exports.fetchInStock = (orderBy = "id", limit = 1000) => {
+
+
+	return new Promise((resolve, reject)=> {
+			let result = {};
+  
+			 db.query(`SELECT * FROM products WHERE out_of_stock IS NULL ORDER BY ${orderBy} DESC LIMIT ${limit}`,(err, products)=>{
+				if (err) throw new Error(err)
+  
+				db.query("SELECT * FROM sub_products", (err, sp)=>{
+					if (err) throw new Error(err)
+					
+					if (products.length > 0 && sp.length > 0) {
+  
+					   products = products.map(p=> ({
+						  ...p,
+						  sub: sp.filter(s=> s.product_id == p.id) 
+						  }));
+  
+						resolve(products);
+					}	else {
+						reject("Couldnt fetch products & sub products");
+					}
+  
+				});	
+  
+			});
+	  });
+  }
+
+
+
+
+// Search
+module.exports.search = (searchParam, orderBy = "id", limit = 1000) => {
+
+
+	return new Promise((resolve, reject)=> {
+			let result = {};
+  
+			 db.query(`SELECT * FROM products WHERE name LIKE N? ORDER BY ${orderBy} DESC LIMIT ${limit}`, ['%'+searchParam+'%'],(err, products)=>{
+				if (err) throw new Error(err)
+  
+				db.query("SELECT * FROM sub_products", (err, sp)=>{
+					if (err) throw new Error(err)
+					
+					if (products.length > 0 && sp.length > 0) {
+  
+					   products = products.map(p=> ({
+						  ...p,
+						  sub: sp.filter(s=> s.product_id == p.id) 
+						  }));
+  
+						resolve(products);
+					}	else {
+						reject("Couldnt fetch products & sub products");
+					}
+  
+				});	
+  
+			});
+	  });
+  }
+  
   

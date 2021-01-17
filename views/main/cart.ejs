@@ -8,6 +8,13 @@
 
 	<style type="text/css">
 
+		a.item-link{
+			color:#f51167
+		}
+
+		a.item-link:hover{
+			text-decoration: underline
+		}
 
 		.item_size {
 			font-style: italic !important;
@@ -139,7 +146,7 @@
 							<div class="row">
 								<div class="product-image"><img src="/img/products/<%=product.superItem.main_img %>" alt="<%=product.name %>" class="img-responsive"/></div>
 								<div class="product-details">
-									<span class="nomargin" style="font-size: 25px; text-transform: capitalize;">	<%= product.superItem.name %></span>
+									<span class="nomargin" style="font-size: 25px; text-transform: capitalize;">	<a href="/store/products/<%= product.superItem.slug %>" class="item-link" target="_blank"><%= product.superItem.name %></a></span>
 									<div data-th="Price" class="item_price"><!-- &#8358;<%= product.item.price.toLocaleString() %> -->
 
 
@@ -167,11 +174,11 @@
 						
 						<div class="total-quantity">
 							<div data-th="Quantity" class="quantity">
-								<input type="number" min="1" class="form-control text-center" value="<%=product.qty %>" onchange="updateItemPrice(this.value,'<%=product.id%>' )">
+								<input type="number" min="1" class="form-control text-center" value="<%=product.qty %>" onchange="updateItemPrice(this,'<%=product.id%>' )">
 							</div>
 
 							<div data-th="Size" class="quantity">
-								<select id="size" class="form-control" onchange="updateItemSize(this.value,'<%=product.id%>')">
+								<select id="size" class="form-control" onchange="updateItemSize(this,'<%=product.id%>')">
 									<option value="XS" <% if (product.size == 'XS') { -%>selected<% } -%>>XS</option>
 									<option value="S" <% if (product.size == 'S') { -%>selected<% } -%>>S</option>
 									<option value="M" <% if (product.size == 'M') { -%>selected<% } -%>>M</option>
@@ -326,8 +333,15 @@
  	}
 
 
- 	function updateItemPrice(qty, id) {
- 		console.trace(qty);
+ 	function updateItemPrice(el, id) {
+
+		let qty = el.value;
+
+		if(qty <= 0) {
+			el.value = 1;
+			qty = 1;
+		}	
+
  			Cart.updateQtyById(id, qty).then(res => {
  				updateTotalPrice();
 
@@ -342,11 +356,12 @@
 
 
 
- 	function updateItemSize(arg, id) {
+ 	function updateItemSize(el, id) {
+		let size = el.value;
  		let itemSizeDisplayElement = $(`#product-size-${id}`);
 
- 		Cart.updateSizeById(id, arg).then (res => {
- 			itemSizeDisplayElement.html(arg);
+ 		Cart.updateSizeById(id, size).then (res => {
+ 			itemSizeDisplayElement.html(size);
  		});
  	}	
 	</script>
